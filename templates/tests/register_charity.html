@@ -1,0 +1,37 @@
+{% extends 'tests/base.html'%}
+
+
+{% block content%}
+
+<div class="row">
+    <div class="col-1"></div>
+
+    <div class="col-10 bg-light p-5 " >
+        <div class="container mb-5 mt-5 px-4 py-3 ms-auto">
+            
+<div class="card p-5 me-3" id="back">
+
+    
+    
+    <form action="" method="POST" enctype="multipart/form-data"><br><br>
+        {% csrf_token %}
+        <h1 class="text-muted card-text text-center">REGISTER</h1>
+        {{ form.as_p }}
+    
+            <button type="submit" class="btn btn-secondary">Submit</button>
+    </form>
+</div>
+</div>
+
+</div>
+
+    <div class="col-1"></div>
+
+
+
+</div>
+
+
+
+
+{% endblock%}
