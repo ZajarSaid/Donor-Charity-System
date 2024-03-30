@@ -95,6 +95,7 @@ class Charithy(models.Model):
     sex = models.CharField(max_length=200, choices=SEX, default='male')
     age = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add= True)
+    #registered_by = models.ForeignKey(CustomUser, related_name='charity', on_delete=models.CASCADE)
     
     
     class Meta:
