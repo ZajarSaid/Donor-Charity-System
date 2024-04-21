@@ -14,24 +14,6 @@ from django.contrib.auth import logout
 
 
 
-# def register(request):
-#     if request.method == 'POST':
-        
-#         form = UserRegister(request.POST or None, request.FILES)
-#         if form.is_valid():
-#             password=request.POST.get('password')
-#             user = form.save(commit=False)
-            
-           
-#             user.set_password(password)
-#             user.save()
-#             messages.success(request, 'a user has been created successfuly...')
-
-#             return redirect('hom')
-            
-#     form = UserRegister(request.POST)
-#     return render(request,'auth/register.html', {'form':form})
-
 def add_user(request):
     title = 'Add-User'
     if request.user.is_authenticated:

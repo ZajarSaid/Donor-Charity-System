@@ -12,25 +12,6 @@ import json
 from validate_email import validate_email
 
 
-#    if user is not None:
-#             request.session['pk'] = user.pk
-#             login(request,user)
-#             return redirect('verify-view')
-#     return render(request, 'auth/login.html', {'form':form})
-
-
-# def index(request):
-#     form = LoginForm()
-#     if request.method == 'POST':
-#         username = request.POST.get('email')
-#         password = request.POST.get('password')
-        
-#         user = authenticate(request, username=username, password=password)
-#         if user is not None:
-#             request.session['pk'] = user.pk
-#             login(request,user)
-#             return redirect('User:register')
-#     return render(request, 'users/login.html', {'form':form})
 
 # Create your views here.
 class RegistrationView(View):
