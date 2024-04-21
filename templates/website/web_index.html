@@ -1,0 +1,123 @@
+{% load static %}
+<div class="row mt-2 me-0 ">
+      
+    <!--LEFT Content -->
+      <div class="col-9 ">
+    <!-- Posts section -->
+    <section id="posts" class="card px-2">
+
+      <!-- navigation -->
+
+      <div class="row mt-1 mb-2">
+          <div class="col-8">
+            <nav class="navbar navbar-expand-lg navbar-dark ms-3 mb-3">
+              <a href="" >Update</a>
+              <a href="" >Delete</a>
+              <a href="" >Approve</a>
+            
+            </nav>
+            
+          </div>
+      
+      </div>
+
+    <!-- navigation -->
+      <div class="row">
+        <!-- Post cards -->
+        <div class="">
+          <div class="card">
+            <div class="card-body ">
+              <!-- row for top event description -->
+
+              <div class="row mb-2 ">
+                <div class="col-2">
+                  <h3>
+
+                    <span class="me-2 bg-light">
+                      <i class="bi bi-journal-text bg-light"></i>
+                    </span>
+
+                  </h3>
+                  
+                </div>
+                <div class="col-6">
+                  <div class="row">
+                    <div class="col-5"> <p class="text-success">Food for the Charity</p></div>
+                    <div class="col-6"> <p class="text-MUTED">Posted at 51 minutes ago</p></div>
+                  
+                  
+                  </div>
+                
+                <h5>A SAFE HOME FOR THE POOR</h5>
+                </div>
+            
+            </div>
+
+              <!-- row for top event description -->
+              
+              <p class="card-text px-3">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Magni ducimus optio iste. Explicabo modi illum sint similique nesciunt.
+                Eius expedita excepturi aspernatur similique in ipsum nesciunt architecto. Fugit, ex temporibus..</p>
+              <a href="#" class="btn btn-primary">Read More..</a>
+              <div class="row mt-2">
+                <img src="{% static 'Photos/inneed.jpg' %}" alt="">
+              </div>
+              
+            </div>
+          </div>
+        </div>
+        <!-- Add more post cards as needed -->
+      </div>
+    </section>
+    <!-- Posts section -->
+      </div>
+<!--LEFT Content -->
+
+    <!--Right Content -->
+      <div class="col-3 ">
+<!-- Events section -->
+      <section id="events" class="border-top ">
+        
+        
+        <div class="row">
+          
+          <!-- Event cards -->
+            <div class=" mb-4">
+              <div class=" ">
+                <h3 class="text-muted card-text">
+                <span class="me-2">
+                <i class="bi bi-calendar-event"></i>
+            </span>Upcoming Events</h3>
+          </div>
+          {% if Events %}
+
+              
+                {% for event in Events %}
+                <div class="card mt-2 border">
+                
+                <div class="card-body shadow">
+                  
+                  <h5 class="card-title">{{ event.pk }}</h5>
+                  <h5 class="card-title">{{ event.venue }}</h5>
+                  <p class="card-text">{{ event.description }}</p>
+                  <a href="#" class="btn btn-primary">Learn More</a>
+                </div>
+              </div>
+                {% endfor %}
+
+              
+              {% endif%}
+          </div>
+            <!-- Add more event cards as needed -->
+        </div>
+        <div class="row">
+          <!-- Event cards -->
+        
+          <!-- Add more event cards as needed -->
+        </div>
+      </section>
+      <!-- Events section -->
+      </div>
+
+   <!--Right Content -->
+    </div>
+   

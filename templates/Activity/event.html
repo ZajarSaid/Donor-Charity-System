@@ -1,0 +1,43 @@
+{% extends 'tests/base1.html'%}
+
+{% block title%} {{title}} {% endblock%}
+
+
+{% block content%}
+
+      <center>  <h1>Event <span>{{ c_event.id }}</span></h1> </center>
+            
+<div class="" id="back">
+    <div class="card-header"><strong>Title:</strong><br>{{c_event.name}}</div>
+<div class="card-body bg-light shadow px-3">
+
+    <p class="card-text mb-2"><strong>Venue:</strong><br>{{c_event.venue}}</p>
+    <p class="card-text mb-2"><strong>Description:</strong><br> {{c_event.description}}</p>
+    <p class="card-text mb-2"><strong>Manager:</strong><br> {{c_event.manager}}</p>
+    <p class="card-text mb-2"><strong>Date:</strong><br>{{c_event.event_date}}</p> 
+    <p class="card-text mb-2"><strong>Members:</strong><br> {{c_event.members}}</p>
+    <p class="card-text mb-2"><strong>Approved:</strong><br> {{c_event.approved}}</p>
+
+
+</div>
+
+<div class="row mt-3 mb-2">
+<div class="col-8">
+    <a href="{% url 'Activity:events' %}" class="btn btn-pass rounded-pill">Back</a>
+<a href="{% url 'Activity:update-event' c_event.id %}" class="btn btn-success rounded-pill">Update</a>
+<a href="{% url 'Activity:update-event' c_event.id %}" class="btn btn-danger rounded-pill">Delete</a>
+<a href="{% url 'Activity:event-approve' c_event.id %}" class="btn btn-warning rounded-pill">Approve</a>
+
+</div>
+
+
+
+
+    
+</div>
+</div>
+
+
+
+
+{% endblock%}

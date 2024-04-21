@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Charity Page</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+    .background {
+      background-image: url('path_to_your_image.jpg');
+      background-size: cover;
+      background-position: center;
+      height: 100vh;
+      position: relative;
+    }
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.5); /* Adjust opacity as needed */
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .content {
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+    nav {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      display: flex;
+      gap: 10px;
+      z-index: 1000;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      padding: 5px 10px;
+      background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background for contrast */
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="background">
+    <nav>
+      <a href="#">Home</a>
+      <a href="#">Profile</a>
+    </nav>
+    <div class="overlay">
+      
+        <form action="" method="POST" autocomplete="off"><br><br>
+          {% csrf_token %}
+          <div class="card-title">
+              <h4 class="text-muted card-text text-center">Register for free Account</h4>
+          </div>
+
+          <div class="card">
+            <div class="card-body">
+              {{ form.as_p }}
+            </div>
+
+           
+    
+          
+<!--           
+              <div class="form-group mb-3 mt-4">
+              
+                  <input type="text" class="form-control" id="usernameField" placeholder="Enter Username" name="username">
+              </div>
+                  <div class="invalid_feedback text-danger" style="display:none"></div>
+                  <p class="text-success UsernameSuccessOutput text-sm"></p>
+              <div class="mb-3 mt-3">
+              
+              <input type="email" class="form-control" id="emailField" placeholder="Enter email" name="email">
+              </div>
+              <div class="invalidEmailfeedback text-danger" style="display:none"></div>
+              <p class="text-success EmailSuccessOutput text-sm"></p>
+              <div class="mb-3">
+              
+              <input type="password" class="form-control  mt-2" id="pwdField" placeholder="Enter password" name="pswd">
+              <div class=" showPasswordToogle mt-2">
+                  <small class=" showPasswordToogle float-right py-3">SHOW</small>
+              </div>
+              
+              </div> -->
+              
+              <button type="submit" class="btn btn-block btn-secondary ">Register</button>
+          </form>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

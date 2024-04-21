@@ -1,116 +1,216 @@
 {% load static %}
-
-    <html lang="en">
+<!DOCTYPE html>
+<html lang="en">
     <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Index | {% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/datatables.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/star.css' %}" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     
-        <title>Dashboard Template · Bootstrap v5.0</title>
-
-        
-
-        
-
-        <!-- Bootstrap core CSS -->
-    
-
-        <!-- Favicons -->
-        <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
-
-
-
-        
-        <!-- Custom styles for this template -->
-        <link rel="stylesheet" href="{% static 'css/dashboard.css' %}" />
     </head>
     <body>
+    <!--navbars-->
+    <!-- navs --> 
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="nnav">
+    <div class="container-fluid">
         
-    <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-    <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">Company name</a>
-    <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+        <!--offcanvas-trigger-->
+        <button class="navbar-toggler me-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#demo">
+            <span class="navbar-toggler-icon" data-bs-target="#demo"></span>
+            </button>
+        <!--offcanvas-trigger-->
+    <a class="navbar-brand fw-bold me-auto text-uppercase " href="#"><span class="me-2">
+        <i class="bi bi-heart"></i>
+    </span>CHARITY MS</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
-    <div class="navbar-nav">
-        <div class="nav-item text-nowrap">
-        <a class="nav-link px-3" href="#">Sign out</a>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+        <div class="d-flex ms-auto">
+
         </div>
-    </div>
-    </header>
+        <div class="d-flex">
 
-    <div class="container-fluid">
-    <div class="row">
-        <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
-        <div class="position-sticky pt-3">
-            <ul class="nav flex-column">
-            <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">
-                <span data-feather="home"></span>
-                Dashboard
-                </a>
-            </li>
-            
-            
-            
-            <li class="nav-item">
-                <a class="nav-link" href="#">
-                <span data-feather="bar-chart-2"></span>
-                Reports
-                </a>
-            </li>
-            
-            </ul>
-
-            <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-            <span>Saved reports</span>
-            <a class="link-secondary" href="#" aria-label="Add a new report">
-                <span data-feather="plus-circle"></span>
-            </a>
-            </h6>
-            <ul class="nav flex-column mb-2">
-            <li class="nav-item">
-                <a class="nav-link" href="#">
-                <span data-feather="file-text"></span>
-                Current month
-                </a>
-            </li>
-            
-            <li class="nav-item">
-                <a class="nav-link" href="#">
-                <span data-feather="file-text"></span>
-                Social engagement
-                </a>
-            </li>
-            
-            </ul>
         </div>
-        </nav>
-
-        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-        {% comment %} <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-            <h1 class="h2">Dashboard</h1>
-            <div class="btn-toolbar mb-2 mb-md-0">
-            <div class="btn-group me-2">
-                <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
-                <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
-            </div>
-            <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
-                <span data-feather="calendar"></span>
-                This week
-            </button>
-            </div>
-        </div> {% endcomment %}
-        {% block content%}
-        {% endblock %}
         
+        
+        <ul class="navbar-nav  mb-2 mb-lg-0">
+            <li>
+                {% if user.is_authenticated %}
+                <div>
+                    <p class=" card-text text-light mt-2">{{user.username}}</p>
+                    
+                </div>
+                {% endif %}
+            </li>
+        
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="bi bi-person-fill"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end">
+                    <li><a class="dropdown-item" href="{% url 'User:user-profile' user.username %}">Profile</a></li>
+                    <li><a class="dropdown-item" href="#">Settings</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="">Logout</a></li>
+                </ul>
+            </li>
+            
+        </ul>
     </div>
-        </main>
     </div>
-</div>
+</nav>
+
+<!-- navs -->     
+
+<!-- offcanvas --> 
+            
+
+<div class="offcanvas offcanvas-start bg-dark text-white" style="width: 270px;" id="demo">
+        <div class="offcanvas-header">
+            <button class="btn-close text-reset ms-auto" data-bs-dismiss="offcanvas" type="button" aria-label="Close" id="close"></button>
+        </div>
+        <div class="offcanvas-body p-0">
+            <nav class="navbar-dark">
+                <ul class="navbar-nav">
+                    <li>
+                        <div class="text-light fw-bold text-uppercase px-3 small">core</div>
+                    </li>
+                    <li>
+                        <a href="{% url 'User:home' %}" class="nav-link px-3 active">
+                            <span class="me-2">
+                                <i class="bi bi-speedometer2"></i>
+                            </span>
+                            <span class="small">Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <hr class="nav-divider text-white">
+                    </li>
+                    <li>
+                        <div class=" text-white fw-bold text-uppercase px-3 small">Interface</div>
+                    </li>
+                    <li>
+                        <a href="#dem" class="nav-link px-3 sidebar-link" data-bs-toggle="collapse" aria-expanded="false" aria-controls="dem">
+                            <span class="me-2">
+                                <i class="bi bi-people"></i>
+                            </span>
+                            <span class="small">Users</span>
+                            <span class="ms-auto right-icon">
+                                <i class="bi bi-chevron-down"></i>
+                            </span>
+                        </a>
+
+                            <div id="dem" class="collapse">
+                                <div>
+                                    <ul class="navbar-nav ps-3">
+                                        <a href="{% url 'Activity:all-charity' %}" class="nav-link px-3 active">
+                                            <span class="me-2">
+                                                <i class="bi bi-people"></i>
+                                            </span>
+                                            <span class="small">Charity</span>
+                                        </a>
+                                        <a href="{% url 'Activity:all-users' %}" class="nav-link px-3 active">
+                                            <span class="me-2">
+                                                <i class="bi bi-people"></i>
+                                            </span>
+                                            <span class="small">Staffs</span>
+                                        </a>
+                                      
+                                    </ul>
+                                </div>
+                            </div>
+                    </li>
+                    <li>
+                        <a href="{% url 'Activity:events' %}" class="nav-link px-3 active">
+                            <span class="me-2">
+                                <i class="bi bi-calendar-event"></i>
+                            </span>
+                            <span class="small">Events</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'Activity:posts' %}" class="nav-link px-3 active">
+                            <span class="me-2">
+                                <i class="bi bi-journal-text"></i>
+                            </span>
+                            <span class="small">Posts</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'Activity:donations' %}" class="nav-link px-3 active">
+                            <span class="me-2">
+                                <i class="bi bi-cash"></i>
+                            </span>
+                            <span class="small">Donations</span>
+                        </a>
+                    </li>
+              
+                
+
+                </ul>
+            </nav>
+        
+        </div>
+    </div>
+    
+    <!-- Offcanvas Sidebar -->
+    <!--main-section-->
+    <main class="mt-5 pt-3 ">
+        
+       
+
+        <div class="container">
+
+            {% if messages %}
+            <div class="alert alert-danger alert-dismissible fade show">
+                {% for message in messages %}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
+                
+                <p class="card-title"><strong> {{ message }}</strong></p> 
+                {% endfor %}
+            </div>
+    
+        {% endif %}
+
+        
+    <div class="row mt-3">
+        <div class="container-fluid px-lg-5">
+
+            {% block content %}
+          
+            
+            {% endblock content %}
+
+        </div>
+    </div>
 
 
-    <script src="/docs/5.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+        </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script><script src="dashboard.js"></script>
-  </body>
+   
+            <!--table-->
+            
+            <!--table-->
+
+
+    
+
+        
+        
+    </main>
+    <!--main-section-->
+    
+    <script src="{% static 'js/bootstrap.bundle.js' %}"></script>
+    <script src="{% static 'js/jquery-3.7.1.min.js' %}"></script>
+    <script src="{% static 'js/datatables.min.js' %}"></script>
+    <script src="{% static 'js/script.js' %}"></script>
+
+    </body>
 </html>

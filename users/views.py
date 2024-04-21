@@ -1,13 +1,37 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from .models import CustomUser
+from Activity.models import Post, Event, Donation
 
-
-from .forms import CharityForm
+from .forms import CharityForm, UserForm
 from django.http import HttpResponseRedirect
 from django.contrib import messages
 # Create your views here.
 
 
+def Add_charity(request):
+    title = 'Add-charity'
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            form = CharityForm(request.POST or None, request.FILES)
+            if form.is_valid():
+                form.save()
+                return HttpResponseRedirect('Charity')
+    form = CharityForm()
+    return render(request, 'Activity/Add_charity.html', {'form':form, 'title':title})
+
+
+def Profile(request, username):
+    user = CustomUser.objects.get(username=username)
+    if request.method == 'POST':
+        form = UserForm(request.GET or None,instance = user)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'your profile has been updated successfulyy')
+            return redirect('users')
+    title = 'Profile'
+    form = UserForm(request.GET or None,instance = user)
+    return render(request, 'Activity/user_profile.html', {'form':form, 'title':title})
 
 
 def index(request):
@@ -28,5 +52,10 @@ def index(request):
 
 
 def home(request):
+    events = Event.objects.all()
+    posts = Post.objects.all()
+    users = CustomUser.objects.all()
+    donation = Donation.objects.all()
     
-    return HttpResponse("wooooooooooooooooooooooooo.")
+    return render(request, 'Activity/dashboard.html', {'users':users, 'posts':posts, 'events':events, 'donations':donation})
+

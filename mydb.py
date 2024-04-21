@@ -3,11 +3,11 @@ import mysql.connector
 dataBase = mysql.connector.connect(
     host = 'localhost',
     user = 'root',
-    passwd = 'zajar@gmail7799'
+    passwd = 'zajar@gmail9977'
 )
 
 cursorObject = dataBase.cursor()
 
-cursorObject.execute("CREATE DATABASE chardb")
+cursorObject.execute("CREATE DATABASE Charitydb")
 
-print('all done!')
+print('well done!')

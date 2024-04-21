@@ -1,0 +1,37 @@
+{% extends 'tests/base1.html'%}
+
+{% block title%} {{title}} {% endblock%}
+
+
+{% block content%}
+
+      <center>  <h1> Profile page<span></span></h1> </center>
+            
+<div class="card card-border bg-light  me-2" id="back">
+    <div class="card-header"><strong></strong><br></div>
+<div class="card-body bg-light shadow">
+    <div>
+        <form action="" method="POST" enctype="multipart/form-data" ><br><br>
+            {% csrf_token %}
+            
+            {{ form.as_p }}
+        
+                <button type="submit" class="btn btn-secondary">Update</button>
+        </form>
+
+    </div>
+
+</div>
+
+<div class="row mt-3 mb-2">
+
+
+
+    
+</div>
+</div>
+
+
+
+
+{% endblock%}

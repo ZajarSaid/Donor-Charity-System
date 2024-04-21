@@ -1,0 +1,82 @@
+{% extends 'tests/base1.html'%}
+
+{% block title%} {{title}} {% endblock%}
+
+
+{% block content%}
+
+<div class="row">
+    <div class="col-3">
+        <h3>List of Donations</h3>
+    </div>
+    <div class="col-7">
+  
+    </div>
+    <div class="col-2">
+        <a href="" class="btn btn-primary rounded-pill">+ Add Donor</a>
+    </div>
+</div>
+    <div class="row bg-light mt-4">
+        <div class="col-1"></div>
+        <div class="col-8 ">
+
+            <table class="table table-striped table-bordered table-hover" id="example">
+                <thead class="bg-dark text-light">
+            
+                        <tr>   
+                            <th>SN</th>
+                            <th>Amount</th>
+                            <th>Donated_At</th>
+                            <th>Donor</th>                               
+                        </tr>
+                </thead>
+        
+                        <tbody>
+                        {% if donations %}
+                           
+                               
+                                {% for donation in donations %}
+                                <tr>
+                                    <td>{{ donation.id }}</td>
+                                    <td>{{donation.amount }}</td>
+                                    <td>{{ donation.donated_at }}</td>
+                                    <td>{{ donation.donor }}</td>
+                                    
+                                    
+                                    <td><a href="{% url 'Activity:donations' donation.pk %}" class="text-decoration-none text-success">Show</a></td>
+                                    
+        
+                                </tr>
+                                    
+                                    
+                                {% endfor %}
+                                    
+                               
+                              
+                        </tbody>
+                            
+            
+                    {% endif %}
+        
+                    <tfoot>
+                        <tr>
+                            <th>SN</th>
+                            <th>Amount</th>
+                            <th>Donated_At</th>
+                            <th>Donor</th>  
+                        </tr>
+                    </tfoot>
+            </table>
+
+        </div>
+        <div class="col-2"></div>
+
+    </div>
+
+    
+</div>
+
+
+
+
+{% endblock %}

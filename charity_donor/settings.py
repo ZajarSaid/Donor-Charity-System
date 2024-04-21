@@ -29,7 +29,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     
     'users',
-    'Activity'
+    'django_extensions',
+    'Activity',
+    'website'
 ]
 
 AUTH_USER_MODEL = 'users.CustomUser'
@@ -71,9 +73,9 @@ WSGI_APPLICATION = 'charity_donor.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'chardb',
+        'NAME': 'Charitydb',
         'USER': 'root',
-        'PASSWORD': 'zajar@gmail7799',
+        'PASSWORD': 'zajar@gmail9977',
         'HOST': 'localhost',
         'PORT': '3306',
     }

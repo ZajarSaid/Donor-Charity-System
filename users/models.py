@@ -12,9 +12,9 @@ class CustomUserManager(BaseUserManager):
     def create_user(self, username, email, password=None):
         # Your custom user creation logic
         if not email:
-            raise ValueError("users must havre an email")
+            raise ValueError("users must have an email")
         if not username:
-            raise ValueError("users must havre a username")
+            raise ValueError("users must have a username")
         user = self.model(
             email = self.normalize_email(email),
             username = username
@@ -48,7 +48,7 @@ class CustomUser(AbstractUser):
     date_joined = models.DateTimeField(auto_now_add=True)
     phone = models.CharField(max_length=200, default='+255')
     status = models.CharField(max_length=200, choices=STATUS, default='regular')
-    image = models.ImageField(null=True, blank=True, upload_to='User_profile/', validators=[EX_IMAGE_VALIDATOR])
+    image = models.ImageField(null=True, blank=True, upload_to='Profiles/', validators=[EX_IMAGE_VALIDATOR])
     password = models.CharField(max_length=120, unique=True)
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
@@ -78,7 +78,7 @@ class CustomUser(AbstractUser):
     def has_module_perms(self, app_label):
         return True
     
-    
+
     
 class Charithy(models.Model):
     
@@ -91,7 +91,7 @@ class Charithy(models.Model):
     first_name = models.CharField(max_length=123)
     middle_name = models.CharField(max_length=123)
     last_name = models.CharField(max_length=123)
-    image = models.ImageField(null=True, blank=True, upload_to='User_profile/', validators=[EX_IMAGE_VALIDATOR])
+    image = models.ImageField(null=True, blank=True, upload_to='Profiles/', validators=[EX_IMAGE_VALIDATOR])
     sex = models.CharField(max_length=200, choices=SEX, default='male')
     age = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add= True)
