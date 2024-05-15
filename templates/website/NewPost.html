@@ -1,0 +1,100 @@
+
+{% extends 'website/base.html' %}
+{% load static %}
+
+{% block title %}Posts{% endblock %}
+
+{% block content %}
+
+
+{% if messages %}
+<div class="alert alert-danger alert-dismissible fade show">
+    {% for message in messages %}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
+    
+    <p class="card-title"><strong> {{ message }}</strong></p> 
+    {% endfor %}
+</div>
+{% endif %}
+
+<div class="container-fluid mt-3">
+  {% for post in Posts %}
+    <div class="row mt-2">
+      <div class="col-8 container px-3 py-3">
+            <!-- Posts section -->
+                <!-- Post cards -->
+          <div class="shadow">
+             <div class="card ">
+                 <div class="card-body ">
+                      <!-- row for top event description -->
+        
+                    <div class="row mb-2 ">
+                        <div class="col-2">
+                          <h3>
+        
+                            <span class="me-2 bg-light">
+                              <i class="bi bi-journal-text bg-light"></i>
+                            </span>
+        
+                          </h3>
+                          
+                        </div>
+                        <div class="col-6">
+                          <div class="row">
+                              <div class="col-5"> <p class="text-success">{{post.title}}</p></div>
+                              <div class="col-6"> <p class="text-MUTED">{{post.created_at}}</p></div>
+                            
+                           </div>
+                        
+                           <h5>A SAFE HOME FOR THE POOR</h5>
+                        </div>
+                    
+                    </div>
+        
+                      <!-- row for top event description -->
+                      
+                      <p class="card-text px-3">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Magni ducimus optio iste. Explicabo modi illum sint similique nesciunt.
+                        Eius expedita excepturi aspernatur similique in ipsum nesciunt architecto. Fugit, ex temporibus..</p>
+                     
+                      <div class="row mt-2">
+                        <img src="{{post.photo.url}}" alt="" style="width: 100%; height: 400px;">
+                      </div>
+                      
+                  </div>
+                  <!-- end of card-body -->
+                  <div class="mb-3 px-3 py-2">
+                      <label for="comment-toggle" class="bg-light mt-2"><button class="comment-label btn btn-secondary " id="" ><span><i class=" fas fa-comment ms-2 "  id="comment-icon"></i> </span class="ms-2">Comment</button></label>
+                      <div class="comment-toggle" id="" style="display: none;">
+
+                        <form method="post" action="">
+                            {% csrf_token %}
+                            <!-- Hidden input field to store the post_id -->
+                          <input type="hidden" name="post_id" value="{{ post.id }}">
+
+                          <!-- Input field for the comment text -->
+                          <input type="text" class="form-control m-1" name="comment_text">
+
+                          <input type="submit" value="send" class="rounded-pill bg-dark" style="color: rgb(225, 200, 216);">
+                        </form>
+                       
+                      </div>
+                  </div>
+
+                </div>
+          </div>
+  <!-- Add more post cards as needed -->
+
+
+
+            <!-- Add more post cards as needed -->
+    </div>
+</div>
+
+
+{% endfor %}
+
+</div>
+
+{% endblock %}
+
+<script src="{% static 'js/comment.js' %}"></script>

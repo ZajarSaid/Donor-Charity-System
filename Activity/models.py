@@ -12,12 +12,15 @@ class Venue(models.Model):
 
 class Event(models.Model):
     name = models.CharField('Name', max_length=128)
-    event_date = models.DateField('Date')
+    event_date = models.DateTimeField('Date')
     venue = models.ForeignKey(Venue, related_name='events', blank=True, null=True, on_delete=models.CASCADE)
     manager = models.ForeignKey(CustomUser, related_name='managed_events', null=True, on_delete=models.CASCADE)
     description = models.TextField(blank=True)
-    members = models.ManyToManyField(CustomUser, related_name='events_attending')
+    members = models.ManyToManyField(CustomUser, related_name='events_attending', blank=True)
     approved = models.BooleanField(default=False)
+
+    def is_user_joined(self, user_id):
+        return self.members.filter(pk=user_id).exists()
     
     def __str__(self):
         return self.name
@@ -36,7 +39,7 @@ class Post(models.Model):
     body = models.TextField()
     author = models.ForeignKey(CustomUser, related_name='posts', on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
-    photo = models.ImageField(upload_to='Posts/User_profile/')
+    photo = models.ImageField(upload_to='Posts/')
     
     def __str__(self):
         return self.title

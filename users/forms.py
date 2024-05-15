@@ -58,7 +58,7 @@ class SignUpForm(UserCreationForm):
 class UserForm(forms.ModelForm):
     class Meta:
         model = CustomUser
-        fields = ('username', 'first_name', 'last_name', 'email', 'phone', 'status', 'password')
+        fields = ('username', 'first_name', 'last_name', 'email', 'phone', 'status', 'password','image')
 
         widgets={
                 
@@ -68,6 +68,7 @@ class UserForm(forms.ModelForm):
              'email':forms.EmailInput(attrs={'class':INPUT_CLASSES}),
              'phone':forms.TextInput(attrs={'class':INPUT_CLASSES}),
              'status':forms.Select(attrs={'class':INPUT_CLASSES}),
+             'image':forms.FileInput(attrs={'class':INPUT_CLASSES}),
              'password':forms.PasswordInput(attrs={'class':INPUT_CLASSES}),
              
             }
@@ -105,6 +106,7 @@ class AddEventForm(forms.ModelForm):
         widgets={
                 'name':forms.TextInput(attrs={'class':INPUT_CLASSES}),
                 'venue':forms.Select(attrs={'class':INPUT_CLASSES}),
+                'event_date':forms.DateInput(attrs={'class':INPUT_CLASSES}),
                 
                 'manager':forms.Select(attrs={'class':INPUT_CLASSES}),
                 'description':forms.Textarea(attrs={'class':INPUT_CLASSES}),

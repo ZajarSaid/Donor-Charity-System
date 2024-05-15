@@ -13,7 +13,11 @@
   
     </div>
     <div class="col-2">
+        {% if user.status == 'regular' %}
+        <a href="{% url 'User:home' %}" class="btn btn-primary rounded-pill">< Back</a>
+        {% else %}
         <a href="{% url 'Activity:add-user' %}" class="btn btn-primary rounded-pill">+ Add User</a>
+        {% endif %}
     </div>
 </div>
     <div class="row bg-light mt-4">
@@ -45,7 +49,7 @@
                                     <td>{{ user.phone }}</td>
                                     <td>{{ user.status}}</td>
                                    
-                                    <td><a href="" class="text-decoration-none text-success">Show</a></td>
+                                    <td><a href="{% url 'User:user-profile' user.username %}" class="text-decoration-none text-success">Show</a></td>
                                 </tr>
                                 {% endfor %}
                                 

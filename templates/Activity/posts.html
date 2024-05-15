@@ -25,6 +25,8 @@
                 <thead class="bg-dark text-light">
             
                         <tr>
+                                <th>SN</th>
+                                <th>Photo</th>
                                 <th>Post</th>
                                 <th>Body</th>
                                 <th>Posted_at</th>
@@ -35,12 +37,14 @@
                 </thead>
         
                         <tbody>
-                        {% if Posts %}
+                        {% if All_posts %}
                            
                               
                        
                                 {% for post in All_posts %}
                                 <tr>
+                                    <td>{{ post.id }}</td>
+                                    <td><img src="{{ post.photo.url}}" alt="" style="height: 70px;"></td>
                                     <td>{{ post.title }}</td>
                                     <td>{{ post.body}}</td>
                                     <td>{{ post.created_at }}</td>
@@ -63,6 +67,8 @@
         
                     <tfoot>
                         <tr>
+                            <th>SN</th>
+                            <th>Photo</th>
                             <th>Post</th>
                             <th>Body</th>
                             <th>Posted_at</th>

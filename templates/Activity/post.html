@@ -13,7 +13,7 @@
 
     <p class="card-text mb-2"><strong>Body:</strong><br>{{u_post.body}}</p>
     
-    <p class="card-text mb-2"><strong>Author:</strong><br> u_post.author</p>
+    <p class="card-text mb-2"><strong>Author:</strong><br>{{  u_post.author }}</p>
 
 </div>
 
@@ -21,7 +21,7 @@
 <div class="col-8">
     <a href="{% url 'Activity:postss' %}" class="btn btn-pass rounded-pill">Back</a>
 <a href="{% url 'Activity:update-post' u_post.id %}" class="btn btn-success rounded-pill">Update</a>
-<a href="{% url 'Activity:update-post' u_post.id %}" class="btn btn-danger rounded-pill">Delete</a>
+<a href="{% url 'Activity:delete-post' u_post.id %}" class="btn btn-danger rounded-pill">Delete</a>
 
 
 </div>

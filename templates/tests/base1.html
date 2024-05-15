@@ -7,6 +7,7 @@
     <title>Index | {% block title %}{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
     <link rel="stylesheet" href="{% static 'css/datatables.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="{% static 'css/temp.css' %}" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     
@@ -196,8 +197,9 @@
                 
                 {% endblock content %}
             </div>
+           
         </div>
-
+        {% include 'demo/footer.html' %}
     
 
         
@@ -207,7 +209,9 @@
     
     <script src="{% static 'js/bootstrap.bundle.js' %}"></script>
     <script src="{% static 'js/jquery-3.7.1.min.js' %}"></script>
-    <script src="{% static 'js/datatables.min.js' %}"></script>
+    <!-- <script src="{% static 'js/datatables.min.js' %}"></script> -->
+    <script src="{% static 'js/jquery.dataTables.min.js' %}"></script>
+    <!-- <script src="{%static 'js/dataTables.bootstrap5.min.js' %}"></script>  -->
     <script src="{% static 'js/script.js' %}"></script>
 
     </body>

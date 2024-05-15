@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import CustomUser
 from Activity.models import Post, Event, Donation
@@ -16,7 +16,8 @@ def Add_charity(request):
             form = CharityForm(request.POST or None, request.FILES)
             if form.is_valid():
                 form.save()
-                return HttpResponseRedirect('Charity')
+                messages.success(request, 'A charity member has been added successfuly')
+                return redirect('Activity:all-charity')
     form = CharityForm()
     return render(request, 'Activity/Add_charity.html', {'form':form, 'title':title})
 
@@ -24,13 +25,13 @@ def Add_charity(request):
 def Profile(request, username):
     user = CustomUser.objects.get(username=username)
     if request.method == 'POST':
-        form = UserForm(request.GET or None,instance = user)
+        form = UserForm(request.POST or None,instance = user)
         if form.is_valid():
             form.save()
             messages.success(request, 'your profile has been updated successfulyy')
             return redirect('users')
     title = 'Profile'
-    form = UserForm(request.GET or None,instance = user)
+    form = UserForm(request.POST or None,instance = user)
     return render(request, 'Activity/user_profile.html', {'form':form, 'title':title})
 
 
@@ -55,7 +56,14 @@ def home(request):
     events = Event.objects.all()
     posts = Post.objects.all()
     users = CustomUser.objects.all()
-    donation = Donation.objects.all()
+    donations = Donation.objects.all()
+
+    context={
+        'events':events,
+        'donations':donations,
+        'posts':posts,
+        'users':users
+    }
     
-    return render(request, 'Activity/dashboard.html', {'users':users, 'posts':posts, 'events':events, 'donations':donation})
+    return render(request, 'Activity/dashboard.html', context)
 

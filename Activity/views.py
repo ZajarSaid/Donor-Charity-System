@@ -20,16 +20,14 @@ def add_user(request):
         if request.method == 'POST':
             form = UserForm(request.POST or None, request.FILES)
             if form.is_valid():
-                password = form.cleaned_data['password']
-                
+                password = form.cleaned_data['password'] 
                 user = form.save(commit=False)
-
-            
                 user.set_password(password)
                 user.email = form.cleaned_data['email']
-                
                 user.save()
                 messages.success(request, 'a user has been added sussceesfully..')
+            else:
+                messages.success(request, 'a user has not been added sussceesfully..')
                 
                 return redirect('Activity:all-users')
     form = UserForm()
@@ -49,13 +47,19 @@ def all_users(request):
 
 def all_charity(request):
     charity = Charithy.objects.all()
+    title = 'All Charity'
 
-    return render(request, 'tests/charity.html', {'charity':charity})
+    context={
+        'charity':charity,
+        'title':title
+    }
+
+    return render(request, 'tests/charity.html', context)
 
 
 
 def delete_event(request, event_id):
-    event = get_object_or_404(Post, pk=event_id)
+    event = get_object_or_404(Event, pk=event_id)
     event.delete()
     messages.success(request, "the event has beeen successfuly deleted")
 
@@ -107,12 +111,25 @@ def edit_post(request, pk):
 def approve_event(request, pk):
     p_event = get_object_or_404(Event, pk=pk)
 
-    if request.user.is_staff:
-        p_event.approved = True
-        p_event.save()
-        messages.success(request, "your event has been approved successfully")
+    p_event.approved = True
+    p_event.save()
+    messages.success(request, "your event has been approved successfully")
+        
     return redirect('Activity:event', pk=p_event.id)
 
+
+def deny_event(request, event_pk):
+    p_event = get_object_or_404(Event, pk=event_pk)
+
+    if p_event.approved == True:
+        p_event.approved = False
+        p_event.save()
+
+    
+    
+        messages.success(request, "your event has been denied successfully")
+        
+    return redirect('Activity:event', pk=p_event.id)
 
 
 #list of events to the page wih minimal implementatkon
@@ -182,23 +199,22 @@ def posts(request):
     
     return render(request, 'Activity/posts.html', {'All_posts':List_posts})
 
-# def add_comment(request, pk):
-#     title = 'Comment'
-#     #retrieve a post
-#     post = get_object_or_404(Post, pk=pk)
+def add_comment(request, post_id):
+    #retrieve a post
+    post = get_object_or_404(Post, pk=post_id)
     
-#     if request.method == 'POST':
-#         form = CommentForm(request.POST)
-#         if form.is_valid():
-#             comment = form.save(commit=False)
-#             comment.author = request.user
-#             comment.post = post
-#             comment.save()
-#             return redirect('/add-comment')
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.author = request.user
+            comment.post = post
+            comment.save()
+            return redirect('Website:post')
         
-#         messages.success(request, 'your commennt has been added successfully')
-#     form = CommentForm()
-#     return render(request, 'Activity/comment.html',{'form':form, 'title':title})
+        messages.success(request, 'your commennt has been added successfully')
+    form = CommentForm()
+    return redirect('Website:post')
 
 
 def add_post(request):
@@ -211,9 +227,9 @@ def add_post(request):
             post = form.save(commit=False)
             post.author = request.user
             post.save()
-            return HttpResponseRedirect('Add-post/?created')
+            return HttpResponseRedirect('/Activity/Add-post?created')
         
-    if created in request.POST:
+    if 'created' in request.GET:
         created = True
         messages.success(request, 'your Post has been created successfully')
     form = AddPostForm()
@@ -227,7 +243,7 @@ def add_venue(request):
         form = AddVenueForm(request.POST or None)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect('Activity/Add-venue/?submitted')
+            return HttpResponseRedirect('/Activity/Add-venue?submitted')
         
     if 'submitted' in request.POST:
         submitted = True

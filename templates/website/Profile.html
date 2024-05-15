@@ -1,42 +1,8 @@
-{% extends 'tests/base1.html'%}
+{% extends 'website/base.html' %}
 {% load static %}
 
-{% block title%} {{title}} {% endblock%}
 
-
-{% block content%}
-
-      <center>  <h1>User Profile<span></span></h1> </center>
-            
-<!-- <div class="card card-border bg-light  me-2" id="back">
-    <div class="card-header"><strong></strong><br></div>
-<div class="card-body bg-light shadow">
-    <div>
-       
-             <form action="" method="POST" enctype="multipart/form-data" ><br><br>
-            {% csrf_token %}
-            
-            {{ form.as_p }}
-        
-                <button type="submit" class="btn btn-secondary">Update</button>
-        </form> -->
-
-
-<!-- 
-    </div>
-
-</div>
-
-<div class="row mt-3 mb-2">
-
-
-
-    
-</div>
-</div> -->
-
-
-
+{% block content %}
 
 
 <div class="container-fluid px-4. mt-4.">
@@ -44,14 +10,13 @@
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800"></h1>
-        <a href="{% url 'Activity:all-users' %}" class="d-none d-sm-inline-block btn btn-sm btn-outline-primary shadow pe-4">
+        <a href="" class="d-none d-sm-inline-block btn btn-sm btn-outline-primary shadow pe-4">
             <i class="fas fa-arrow-left fa-sm text-white-50. px-1"></i> Back</a>
     </div>
-    <form action="{% url 'User:user-profile' user.username %}" class="row">
+    <form id="updateTeacher" class="row">
         <div class="col-xl-4">
             <!-- Profile picture card-->
             <div class="card mb-4 mb-xl-0">
-
                 <div class="card-header">Profile Picture</div>
                 <div class="card-body text-center">
                 <!-- Profile picture image -->
@@ -60,13 +25,12 @@
                 <div class="small font-italic text-muted mb-4">JPG or PNG no larger than 5 MB</div>
                 <!-- Profile picture upload form -->
                 <!-- <form id="teacherProfilePicture"> -->
-                    <input class="form-control" type="file" id="profilePicture" name="profilePicture" accept="image/*"  style="display:none"  onchange="previewProfilePicture(event)"/>
+                    <input class="form-control" type="file" id="profilePicture" name="profilePicture" accept="image/*"  hidden  onchange="previewProfilePicture(event)"/>
                     <!-- Profile picture upload button -->										
                     <label class="btn btn-primary btn-sm mb-0" type="button" for="profilePicture" class="m-0"><i class="fas fa-upload fa-sm text-white-50 pe-2"></i> Change Image</label>
                     
                 <!-- </form> -->
                 </div>
-                
             </div>
         </div>
         <div class="col-xl-8">
@@ -78,13 +42,13 @@
                     <div class="row gx-3 mb-3">
                         <!-- Form Group (first name)-->
                         <div class="col-md-6">
-                            <label class="small mb-1" for="inputUserName">Username</label>
-                            {{form.username}}
+                            <label class="small mb-1" for="inputUserName" >Username</label>
+                            <input class="form-control" id="inputUserName" type="text" placeholder="Enter your first name" value="{{User.username}}" required />
                         </div>
                         <!-- Form Group (last name)-->
                         <div class="col-md-6">
                             <label class="small mb-1" for="inputFirstName">First name</label>
-                         {{form.first_name}}
+                            <input class="form-control" id="inputFirstName" type="text" placeholder="Enter your last name" value="{{User.first_name}}" required />
                         </div>
                     </div>
 
@@ -92,12 +56,12 @@
                         <!-- Form Group (first name)-->
                         <div class="col-md-6">
                             <label class="small mb-1" for="inputLasttName" >Last name</label>
-                           {{form.last_name}}
+                            <input class="form-control" id="inputLasttName" type="text" placeholder="Enter your first name" value="{{User.last_name}}" required />
                         </div>
                         <!-- Form Group (last name)-->
                         <div class="col-md-6">
                             <label class="small mb-1" for="inputEmail">Email</label>
-                           {{form.email}}
+                            <input class="form-control" id="inputEmail" type="text" placeholder="Enter your last name" value="{{User.email}}" required />
                         </div>
                     </div>
                     <!-- Form Group (email address)-->
@@ -105,25 +69,31 @@
                     <!-- Form Group (Positions)-->
                     <div class="mb-4">
                         <label class="small mb-1">Status</label>
-                               {{form.status}}
+                        <input class="form-control" id="Status" type="email" name="status"  value="{{User.status}}" required />
                             
                     </div>
                     <div class="mb-4">
                         <label class="small mb-1">Phone</label>
-                        {{form.phone}}
+                        <input class="form-control" id="phone" type="text" name="phone"  value="{{User.phone}}" required />
                             
                     </div>
                     <!-- Form Group (Subjects)-->
-                 <input type="submit" value="Submit">
+                    <div class="mb-4">
+                        <label class="small mb-2 h6">Aquainted Subject(s)</label>
+                    
+                                <div class="form-check mx-2 py-1">
+                                    <input class="form-check-input" name="subjects" id="subject" type="checkbox" value="" disabled checked >
+                                    <label class="form-check-label" for="subject"></label>
+                                </div>
+                
+                    </div>
                     <!-- Submit button-->
-                  
+                    <button class="btn btn-primary btn-sm" type="submit"><i class="fas fa-upload fa-sm text-white-50 pe-2"></i> Updated Info</button>
                 </div>
             </div>
         </div>
     </form>
-
-    {% if request.user.username == user.username %}
-
+  
     <form id="changePassword" class="row">
         <div class="offset-xl-4 col-xl-8">
             <!-- Account details card-->
@@ -152,17 +122,7 @@
             </div>
         </div>
     </form>
-
-    {% else %}
-
-    
-
-    {% endif %}
-  
-   
 </div>
 
 
-
-
-{% endblock%}
+{% endblock %}

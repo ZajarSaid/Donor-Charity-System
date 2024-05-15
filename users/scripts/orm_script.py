@@ -1,16 +1,78 @@
-from User.models import MyUser, Charithy
+from users.models import CustomUser, Charithy
 from Activity.models import Venue, Event, Comment
-import requests
+from django.shortcuts import get_object_or_404
+
 
 
 def run():
+
+  # taking all events with their corresponding id's
+  comments = Comment.objects.all()
+  for comment in comments:
+    print(comment.author)
+    print(comment.post)
+    print(comment.body)
+    
+
+
+
+  
+  e_names = []
+
+  # assign members of event from custom users
+  
+  
+  # for event in events:
+  #    for member in event.members.all:
+  #     print(member.username)
+  #     print(member.status)
+    
+    # event.members.add(Kevo)
+    # print(event.members.all)
+
+  
+ 
+  # members_id = []
+
+  # for event in events:
+  #   MEMBERS = event.members.add(Ceo)
+    
+
+  
+  # event_members = [members for event.members.all in events]
+
+  
+
+  
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     #description = 'For all kind of contracts'
     #Category.objects.create(name='Contracts', description= description)
     #g = Category.objects.values()
-    f_name = 'John'
-    m_name = 'John'
-    l_name = 'John'
-    age = 23
+    # f_name = 'John'
+    # m_name = 'John'
+    # l_name = 'John'
+    # age = 23
     #print (g)
     # User = Charithy.objects.create(first_name=f_name, middle_name=m_name, last_name=l_name, age=age)
     # Result = Charithy.objects.values().filter(age=25)
@@ -24,8 +86,10 @@ def run():
     #   print(r.created_by)
     # User.save()
     # Venues = Venue.objects.all()
-comments = Comment.objects.all()
-print(comments.post.title)
+
+
+
+
         
         
 
@@ -46,3 +110,7 @@ print(comments.post.title)
          #   print("Empty response received from the API.")
     #else:
      #   print(f"Failed to fetch data from API. Status code: {response.status_code}")
+
+
+
+

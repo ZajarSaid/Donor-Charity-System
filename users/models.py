@@ -9,7 +9,7 @@ EX_FILE_VALIDATOR = FeV(['csv'])
 EX_IMAGE_VALIDATOR = FeV(['jpg','jpeg', 'png'])
 
 class CustomUserManager(BaseUserManager):
-    def create_user(self, username, email, password=None):
+    def create_user(self, username,first_name, last_name, phone, email, image=None, password=None):
         # Your custom user creation logic
         if not email:
             raise ValueError("users must have an email")
@@ -17,7 +17,11 @@ class CustomUserManager(BaseUserManager):
             raise ValueError("users must have a username")
         user = self.model(
             email = self.normalize_email(email),
-            username = username
+            username = username,
+            first_name=first_name,
+            last_name=last_name,
+            phone=phone,
+            image=image
         )
         user.set_password(password)
         user.save(using=self._db)
@@ -47,7 +51,7 @@ class CustomUser(AbstractUser):
     email = models.EmailField(max_length=123,unique=True)
     date_joined = models.DateTimeField(auto_now_add=True)
     phone = models.CharField(max_length=200, default='+255')
-    status = models.CharField(max_length=200, choices=STATUS, default='regular')
+    status = models.CharField(max_length=200, choices=STATUS, default='donor')
     image = models.ImageField(null=True, blank=True, upload_to='Profiles/', validators=[EX_IMAGE_VALIDATOR])
     password = models.CharField(max_length=120, unique=True)
     is_active = models.BooleanField(default=True)
@@ -79,6 +83,15 @@ class CustomUser(AbstractUser):
         return True
     
 
+
+
+# class Needs(models.Model):
+#     name = models.CharField( max_length=120)
+#     value = models.FloatField()
+
+#     def __str__(self):
+#         return self.value
+
     
 class Charithy(models.Model):
     
@@ -93,9 +106,8 @@ class Charithy(models.Model):
     last_name = models.CharField(max_length=123)
     image = models.ImageField(null=True, blank=True, upload_to='Profiles/', validators=[EX_IMAGE_VALIDATOR])
     sex = models.CharField(max_length=200, choices=SEX, default='male')
-    age = models.IntegerField()
+    age = models.PositiveIntegerField()
     created_at = models.DateTimeField(auto_now_add= True)
-    #registered_by = models.ForeignKey(CustomUser, related_name='charity', on_delete=models.CASCADE)
     
     
     class Meta:

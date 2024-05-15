@@ -1,11 +1,14 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from users.forms import SignUpForm, UserForm, LoginForm
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from users.models import CustomUser
+from django.urls import reverse
+from django.http import HttpResponseRedirect
 
-from Activity.models import Event
+from Activity.models import Event, Post, Comment
 
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import View
 from django.http import JsonResponse
 import json
@@ -14,6 +17,99 @@ from validate_email import validate_email
 
 
 # Create your views here.
+
+def leave_event(request, event_pk, username):
+
+    user = get_object_or_404(CustomUser, username = username)
+    event = get_object_or_404(Event, pk = event_pk)
+
+    if event:
+        event.members.remove(user)
+        messages.success(request, 'you have been successfuly removed from the event members ')
+
+        return HttpResponseRedirect(reverse('Website:events') + '?left')
+
+    
+    return render(request, 'website/events.html')
+
+
+def join_event(request, event_pk, username):
+
+    user = get_object_or_404(CustomUser, username = username)
+    event = get_object_or_404(Event, pk = event_pk)
+
+    if event:
+        event.members.add(user)
+        messages.success(request, 'you have been successfuly joined the event')
+
+        return HttpResponseRedirect(reverse('Website:events') + '?joined')
+
+    
+    return render(request, 'website/events.html')
+
+
+
+def about(request):
+  
+    return render(request, 'website/about.html')
+
+
+class Post_Comment_View(LoginRequiredMixin, View):
+    template_name = 'website/NewPost.html'
+
+
+    def get(self, request, *arg, **kwargs):
+        all_posts = Post.objects.all()
+
+        return render(request, self.template_name, {'Posts':all_posts})
+
+    def post(self, request, *arg, **kwargs):
+
+        comment = request.POST['comment_text']
+        author = request.user
+        post_id = request.POST['post_id']
+
+        if comment and post_id:
+            post = get_object_or_404(Post, id=post_id)
+
+        post_comment = Comment.objects.create(
+            body=comment, 
+            post=post,
+            author=author
+            )
+
+        post_comment.save()
+
+        print(post_comment.post.title)
+        print(post_comment.post.author)
+        print(post_comment.author)
+        
+        messages.success(request, 'your comment has been added successfully')
+       
+        return redirect('Website:post')
+
+
+def post(request):
+    all_posts = Post.objects.all()
+
+
+    return render(request, 'website/NewPost.html', {'Posts':all_posts})
+
+
+def _events(request):
+    all_events = Event.objects.all()
+
+    title = 'All events'
+
+    return render(request, 'website/events.html', {'title':title, 'Events':all_events})
+
+def User_profile(request, email):
+    user = get_object_or_404(CustomUser, email=email)
+
+    return render(request, 'website/Profile.html', {'User':user})
+
+
+
 class RegistrationView(View):
     def get(self, request):
 
@@ -40,15 +136,21 @@ class RegistrationView(View):
 
                     return render(request, 'website/register.html', context)
 
-                #the default avlue of status is donor here
-                user = CustomUser.objects.create_user(username=username, first_name=firstname, last_name=lastname, email=email, phone=phone)
+                # the default value of status is donor here
+                user = CustomUser.objects.create_user(
+                 username=username,
+                 first_name=firstname,
+                 last_name=lastname,
+                 email=email, phone=phone
+                 )
                 user.set_password(password)
                 user.save()
                 messages.success(request, 'A user account has been created successfuly..')
+                return redirect('Website:register')
 
-                render(request, 'website/register.html')
+                return render(request, 'Website/register.html')
 
-        render(request, 'website/register.html')
+        return render(request, 'website/register.html')
 
 
 class UsernameValidationView(View):
@@ -88,7 +190,7 @@ def user_login(request):
             login(request, user)
             messages.success(request, 'you have been logged in successfuly..')
             return redirect('User:home')
-        # if CustomUser.objects.filter(password=password).exists():
+        
             
             print(password)
                 
@@ -100,8 +202,8 @@ def index(request):
     if request.method == 'POST':
         form = UserForm(request.POST or None)
     
-    events = Event.objects.filter(approved=False)
+    events = Event.objects.all()
 
     form = UserForm()
-    return render(request, 'demo/temp.html', {'form':form, 'Events':events})
+    return render(request, 'website/base.html', {'form':form, 'Events':events})
 

@@ -1,4 +1,5 @@
 {% extends 'tests/base1.html'%}
+{% load static %}
 
 {% block title%} {{title}} {% endblock%}
 
@@ -27,8 +28,8 @@
                         <tr>
                                 <th>Event</th>
                                 <th>Event_date</th>
-                                <th>Venue</th>
                                 <th>Description</th>
+                                <th>Venue</th>
                                 <th>Manager</th>
                                 <th>Members</th>
                                 <th>Action</th>
@@ -47,7 +48,9 @@
                                     <td>{{ event.description }}</td>
                                     <td>{{ event.venue }}</td>
                                     <td>{{ event.manager }}</td>
-                                    <td>{{ event.members }}</td>
+                                    
+                                    <td>{% for member in event.members.all %}{{ member.username }}<br>{% endfor %}</td>
+                                    
                                     <td><a href="{% url 'Activity:event' event.id %}" class="text-decoration-none text-success">Show</a></td>
                                     
         
@@ -67,8 +70,8 @@
                         <tr>
                             <th>Event</th>
                             <th>Event_date</th>
-                            <th>Venue</th>
                             <th>Description</th>
+                            <th>Venue</th>
                             <th>Manager</th>
                             <th>Members</th>
                             <th>Action</th>
@@ -88,3 +91,5 @@
 
 
 {% endblock %}
+
+<script src="{% static 'js/script.js' %}"></script>
