@@ -106,7 +106,7 @@ class AddEventForm(forms.ModelForm):
         widgets={
                 'name':forms.TextInput(attrs={'class':INPUT_CLASSES}),
                 'venue':forms.Select(attrs={'class':INPUT_CLASSES}),
-                'event_date':forms.DateInput(attrs={'class':INPUT_CLASSES}),
+                'event_date':forms.DateInput(attrs={'type':'date','class':INPUT_CLASSES}),
                 
                 'manager':forms.Select(attrs={'class':INPUT_CLASSES}),
                 'description':forms.Textarea(attrs={'class':INPUT_CLASSES}),
@@ -129,12 +129,13 @@ class AddVenueForm(forms.ModelForm):
 class CharityForm(forms.ModelForm):
     class Meta:
         model = Charithy
-        fields = ('first_name', 'middle_name', 'last_name','image', 'sex', 'age')
+        fields = ('first_name', 'middle_name', 'last_name','image', 'sex', 'age', 'needs')
         
         widgets={
             'first_name':forms.TextInput(attrs={'class':INPUT_CLASSES}),
             'middle_name':forms.TextInput(attrs={'class':INPUT_CLASSES}),
             'last_name':forms.TextInput(attrs={'class':INPUT_CLASSES}),
+            'needs':forms.Select(attrs={'class':INPUT_CLASSES}),
             'image':forms.FileInput(attrs={'class':INPUT_CLASSES}),
             
             

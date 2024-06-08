@@ -12,24 +12,55 @@
     <div class="card-body shadow">
 
         <h1 class="text-muted card-text text-center">{{title}}</h1>
-        <form action="" method="POST" enctype="multipart/form-data"><br>
+        <form action="{% url 'User:add-charity' %}" method="POST" enctype="multipart/form-data">
             
             {% csrf_token %}
+
             <div class="row mb-2">
-    <div class="col-6 mb-2">  <label>First name:</label>{{ form.first_name}}</div>
-    <div class="col-6 mb-2">  <label>Middle name:</label>{{ form.middle_name}}</div>
-    
-    
+                <div class="col-6 mb-2"> 
+                    <label>First name:</label>
+                    <input type="text" name="first_name" id="" class="form-control">
+                </div>
+                <div class="col-6 mb-2"> 
+                    <label>Middle name:</label>
+                    <input type="text" name="middle_name" id="" class="form-control">
+                </div>
             </div>
+
             <div class="row mb-2">
-                <div class="col-6 mb-2">  <label>Last name:</label>{{ form.last_name}}</div>
-                <div class="col-6 mb-2">  <label>Sex:</label>{{ form.sex}}</div>
+                <div class="col-6 mb-2"> 
+                    <label>Last name:</label>
+                    <input type="text" name="last_name" id="" class="form-control">
+                </div>
+                <div class="col-6 mb-2"> 
+                    <label>Sex:</label>
+                    <select name="sex" id="" class="form-control">
+                        <option value="MALE">MALE</option>
+                        <option value="FEMALE">FEMALE</option>
+                    </select>
+                </div>
             </div>
+
+            <div class="row mb-2">
+                <div class="col-6 mb-2"> 
+                    <label>Age:</label>
+                    <input type="text" name="age" id="" class="form-control">
+                </div>
+                <div class="col-6 mb-2"> 
+                    <label>Image:</label>
+                    <input type="file" name="image" id="" class="form-control" accept="">
+                </div>
+            </div>
+
                 <div class="row">
-                  
-                    <div class="col-6">  <label>Age:</label>{{ form.age}}</div>
-                    
-                    <div class="col-6"><label>Image:</label>{{ form.image}}</div>
+                    <div class="col-6 mb-2"> 
+                        <label>Needs:</label>
+                        <select  name="needs" id="" class="form-control" multiple>
+                            {% for need in needs %}
+                            <option value="{{need.id}}">{{ need.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
                 </div>
                
                 <button type="submit" class="btn btn-secondary mt-3">Submit</button>

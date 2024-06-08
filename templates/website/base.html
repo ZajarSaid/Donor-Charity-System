@@ -43,12 +43,14 @@
   <div class="background ">
     
     <nav>
-      <a href="{% url 'Website:index' %}">Home</a>
-      <a href="">Logout</a>
       {% if user.is_authenticated %}
+      <a href="{% url 'Website:index' %}">Home</a>
+      <a href="{% url 'Website:logout' %}">Logout</a>
+      
 
       {% else %}
       <a href="{% url 'Website:login' %}">Login</a>
+      <a href="{% url 'Website:register' %}">Register</a>
 
       {% endif %}
     </nav>
@@ -59,7 +61,7 @@
         {% if user.is_authenticated %}
         <a href=""><button class="rounded-pill success text-warning px-2 py-1">Donate Now</button></a>
         {% else %}
-        <a href="{% url 'Website:register' %}"><button class="rounded-pill bg-dark text-light px-2 py-1">Register</button></a>
+   
 
         {% endif %}
       </div>
@@ -71,12 +73,13 @@
  
   <nav class="navbar navbar-expand-lg navbar-dark  topnav mb-2">
     
-      <a class="navbar-brand ms-3" href="#">Charity Website</a>
+      <a class="navbar-brand ms-3" href="{% url 'Website:index' %}">Charity Website</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
+
           {% if user.is_authenticated %}
           <li class="nav-item">
             <a class="nav-link" href="{% url 'Website:events' %}">Events</a>
@@ -86,6 +89,10 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href="">Profile</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="">Inbox</a>
           </li>
 
           {% else %}
@@ -101,6 +108,8 @@
   </nav>
 <!-- Navigation bar -->
 
+
+ {% include 'partials/messages.html' %}
 
 
 

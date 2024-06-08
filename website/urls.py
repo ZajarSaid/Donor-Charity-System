@@ -8,6 +8,7 @@ app_name = 'Website'
 urlpatterns = [
     path('', views.index, name='index'),
     path('login/', views.user_login, name='login'),
+    path('logout/', views.user_logout, name='logout'),
     path('validate-username/', csrf_exempt(UsernameValidationView.as_view()), name="validate-username"),
     path('validate-email/', csrf_exempt(EmailValidationView.as_view()), name="validate-email"),
     path('register/', RegistrationView.as_view(), name='register'),

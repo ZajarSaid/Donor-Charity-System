@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from users.forms import SignUpForm, UserForm, LoginForm
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from users.models import CustomUser
 from django.urls import reverse
@@ -15,7 +15,6 @@ import json
 from validate_email import validate_email
 
 
-
 # Create your views here.
 
 def leave_event(request, event_pk, username):
@@ -25,7 +24,7 @@ def leave_event(request, event_pk, username):
 
     if event:
         event.members.remove(user)
-        messages.success(request, 'you have been successfuly removed from the event members ')
+        messages.error(request, 'you have been successfuly removed from the event members ')
 
         return HttpResponseRedirect(reverse('Website:events') + '?left')
 
@@ -187,6 +186,11 @@ def user_login(request):
         user = authenticate(request, username=username, password=password)
             
         if user is not None:
+            if user.status == 'donor':
+                login(request, user)
+                messages.success(request, 'you have been logged in successfuly..')
+                return redirect('Website:index')
+                
             login(request, user)
             messages.success(request, 'you have been logged in successfuly..')
             return redirect('User:home')
@@ -197,6 +201,12 @@ def user_login(request):
     form = LoginForm()
     return render(request, 'website/weblogin.html', {'form':form})
 
+def user_logout(request):
+    if request.user is not None:
+        logout(request)
+        messages.error(request, 'you have been logged out successfuly..')
+        return redirect('Website:index')
+
 
 def index(request):
     if request.method == 'POST':
@@ -205,5 +215,5 @@ def index(request):
     events = Event.objects.all()
 
     form = UserForm()
-    return render(request, 'website/base.html', {'form':form, 'Events':events})
+    return render(request, 'website/base1.html', {'form':form, 'Events':events})
 

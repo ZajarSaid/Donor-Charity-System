@@ -85,12 +85,15 @@ class CustomUser(AbstractUser):
 
 
 
-# class Needs(models.Model):
-#     name = models.CharField( max_length=120)
-#     value = models.FloatField()
+class Needs(models.Model):
+    name = models.CharField( max_length=120)
+    value = models.FloatField()
 
-#     def __str__(self):
-#         return self.value
+    def __str__(self):
+        return f'{self.name}'
+
+    class Meta:
+        verbose_name_plural = 'Needs'
 
     
 class Charithy(models.Model):
@@ -107,7 +110,9 @@ class Charithy(models.Model):
     image = models.ImageField(null=True, blank=True, upload_to='Profiles/', validators=[EX_IMAGE_VALIDATOR])
     sex = models.CharField(max_length=200, choices=SEX, default='male')
     age = models.PositiveIntegerField()
+    needs = models.ManyToManyField(Needs)
     created_at = models.DateTimeField(auto_now_add= True)
+
     
     
     class Meta:

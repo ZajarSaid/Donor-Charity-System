@@ -60,10 +60,10 @@
                 <div class="small font-italic text-muted mb-4">JPG or PNG no larger than 5 MB</div>
                 <!-- Profile picture upload form -->
                 <!-- <form id="teacherProfilePicture"> -->
-                    <input class="form-control" type="file" id="profilePicture" name="profilePicture" accept="image/*"  style="display:none"  onchange="previewProfilePicture(event)"/>
-                    <!-- Profile picture upload button -->										
-                    <label class="btn btn-primary btn-sm mb-0" type="button" for="profilePicture" class="m-0"><i class="fas fa-upload fa-sm text-white-50 pe-2"></i> Change Image</label>
-                    
+                <input class="form-control" type="file" id="profilePicture" name="profilePicture" accept="image/*"  style="display:none"  onchange="previewProfilePicture(event)"/>
+                <!-- Profile picture upload button -->										
+                <label class="btn btn-primary btn-sm mb-0" type="button" for="profilePicture" class="m-0"><i class="fas fa-upload fa-sm text-white-50 pe-2"></i> Change Image</label>
+                
                 <!-- </form> -->
                 </div>
                 
@@ -122,7 +122,7 @@
         </div>
     </form>
 
-    {% if request.user.username == user.username %}
+    {% if request.user.username != form.username %}
 
     <form id="changePassword" class="row">
         <div class="offset-xl-4 col-xl-8">

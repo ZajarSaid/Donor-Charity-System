@@ -10,9 +10,35 @@ from django.http import HttpResponseRedirect
 from .models import Post, Donation
 from django.urls import reverse
 from django.contrib.auth import logout
-# Create your views here.
 
+# Create your views here
 
+from django.template.loader import get_template
+from xhtml2pdf import pisa
+
+def export_pdf(request):
+    template_path = 'Activity/charity.html'
+    charity = Charithy.objects.all()
+    context = {
+        'myvar':'heeeeeeeeeeeeeeeeey',
+        'charity':charity
+    }
+
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = ' filename=ListOfChariy.pdf' 
+   
+    
+    #find a template and render it
+    template = get_template(template_path)
+    html = template.render(context)
+
+    #create a pdf
+    pisa_status = pisa.CreatePDF(html, dest=response)
+
+    #if error then show some funny view
+    if pisa_status.err:
+        return HttpResponse('We had some bla  bla blaaaaaaaa <prev>' + html +'</prev>')
+    return response
 
 def add_user(request):
     title = 'Add-User'
@@ -61,7 +87,7 @@ def all_charity(request):
 def delete_event(request, event_id):
     event = get_object_or_404(Event, pk=event_id)
     event.delete()
-    messages.success(request, "the event has beeen successfuly deleted")
+    messages.error(request, "the event has beeen successfuly deleted")
 
     return redirect('Activity:events')
 
@@ -70,7 +96,7 @@ def delete_post(request, post_id):
     post = get_object_or_404(Post, pk=post_id)
     post.delete()
     
-    messages.success(request, "the post has beeen successfuly deleted")
+    messages.error(request, "the post has beeen successfuly deleted")
 
     return redirect('Activity:posts')
 
@@ -99,7 +125,7 @@ def edit_post(request, pk):
 
         form = AddPostForm(instance=u_post)
     else:
-        messages.success(request, "you have to be logged in first ndugu..")
+        messages.success(request, "you have to be logged in first ..")
         return redirect('Activity:add-post')
     
         
@@ -127,7 +153,7 @@ def deny_event(request, event_pk):
 
     
     
-        messages.success(request, "your event has been denied successfully")
+        messages.info(request, "your event has been denied successfully")
         
     return redirect('Activity:event', pk=p_event.id)
 
@@ -151,13 +177,13 @@ def update_event(request, pk):
             form = AddEventForm(request.POST or None, instance=u_event)
             if form.is_valid():
                 form.save()
-                messages.success(request, "event updated successfuly..!")
+                messages.info(request, "event updated successfuly..!")
             
                 return redirect('Activity:event', pk=u_event.id)
 
         form = AddEventForm(instance=u_event)
     else:
-        messages.success(request, "you have to be logged in first ndugu..")
+        messages.error(request, "you have to be logged in first ..")
         return redirect('Activity:add-event')
     
         
@@ -271,6 +297,6 @@ def add_event(request):
 
 def user_logout(request):
     logout(request)
-
-
+    messages.error(request, 'you have been logged out successfuly')
     return HttpResponseRedirect(reverse('Website:index'))
+

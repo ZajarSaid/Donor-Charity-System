@@ -24,7 +24,8 @@ urlpatterns = [
     path('donation/', views.all_donations, name='donations'),
     path('Approve-Event/<int:pk>', views.approve_event, name='event-approve'),
     path('Deny-Event/<int:event_pk>', views.deny_event, name='event-denial'),
-    path('logout/', views.user_logout, name='logout')
+    path('logout/', views.user_logout, name='logout'),
+    path('ExportPDF/', views.export_pdf, name='export-pdf')
 
 
 

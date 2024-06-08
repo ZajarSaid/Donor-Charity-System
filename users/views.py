@@ -1,10 +1,10 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
-from .models import CustomUser
+from .models import CustomUser, Needs
 from Activity.models import Post, Event, Donation
-
+from .models import Charithy
 from .forms import CharityForm, UserForm
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponsePermanentRedirect, HttpResponseBadRequest
 from django.contrib import messages
 # Create your views here.
 
@@ -13,13 +13,43 @@ def Add_charity(request):
     title = 'Add-charity'
     if request.user.is_authenticated:
         if request.method == 'POST':
-            form = CharityForm(request.POST or None, request.FILES)
-            if form.is_valid():
-                form.save()
-                messages.success(request, 'A charity member has been added successfuly')
-                return redirect('Activity:all-charity')
+            print(request.POST)
+            first_name = request.POST['first_name']
+            middle_name = request.POST['middle_name']
+            last_name = request.POST['last_name']
+            sex = request.POST['sex']
+            age = request.POST['age']
+            image = request.FILES.get('image')
+            needs_ids = request.POST.getlist('needs')
+
+            if not needs_ids:
+                return HttpResponseBadRequest('Needs are required')
+
+            # needs = get_object_or_404(Needs, pk=needs_ids)
+
+            charity = Charithy.objects.create(
+                first_name=first_name,
+                middle_name=middle_name,
+                last_name=last_name,
+                sex=sex,
+                age=age,
+                image=image,
+            )
+            charity.needs.set(needs_ids)  # Set the ManyToMany relationship
+            charity.save()
+            messages.success(request, 'A charity member has been added successfuly')
+            return redirect('Activity:all-charity')
+        else:
+
+            print(request.POST)
+    needs = Needs.objects.all()
     form = CharityForm()
-    return render(request, 'Activity/Add_charity.html', {'form':form, 'title':title})
+    context={
+        'title':title,
+        'needs':needs,
+        'form':form,
+    }
+    return render(request, 'Activity/Add_charity.html', context)
 
 
 def Profile(request, username):

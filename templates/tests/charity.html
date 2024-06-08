@@ -4,82 +4,88 @@
 
 
 {% block content%}
-<div class="row">
+<div class="row mb-3">
     <div class="col-3">
         <h3>List of Charities</h3>
     </div>
-    <div class="col-7">
+    <div class="col-5">
   
+    </div>
+    <div class="col-2">
+        <a href="{% url 'Activity:export-pdf' %}" class="btn btn-secondary rounded-pill"> Export PDF</a>
     </div>
     <div class="col-2">
         <a href="{% url 'User:add-charity' %}" class="btn btn-primary rounded-pill">+ Add Charity</a>
     </div>
 </div>
     <div class="row bg-light mt-4">
-        <div class="col-1"></div>
-        <div class="col-8 ">
 
-            <table class="table table-striped table-bordered table-hover" id="example">
-                <thead class="bg-dark text-light">
+      
+
+            <div class="container px-2">
+
+                <table id="example" class="table table-striped table-bordered table-hover" style="width: 100%;">
+                    <thead class="bg-dark text-light">
+                
+                            <tr>
+                                    <th>Photo</th>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>Sex</th>
+                                    <th>Age</th>
+                                    <th>Needs</th>
+                                    <td>Action</td>
+                                    
+                                </tr>
+                    </thead>
             
-                        <tr>
+                            <tbody>
+                            {% if charity %}
+                               
+                                   
+                                    {% for child in charity%}
+                                    <tr>
+                                        <td><img src="{{ child.image.url }}" alt="" style="width:60px"></td>
+                                        <td>{{ child.first_name }}</td>
+                                        <td>{{ child.last_name }}</td>
+                                        <td>{{ child.sex }}</td>
+                                        <td>{{ child.age }}</td>
+                                        <td style="width:300px">{% for need in child.needs.all %}{{need.name}}<br>{%endfor%}</td>
+                                        
+                                        
+                                        
+                                        <td><a href="" class="text-decoration-none text-success">Show</a></td>
+                                        
+            
+                                    </tr>
+                                        
+                                        
+                                    {% endfor %}
+                                        
+                                   
+                                  
+                            </tbody>
+                                
+                
+                        {% endif %}
+            
+                        <tfoot>
+                            <tr>
                                 <th>Photo</th>
                                 <th>First Name</th>
                                 <th>Last Name</th>
                                 <th>Sex</th>
                                 <th>Age</th>
+                                <th>Needs</th>
                                 <td>Action</td>
-                                
+                             
                             </tr>
-                </thead>
-        
-                        <tbody>
-                        {% if charity %}
-                           
-                               
-                                {% for child in charity%}
-                                <tr>
-                                    <td><img src="{{ child.image.url }}" alt="" style="width:60px"></td>
-                                    <td>{{ child.first_name }}</td>
-                                    <td>{{ child.last_name }}</td>
-                                    <td>{{ child.sex }}</td>
-                                    <td>{{ child.age }}</td>
-                                    
-                                    
-                                    
-                                    <td><a href="" class="text-decoration-none text-success">Show</a></td>
-                                    
-        
-                                </tr>
-                                    
-                                    
-                                {% endfor %}
-                                    
-                               
-                              
-                        </tbody>
-                            
-            
-                    {% endif %}
-        
-                    <tfoot>
-                        <tr>
-                            <th>Photo</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Sex</th>
-                            <th>Age</th>
-                            <td>Action</td>
-                         
-                        </tr>
-                    </tfoot>
-            </table>
-
-        </div>
-        <div class="col-2"></div>
+                        </tfoot>
+                </table>
+    
+            </div>
 
     </div>
-
     
 </div>
 
