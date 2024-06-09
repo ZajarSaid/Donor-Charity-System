@@ -18,6 +18,6 @@ urlpatterns = [
     path('Events/', views._events, name='events'),
     path('JoinEvent/<int:event_pk>/<username>', views.join_event, name='join-event'),
     path('LeaveEvent/<int:event_pk>/<username>', views.leave_event, name='leave-event'),
-    path('User-Account/', views.User_profile_page, name='user-page')
+    path('User-Account/<int:user_pk>/', views.User_profile_page, name='user-page')
 
 ]

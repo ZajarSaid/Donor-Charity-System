@@ -17,9 +17,16 @@ from validate_email import validate_email
 
 # Create your views here.
 
-def User_profile_page(request):
+def User_profile_page(request, user_pk):
 
-    return render(request, 'Website/user_profile.html')
+    userInfo = get_object_or_404(CustomUser, pk=user_pk)
+    form = UserForm(instance=userInfo)
+    context = {
+        'form':form
+    }
+
+
+    return render(request, 'Website/user_profile.html', context)
 
 def leave_event(request, event_pk, username):
 

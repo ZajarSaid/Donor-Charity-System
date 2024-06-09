@@ -229,7 +229,7 @@ def edit_post(request, pk):
         title = 'Update-Post'
 
         if request.method == 'POST':
-            form = AddPostForm(request.POST or None, instance=u_post)
+            form = AddPostForm(request.POST or None,request.FILES, instance=u_post)
             if form.is_valid():
                 form.save()
                 messages.success(request, "the event has been updated successfuly..!")

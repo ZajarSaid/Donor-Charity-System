@@ -13,21 +13,7 @@
     </head>
     <body>
  
-   
-       {% if messages %}
-
-    
-       <div class="alert alert-danger alert-dismissible fade show">
-           {% for message in messages %}
-           <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
-           
-           <p class="card-title"><strong> {{ message }}</strong></p> 
-           {% endfor %}
-       </div>
-   
-   
-   {% endif %}
-   
+  
 
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="width: 250px; background-color: rgb(196, 186, 162);" >
     <div class="container-fluid">
@@ -77,6 +63,8 @@
     </div>
 </nav>
 
+{% include 'partials/messages.html' %}
+
 <!-- navs -->     
 
 <div class="container-fluid">
@@ -100,7 +88,7 @@
                         <a href="" class="btn " style="background-color: aquamarine;">Inbox</a>
                     </div>
                     <div class="col-1">
-                        <a href="" class="btn " style="background-color: beige;">Logout</a>
+                        <a href="{% url 'Website:logout'%}" class="btn " style="background-color: beige;">Logout</a>
                     </div>
 
                 </div>
@@ -135,7 +123,7 @@
             <div class="row mt-2 mb-3">
         
                     <div class="row my-3 mx-3 px-4 bg-light">
-                        <div class="col-4">
+                        <div class="col-3">
                             <div class="card shadow">
                                 <div class="card-header">
 
@@ -151,13 +139,25 @@
                             </div>
                         </div>
 
-                        <div class="col-7">
-                            <h3 class="card-title text-muted"></h3>
+                        <div class="col-9">
+                            
                             <div class="container=fluid">
                                 <div class="card">
                                     <div class="card-header">
 
                                         <h4 class="card-title text-center">Account Details</h4>
+                                    </div>
+                                    <div class="card bg-light px-1 py-2">
+                                        <form action="" method="get">
+                                            <div class="row mb-1 ">
+                                                <div class="col-6">{{form.username}}</div>
+                                                <div class="col-6">{{form.email}}</div>
+                                            </div>
+                                            <div class="row mb-1 ">
+                                                <div class="col-6">{{form.status}}</div>
+                                                <div class="col-6">{{form.phone}}</div>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
                                 
