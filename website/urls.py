@@ -17,5 +17,7 @@ urlpatterns = [
     path('About/', views.about, name='about'),
     path('Events/', views._events, name='events'),
     path('JoinEvent/<int:event_pk>/<username>', views.join_event, name='join-event'),
-    path('LeaveEvent/<int:event_pk>/<username>', views.leave_event, name='leave-event')
+    path('LeaveEvent/<int:event_pk>/<username>', views.leave_event, name='leave-event'),
+    path('User-Account/', views.User_profile_page, name='user-page')
+
 ]

@@ -27,6 +27,7 @@
             
                         <tr>
                                 <th>Event</th>
+                                <th>photo</th>
                                 <th>Event_date</th>
                                 <th>Description</th>
                                 <th>Venue</th>
@@ -44,6 +45,12 @@
                                 {% for event in Events%}
                                 <tr>
                                     <td>{{ event.name }}</td>
+                                    <td>                      {% if event.photo %}
+                                        <img src="{{ event.photo.url }}" alt="">
+                                    {% else %}
+                                        <img src="{% static 'path/to/default_image.jpg' %}" alt="">
+                                    {% endif %}</td>
+              
                                     <td>{{ event.event_date }}</td>
                                     <td>{{ event.description }}</td>
                                     <td>{{ event.venue }}</td>
@@ -69,6 +76,7 @@
                     <tfoot>
                         <tr>
                             <th>Event</th>
+                            <th>photo</th>
                             <th>Event_date</th>
                             <th>Description</th>
                             <th>Venue</th>

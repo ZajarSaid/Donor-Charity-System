@@ -16,7 +16,7 @@ class Event(models.Model):
     venue = models.ForeignKey(Venue, related_name='events', blank=True, null=True, on_delete=models.CASCADE)
     manager = models.ForeignKey(CustomUser, related_name='managed_events', null=True, on_delete=models.CASCADE)
     description = models.TextField(blank=True)
-    # photo = models.ImageField(upload_to='Events/')
+    photo = models.ImageField(upload_to='Events/', blank=True)
     members = models.ManyToManyField(CustomUser, related_name='events_attending', blank=True)
     approved = models.BooleanField(default=False)
 

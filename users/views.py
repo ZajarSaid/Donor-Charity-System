@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from .models import CustomUser, Needs
-from Activity.models import Post, Event, Donation
+from Activity.models import Post, Event, Donation, Comment
 from .models import Charithy
 from .forms import CharityForm, UserForm
 from django.http import HttpResponseRedirect, HttpResponsePermanentRedirect, HttpResponseBadRequest
@@ -87,12 +87,14 @@ def home(request):
     posts = Post.objects.all()
     users = CustomUser.objects.all()
     donations = Donation.objects.all()
+    comments = Comment.objects.all()
 
     context={
         'events':events,
         'donations':donations,
         'posts':posts,
-        'users':users
+        'users':users,
+        'comments':comments
     }
     
     return render(request, 'Activity/dashboard.html', context)

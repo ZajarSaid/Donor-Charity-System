@@ -101,13 +101,13 @@ class AddPostForm(forms.ModelForm):
 class AddEventForm(forms.ModelForm):
     class Meta:
         model = Event
-        fields = ('name', 'event_date', 'venue', 'manager', 'description')
+        fields = ('name', 'event_date', 'venue', 'manager','photo', 'description')
             
         widgets={
                 'name':forms.TextInput(attrs={'class':INPUT_CLASSES}),
                 'venue':forms.Select(attrs={'class':INPUT_CLASSES}),
                 'event_date':forms.DateInput(attrs={'type':'date','class':INPUT_CLASSES}),
-                
+                'photo':forms.FileInput(attrs={'class':INPUT_CLASSES}),
                 'manager':forms.Select(attrs={'class':INPUT_CLASSES}),
                 'description':forms.Textarea(attrs={'class':INPUT_CLASSES}),
                 
