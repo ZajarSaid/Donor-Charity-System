@@ -4,7 +4,8 @@
     <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Index | {% block title %}{% endblock %}</title>
+    <title>Donor Account | {% block title %}Dashboard{% endblock %}</title>
+
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
     <link rel="stylesheet" href="{% static 'css/datatables.min.css' %}" />
     <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
@@ -23,9 +24,7 @@
             </button>
         <!--offcanvas-trigger-->
     <a class="navbar-brand fw-bold me-auto text-uppercase" href="#">DONOR ACCOUNT</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+    
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
         <div class="d-flex ms-auto">
@@ -35,35 +34,18 @@
 
         </div>
         
-        
-        <ul class="navbar-nav  mb-2 mb-lg-0">
-            <li>
-                {% if user.is_authenticated %}
-                <div>
-                    <p class=" card-text text-light mt-2">{{user.username}}</p>
-                    
-                </div>
-                {% endif %}
-            </li>
-        
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="bi bi-person-fill"></i>
-                </a>
-                <ul class="dropdown-menu dropdown-menu-end">
-                    <li><a class="dropdown-item" href="#">Profile</a></li>
-                    <li><a class="dropdown-item" href="#">Settings</a></li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="{% url 'Website:logout'%}">Logout</a></li>
-                </ul>
-            </li>
-            
-        </ul>
+
     </div>
     </div>
 </nav>
 
-{% include 'partials/messages.html' %}
+<div class="row mt-2 mb-2">
+    <div class="col-3"></div>
+    <div class="col-8">{% include 'partials/messages.html' %}</div>
+    <div class="col-1"></div>
+</div>
+
+
 
 <!-- navs -->     
 
@@ -71,116 +53,121 @@
     <div class="row mt-2 mb-3">
         <div class="col-3">{% include 'partials/user_sidebar.html '%}</div>
         <div class="col-8">
-            {% block content %}
+            
             <div class="container-fluid mt-3 ">
                 <div class="row ">
 
-                    <div class="col-6 bg-light">
+                    <div class="col-md-6 bg-light">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb py-1">
-                                <li class="breadcrumb-item active text-decoration-none pt-1"><a href="" class="text-decoration-none pt-2">Home</a></li>
-                                <li class="breadcrumb-item list-unstyled pt-1"><a href="" class="text-decoration-none">User Account</a></li>
+                                <li class="breadcrumb-item active text-decoration-none pt-1"><a href="" class="text-decoration-none pt-2">Dashboard</a></li>
+                                <li class="breadcrumb-item list-unstyled pt-1"><a href="" class="text-decoration-none">{%block desc%}User Account{%endblock desc%}</a></li>
                             </ol>
                         </nav>
                     </div>
-                    <div class="col-4"></div>
-                    <div class="col-1">
-                        <a href="" class="btn " style="background-color: aquamarine;">Inbox</a>
+                    <div class="col-2"></div>
+                    <div class="col-md-2 mt-1 ms-auto">
+                        {%block btn%}
+                        <a href="{% url 'Website:inbox'%}" class="btn " style="background-color: aquamarine;">
+                            <span class="me-2">
+                            <i class="bi bi-inbox text-dark"></i>
+                        </span>Inbox</a>
+                        {% endblock %}
+                        
+                        
                     </div>
-                    <div class="col-1">
-                        <a href="{% url 'Website:logout'%}" class="btn " style="background-color: beige;">Logout</a>
+                    <div class="col-md-2 mt-1 ms-auto">
+                        <a href="{% url 'Website:logout'%}" class="btn " style="background-color: beige;">    <span class="me-2">
+                            <i class="bi bi-box-arrow-right"></i>
+                        </span>Logout</a>
                     </div>
 
                 </div>
                 
             </div>
 
-            <div class="row my-3 mx-3 px-4 bg-light py-2">
+            <div class="row my-1 mx-1  my-2 ms-3  py-1">
                 <div class="col-3"></div>
                 <div class="col-6">
-                    
-                    <!-- <div class="row ">
-                        <div>
-                           
-                            <center>
-                                <img src="{% static 'Photos/tz_gov_logo.png' %}" alt="" class="px-2 rounded-pill" style="width: 80px; background-color: rgb(190, 231, 185);">
-                            </center>
-                        </div>
-                        <div class="row">
-                            <h5 class="text-success ms-5 mt-2">Farmers Registration System</h5>
-                        </div>
-                    </div> -->
-
-                    <h4 class="card-text mb-2">Donor Personal Account</h4>
-
-
+                    <h4 class="card-text mb-2 text-muted">{% block header %}Donor Personal Account{% endblock %}</h4>
                 </div>
                 <div class="col-3"></div>
             </div>
+            <hr class="bg-success">
+
+            {% block content %}
+        
+
+            
 
             <!-- User information -->
 
             <div class="row mt-2 mb-3">
         
-                    <div class="row my-3 mx-3 px-4 bg-light">
-                        <div class="col-3">
-                            <div class="card shadow">
+                <div class="row my-3 mx-3 px-4 bg-light">
+
+                    <div class="col-md-3">
+                        <div class="card shadow">
+                            <div class="card-header">
+
+                                <h4 class="card-title text-center">Profile</h4>
+                            </div>
+                            <center>
+                            <div class="col-md-xl-2 py-2 px-2">
+                                <img id="" class="rounded-pill mb-2" src="{% static 'profiles/avatar.svg' %}" alt="" height="100%" width="100%" />
+                            </div>
+                            </center>
+                        </div>
+                    </div>
+
+                    <div class="col-9">
+                        
+                        <div class="container=fluid">
+                            <div class="card">
                                 <div class="card-header">
 
-                                    <h4 class="card-title text-center">Profile</h4>
+                                    <h4 class="card-title text-center">Account Details</h4>
                                 </div>
-                                <center>
-                                    <div class="py-2">
-                                        <img id="" class=" rounded-circle mb-2" src="{% static 'profiles/avatar.svg' %}" alt="" height="100px" width="100px" />
-                                    </div>
-                                </center>
-                                    
-                                
-                            </div>
-                        </div>
-
-                        <div class="col-9">
-                            
-                            <div class="container=fluid">
-                                <div class="card">
-                                    <div class="card-header">
-
-                                        <h4 class="card-title text-center">Account Details</h4>
-                                    </div>
-                                    <div class="card bg-light px-1 py-2">
-                                        <form action="" method="get">
-                                            <div class="row mb-1 ">
-                                                <div class="col-6">{{form.username}}</div>
-                                                <div class="col-6">{{form.email}}</div>
-                                            </div>
-                                            <div class="row mb-1 ">
-                                                <div class="col-6">{{form.status}}</div>
-                                                <div class="col-6">{{form.phone}}</div>
-                                            </div>
-                                        </form>
-                                    </div>
+                                <div class="card bg-light px-1 py-2">
+                                    <form action="" method="get">
+                                        <div class="row mb-1 ">
+                                            <div class="col-6">{{form.username}}</div>
+                                            <div class="col-6">{{form.email}}</div>
+                                        </div>
+                                        <div class="row mb-1 ">
+                                            <div class="col-6">{{form.status}}</div>
+                                            <div class="col-6">{{form.phone}}</div>
+                                        </div>
+                                    </form>
                                 </div>
-                                
                             </div>
                             
                         </div>
                         
                     </div>
+                        
+                </div>
             
-            {% endblock content %}</div>
+            {% endblock %}
+          </div>
        </div>
 </div>
 
-{% include 'partials/footer.html' %}
+
+<div class="row mt-2">
+    <div class="col-3"></div>
+    <div class="col-7">{% include 'partials/footer.html' %}</div>
+    <div class="col-2"></div>
+</div>
+
     
     </main>
-    <!--main-section-->
+   
     
     
- <script src="{% static '/js/bootstrap.bundles.js' %}"></script>
- <script src="{% static 'js/jquery-3.7.1.min.js' %}"></script>
- <script src="{% static 'js/datatables.min.js' %}"></script>
- <script src="{% static 'js/script.js' %} "></script>
- <script src="{% static 'js/datatable.js' %} "></script>
+    <script src="{% static 'js/bootstrap.bundle.js' %}"></script>
+    <script src="{% static 'js/jquery-3.7.1.min.js' %}"></script>
+    <script src="{% static 'js/datatables.min.js' %}"></script>
+    <script src="{% static 'js/script.js' %}"></script>
     </body>
 </html>

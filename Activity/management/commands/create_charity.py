@@ -20,7 +20,7 @@ class command(BaseCommand):
 
         #    first_name, middle_name, last_name, image, sex, age, created_at
 
-        charity = [
+        charity = []
                   
 
 

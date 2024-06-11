@@ -41,8 +41,6 @@
 
       {% endif %}
   </nav>
-<div class="row mt-2 message">{% include 'partials/messages.html' %}</div>
-
 
   <ol class="carousel-indicators ">
     <li data-bs-target="#myCarousel" data-bs-slide-to="0" class="list-unstyled active"></li>
@@ -132,7 +130,7 @@
           <a class="nav-link" href="{% url 'Website:post' %}">Posts</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'Website:user-page' request.user.pk %}">Profile</a>
+          <a class="nav-link" href="{% url 'Website:user-page'  %}">Profile</a>
         </li>
 
         <li class="nav-item">

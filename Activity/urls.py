@@ -27,7 +27,8 @@ urlpatterns = [
     path('logout/', views.user_logout, name='logout'),
     path('ExportPDF/', views.export_pdf, name='export-pdf'),
     path('PdfGenerate/',views.generate_pdf_report, name='pdf'),
-    path('Charity-Analysis/', views.charity_age_trends, name='Charity-Trends')
+    path('Charity-Analysis/', views.charity_age_trends, name='Charity-Trends'),
+    path('Inbox/', views.inbox, name='inbox')
 
 
 

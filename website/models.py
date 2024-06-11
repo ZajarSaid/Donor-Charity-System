@@ -4,11 +4,11 @@ from users.models import CustomUser
 
 class Conversation(models.Model):
     members = models.ManyToManyField(CustomUser, related_name='conversations')
-    created_at = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField()
     modified_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.members
+        return f"Conversation started at {self.created_at}"
 
     class Meta:
         verbose_name_plural = 'Conversation'
@@ -22,4 +22,5 @@ class ConversationMessage(models.Model):
     created_by = models.ForeignKey(CustomUser, related_name='user_messages', on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.conversation
+        return f"Message by {self.created_by} on {self.created_at}"
+

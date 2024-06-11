@@ -6,6 +6,7 @@ from .models import Charithy
 from .forms import CharityForm, UserForm
 from django.http import HttpResponseRedirect, HttpResponsePermanentRedirect, HttpResponseBadRequest
 from django.contrib import messages
+from website.models import Conversation
 # Create your views here.
 
 
@@ -88,13 +89,15 @@ def home(request):
     users = CustomUser.objects.all()
     donations = Donation.objects.all()
     comments = Comment.objects.all()
+    conversation = Conversation.objects.all()
 
     context={
         'events':events,
         'donations':donations,
         'posts':posts,
         'users':users,
-        'comments':comments
+        'comments':comments,
+        'conversation':conversation
     }
     
     return render(request, 'Activity/dashboard.html', context)

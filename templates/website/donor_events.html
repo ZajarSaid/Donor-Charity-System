@@ -1,0 +1,82 @@
+{% extends 'website/user_profile.html' %}
+
+{% load static %}
+
+{% block title %}My Events{% endblock %}
+{% block header %}My Events{% endblock %}
+{% block desc%}events{% endblock %}
+{% block btn%}{% endblock %}
+
+{% block content %}
+<div class="row mb-2 mt-2">
+
+
+
+<div class="col-8">
+    <div class="container-fluid">
+       
+       
+        <table class="table table-striped table-bordered table-hover" id="example">
+            <thead class="bg-dark text-light">
+        
+                    <tr>
+                            <th>Event</th>
+                            <th>photo</th>
+                            <th>Event_date</th>
+                            <th>Description</th>
+                            <th>Venue</th>
+                            <th>Manager</th>
+                           
+                          
+                            
+                        </tr>
+            </thead>
+    
+                    <tbody>
+                    {% if Events %}
+                       
+                           
+                            {% for event in Events%}
+                            <tr>
+                                <td>{{ event.name }}</td>
+                                <td>                      {% if event.photo %}
+                                    <img src="{{ event.photo.url }}" alt="">
+                                {% else %}
+                                    <img src="{% static 'path/to/default_image.jpg' %}" alt="">
+                                {% endif %}</td>
+          
+                                <td>{{ event.event_date }}</td>
+                                <td>{{ event.description }}</td>
+                                <td>{{ event.venue }}</td>
+                                <td>{{ event.manager }}</td>
+                            
+                            </tr>
+                                
+                                
+                            {% endfor %}
+                                
+                    </tbody>
+                        
+        
+                {% endif %}
+    
+                <tfoot>
+                    <tr>
+                        <th>Event</th>
+                        <th>photo</th>
+                        <th>Event_date</th>
+                        <th>Description</th>
+                        <th>Venue</th>
+                        <th>Manager</th>
+                    </tr>
+                </tfoot>
+        </table>
+
+          </div>
+    </div>
+</div>
+
+</div>
+
+
+{% endblock %}

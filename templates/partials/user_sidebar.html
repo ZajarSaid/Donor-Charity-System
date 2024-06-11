@@ -13,25 +13,25 @@
                      <div class="text-muted fw-bold text-uppercase px-3 small">core</div>
                  </li>
                  <li>
-                     <a href="" class="nav-link px-3 active">
+                     <a href="{% url 'Website:user-page' %}" class="nav-link px-3 active">
                          <span class="me-2">
-                             <i class="bi bi-speedometer2 text-muted"></i>
+                             <i class="bi bi-speedometer2 text-dark"></i>
                          </span>
-                         <span class="small text-muted">Dashboard</span>
+                         <span class="small text-dark">Dashboard</span>
                      </a>
                  </li>
                  <li>
                      <hr class="nav-divider text-success">
                  </li>
                  <li>
-                     <div class=" text-muted fw-bold text-uppercase px-3 small">apps</div>
+                     <div class=" text-muted fw-bold text-uppercase px-3 small">History</div>
                  </li>
                  <li>
                      <a href="#dem" class="nav-link px-3 sidebar-link" data-bs-toggle="collapse" aria-expanded="false" aria-controls="dem">
                          <span class="me-2">
-                             <i class="bi bi-people text-muted"></i>
+                            <i class="bi bi-list-check text-dark"></i>
                          </span>
-                         <span class="small text-muted">Users</span>
+                         <span class="small text-dark">My Activities</span>
                          <span class="ms-auto right-icon">
                              <i class="bi bi-chevron-down text-muted"></i>
                          </span>
@@ -40,59 +40,36 @@
                          <div id="dem" class="collapse">
                              <div>
                                  <ul class="navbar-nav ps-3">
-                                     <a href="" class="nav-link px-3 active">
+                                     <a href="{% url 'Website:donor-events' %}" class="nav-link px-3 active">
                                          <span class="me-2">
-                                             <i class="bi bi-people text-muted"></i>
+                                            <i class="bi bi-calendar-event text-dark"></i>
                                          </span>
-                                         <span class="small text-muted">Farmers</span>
+                                         <span class="small text-dark">Events</span>
                                      </a>
-                                     <a href="" class="nav-link px-3 active">
+                                     <a href="{% url 'Website:donor-contribution' %}" class="nav-link px-3 active">
                                          <span class="me-2">
-                                             <i class="bi bi-people text-muted"></i>
+                                            <i class="bi bi-currency-dollar text-muted"></i>
                                          </span>
-                                         <span class="small text-muted">Staffs</span>
+                                         <span class="small text-dark">Donations</span>
                                      </a>
-                                     
+               
                                  </ul>
                              </div>
                          </div>
                  </li>
                  <li>
-                     <a href="" class="nav-link px-3 active">
-                         <span class="me-2">
-                             <i class="bi bi-file-earmark text-muted"></i>
-                         </span>
-                         <span class="small text-muted">Crops</span>
-                     </a>
-                     <a href="" class="nav-link px-3 active">
-                         <span class="me-2">
-                             <i class="bi bi-file-earmark text-muted"></i>
-                         </span>
-                         <span class="small text-muted">Farms</span>
-                     </a>
-                 </li>
-                 <li>
-                     <a href="#de" class="nav-link sidebar-link px-3 active" data-bs-toggle="collapse" aria-expanded="false">
-                         <span class="me-2 text-success">
-                             <i class="bi bi-grid"></i>
-                         </span>
-                         <span class="small text-muted">Categories</span>
-                         <span class="ms-auto right-icon">
-                             <i class="bi bi-chevron-down text-muted"></i>
-                         </span>
-                     </a>
-
+                    <a href="" class="nav-link px-3 active">
+                        <span class="me-2">
+                            <i class="bi bi-inbox text-dark"></i>
+                        </span>
+                        <span class="small text-dark">Inbox</span>
+                    </a>
                      
-
                  </li>
+             
                  <li>
                      <hr class="nav-divider text-white">
                  </li>
-
-                 <li>
-                     <div class=" text-white fw-bold text-uppercase px-3 small">Addons</div>
-                 </li>
-                 
                  
 
 

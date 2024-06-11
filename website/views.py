@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from users.models import CustomUser
 from django.urls import reverse
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 
 from Activity.models import Event, Post, Comment
@@ -13,12 +14,92 @@ from django.views import View
 from django.http import JsonResponse
 import json
 from validate_email import validate_email
+from .models import Conversation, ConversationMessage
+from .forms import ConversationMessageForm
+from django.utils import timezone
+
+
+
+@login_required
 
 
 # Create your views here.
 
-def User_profile_page(request, user_pk):
 
+class Conversation_Inbox_View(View):
+    pass
+
+class DonationView(View):
+    template_name = 'website/account_donation.html'
+
+    def get(self, request):
+        return render(request, self.template_name)
+
+class EventsView(View):
+    template_name = 'website/donor_events.html'
+
+    def get(self,request):
+        donor_id = request.user.pk 
+        joined_events = Event.objects.filter(members__in=[donor_id])
+
+        context={
+            'Events':joined_events
+        }
+        return render(request, self.template_name, context)
+
+class InboxView(View):
+
+    template_name = 'website/inbox.html'
+    Status = 'regular'
+    
+
+    def get(self, request):
+        user_pk = request.user.pk
+        user_conversations = Conversation.objects.filter(members__in=[user_pk])
+        # if user_conversations:
+
+        #    return redirect('Website:details', pk=user_pk)
+
+
+        form = ConversationMessageForm()
+
+        context={
+            'form':form,
+            'user_conversations':user_conversations
+        }
+
+        return render(request, self.template_name, context)
+
+    def post(self, request):
+
+        form = ConversationMessageForm(request.POST)
+        # take admin as an initial member of conversation
+        admin = CustomUser.objects.filter(status=self.Status).first()
+        print(admin)
+
+        if form.is_valid():
+            conversation = Conversation.objects.create(created_at=timezone.now())
+            conversation.members.add(admin)
+            conversation.members.add(request.user)
+            conversation.save()
+
+            conversation_message = form.save(commit=False)
+            conversation_message.conversation = conversation
+            conversation_message.created_by = request.user
+            conversation_message.save()
+            messages.success(request, 'Your Message has been sent successfuly')
+            return redirect('Website:inbox')
+
+        context={
+            'form':form
+        }
+
+        return render(request, self.template_name, context)
+
+
+def User_profile_page(request):
+    user_pk = request.user.pk
+        
     userInfo = get_object_or_404(CustomUser, pk=user_pk)
     form = UserForm(instance=userInfo)
     context = {
@@ -200,7 +281,7 @@ def user_login(request):
             if user.status == 'donor':
                 login(request, user)
                 messages.success(request, 'you have been logged in successfuly..')
-                return redirect('Website:index')
+                return redirect('Website:user-page')
                 
             login(request, user)
             messages.success(request, 'you have been logged in successfuly..')
@@ -215,7 +296,7 @@ def user_login(request):
 def user_logout(request):
     if request.user is not None:
         logout(request)
-        messages.error(request, 'you have been logged out successfuly..')
+        
         return redirect('Website:index')
 
 

@@ -2,6 +2,7 @@ from django.urls import path
 from . import views
 from .views import RegistrationView, UsernameValidationView, EmailValidationView, Post_Comment_View
 from django.views.decorators.csrf import csrf_exempt
+from .views import  InboxView, EventsView, DonationView
 
 app_name = 'Website'
 
@@ -18,6 +19,9 @@ urlpatterns = [
     path('Events/', views._events, name='events'),
     path('JoinEvent/<int:event_pk>/<username>', views.join_event, name='join-event'),
     path('LeaveEvent/<int:event_pk>/<username>', views.leave_event, name='leave-event'),
-    path('User-Account/<int:user_pk>/', views.User_profile_page, name='user-page')
-
+    path('User-Account/', views.User_profile_page, name='user-page'),
+    path('Inbox/', views.InboxView.as_view(), name='inbox'),
+    path('DonorEvents/', views.EventsView.as_view(), name='donor-events'),
+    path('DonorContribution/', views.DonationView.as_view(), name='donor-contribution'),
+   
 ]

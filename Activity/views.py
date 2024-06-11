@@ -11,6 +11,7 @@ from django.http import HttpResponseRedirect
 from .models import Post, Donation
 from django.urls import reverse
 from django.contrib.auth import logout
+from website.models import Conversation
 
 # Create your views here
 from django.template.loader import get_template
@@ -27,6 +28,16 @@ from users.models import Charithy
 import pandas as pd
 import plotly.express as px
 import plotly.io as pio
+
+def inbox(request):
+
+    conversations = Conversation.objects.filter(members__in=[request.user.id])
+    
+    context={
+        'conversations':conversations
+    }
+
+    return render(request, 'Activity/inbox.html', context)
 
 
 def charity_age_trends(request):

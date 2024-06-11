@@ -10,13 +10,13 @@
                                     <a href="" class="nav-link px-3 active">
                                         <div class="row">
                                             <span class="me-2">
-                                                <i class="bi bi-people icon bi-3x"></i>
+                                                <i class="bi bi-people icon bi-3x text-success"></i>
                                             </span>
                                         </div>
                                         <div class="row">
-                                            <p><span class="small">Users</span></p>
+                                            <p><span class="small text-success">Users</span></p>
                                         </div>
-                                        <p class="card-text">{{users.count}}</p>
+                                        <p class="card-text text-success">{{users.count}}</p>
                                     </a> 
                                 </div>
                                 
@@ -36,13 +36,13 @@
                         <a href="" class="nav-link px-3 active">
                             <div class="row">
                                 <span class="me-2">
-                                    <i class="bi bi-journal-text"></i>
+                                    <i class="bi bi-journal-text text-success"></i>
                                 </span>
                             </div>
                             <div class="row">
-                                <p><span class="small">Events</span></p>
+                                <p><span class="small text-success">Events</span></p>
                             </div>
-                            <p class="card-text">{{events.count}}</p>
+                            <p class="card-text text-success">{{events.count}}</p>
                         </a> 
                     </div>
                 </div>
@@ -62,13 +62,13 @@
                         <a href="" class="nav-link px-3 active">
                             <div class="row">
                                 <span class="me-2">
-                                    <i class="bi bi-journal-text"></i>
+                                    <i class="bi bi-journal-text text-success"></i>
                                 </span>
                             </div>
                             <div class="row">
-                                <p><span class="small">Posts</span></p>
+                                <p><span class="small text-success">Posts</span></p>
                             </div>
-                            <p class="card-text">{{posts.count}}</p>
+                            <p class="card-text text-success">{{posts.count}}</p>
                         </a> 
                     </div>
                 </div>
@@ -86,13 +86,15 @@
                         <a href="" class="nav-link px-3 active">
                             <div class="row">
                                 <span class="me-2">
-                                    <i class="bi bi-journal-text"></i>
+                                    <i class="bi bi-journal-text text-success" id="bs"></i>
                                 </span>
                             </div>
                             <div class="row">
-                                <p><span class="small">Comments</span></p>
+                                <p><span class="small text-success">Messages</span></p>
                             </div>
-                            <p class="card-text">{{comments.count}}</p>
+                            {% if conversation %}
+                            <p class="card-text text-success">{{conversation.count}}</p>
+                            {% endif %}
                         </a> 
                     </div>
                 </div>
@@ -112,12 +114,12 @@
                                     <a href="" class="nav-link px-3 active">
                                         <div class="row">
                                             <span class="me-2">
-                                                <i class="bi bi-cash"></i>
+                                                <i class="bi bi-cash text-success"></i>
                                             </span>
                                         </div>
                                         <div class="row">
-                                            <p><span class="small">Donations</span></p>
-                                            <p class="card-text">{{donations.count}}</p>
+                                            <p><span class="small text-success">Donations</span></p>
+                                            <p class="card-text text-success">{{donations.count}}</p>
                                         </div>
                                         
                                     </a> 
