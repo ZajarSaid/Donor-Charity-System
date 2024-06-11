@@ -29,6 +29,40 @@ import pandas as pd
 import plotly.express as px
 import plotly.io as pio
 
+from website.forms import ConversationMessageForm
+
+def messages_view(request, c_id):
+    # take conversation/user_id
+    u_id = request.user.id
+    conversation = Conversation.objects.filter(members__in=[u_id]).get(pk=c_id)
+
+
+    if request.method == 'POST':
+        form = ConversationMessageForm(request.POST)
+
+        if form.is_valid():
+            conversation_message=form.save(commit=False)
+            conversation_message.created_by = request.user
+            conversation_message.conversation = conversation
+            conversation_message.save()
+            
+            conversation.save()
+            messages.success(request, 'your message has been sent successfuly..')
+            
+            return redirect('Activity:messages', c_id=c_id)
+            
+            
+    form = ConversationMessageForm()
+
+    context={
+        'form':form,
+        'conversation':conversation
+    }
+
+    return render(request, 'Activity/messages.html', context)
+
+
+
 def inbox(request):
 
     conversations = Conversation.objects.filter(members__in=[request.user.id])
@@ -332,7 +366,7 @@ def list_events(request):
 
 def index(request):
 
-    return render(request, 'website/index.html')
+    return render(request, 'website/dashboard.html')
 
 def list_post(request):
     title = 'Posts'

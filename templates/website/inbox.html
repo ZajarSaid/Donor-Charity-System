@@ -1,8 +1,12 @@
 {% extends 'website/user_profile.html' %}
 
 {% block title %}Inbox{% endblock %}
-{% block header %}Inbox{% endblock %}
+
+{%block btn%}{% endblock %}
 {% block desc%}Inbox{% endblock %}
+{% block opt%}{% endblock %}
+
+{% block header %}Inbox{% endblock %}
 
 
 {% block content %}
@@ -13,7 +17,7 @@
         <div class="">
          
             {% for conversation in user_conversations %}
-            <a href="" class="text-decoration-none">
+            <a href="{% url 'Website:messages' conversation.id %}" class="text-decoration-none">
                 <div class="row bg-light mb-3 px-2 py-3 ">
                   {% for member in conversation.members.all %}
                       {% if member != request.user %}
@@ -44,18 +48,11 @@
 
 {% else %}
 <div class="row mb-2 mt-2">
-    <div class="col-2"></div>
-    <div class="col-8">
-        <div class="card mb-2 mt-2 py-2 px-1">
-            <form action="" method="post">
-                {% csrf_token %}
-                {{form.as_p}}
-
-                <input type="submit" value="Submit">
-            </form>
-        </div>
+    <div class="col-3"></div>
+    <div class="col-5">
+        <center><p class="card-text text-warning">No Conversation History</p></center>
     </div>
-    <div class="col-2"></div>
+    <div class="col-3"></div>
 </div>
 {% endif %}
 

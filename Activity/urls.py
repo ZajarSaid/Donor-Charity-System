@@ -28,7 +28,8 @@ urlpatterns = [
     path('ExportPDF/', views.export_pdf, name='export-pdf'),
     path('PdfGenerate/',views.generate_pdf_report, name='pdf'),
     path('Charity-Analysis/', views.charity_age_trends, name='Charity-Trends'),
-    path('Inbox/', views.inbox, name='inbox')
+    path('Inbox/', views.inbox, name='inbox'),
+    path('Messages/<int:c_id>/', views.messages_view, name='messages'),
 
 
 

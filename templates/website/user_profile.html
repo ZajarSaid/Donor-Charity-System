@@ -57,7 +57,7 @@
             <div class="container-fluid mt-3 ">
                 <div class="row ">
 
-                    <div class="col-md-6 bg-light">
+                    <div class="col-md-3 bg-light">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb py-1">
                                 <li class="breadcrumb-item active text-decoration-none pt-1"><a href="" class="text-decoration-none pt-2">Dashboard</a></li>
@@ -66,6 +66,14 @@
                         </nav>
                     </div>
                     <div class="col-2"></div>
+                    <div class="col-3 mt-1 ms-auto">
+                        {%block opt%}
+                        <a href="{% url 'Website:new-conversation'%}" class="btn " style="background-color: rgb(154, 188, 199);">
+                            <span class="me-2">
+                            <i class="bi bi-person text-dark"></i>
+                        </span>Contact Admin</a>
+                        {% endblock %}
+                    </div>
                     <div class="col-md-2 mt-1 ms-auto">
                         {%block btn%}
                         <a href="{% url 'Website:inbox'%}" class="btn " style="background-color: aquamarine;">
@@ -73,9 +81,9 @@
                             <i class="bi bi-inbox text-dark"></i>
                         </span>Inbox</a>
                         {% endblock %}
-                        
-                        
+
                     </div>
+                   
                     <div class="col-md-2 mt-1 ms-auto">
                         <a href="{% url 'Website:logout'%}" class="btn " style="background-color: beige;">    <span class="me-2">
                             <i class="bi bi-box-arrow-right"></i>
@@ -87,11 +95,11 @@
             </div>
 
             <div class="row my-1 mx-1  my-2 ms-3  py-1">
-                <div class="col-3"></div>
+                <div class="col-4"></div>
                 <div class="col-6">
-                    <h4 class="card-text mb-2 text-muted">{% block header %}Donor Personal Account{% endblock %}</h4>
+                    <h4 class="card-text mb-2 mt-2 fw-bold text-muted">{% block header %}Donor Personal Account{% endblock %}</h4>
                 </div>
-                <div class="col-3"></div>
+                <div class="col-2"></div>
             </div>
             <hr class="bg-success">
 

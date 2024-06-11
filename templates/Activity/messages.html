@@ -1,0 +1,83 @@
+{% extends 'tests/base1.html'%}
+{% load static %}
+
+{% block title%} Messages {{title}} {% endblock%}
+
+{% block content %}
+
+<div class="container-fluid mt-3 ">
+    <div class="row ">
+
+        <div class="col-md-6 bg-light">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb py-1">
+                    <li class="breadcrumb-item active text-decoration-none pt-1"><a href="" class="text-decoration-none pt-2">Dashboard</a></li>
+                    <li class="breadcrumb-item list-unstyled pt-1"><a href="" class="text-decoration-none">{%block desc%}Inbox{%endblock desc%}</a></li>
+                </ol>
+            </nav>
+        </div>
+        <div class="col-2"></div>
+        <div class="col-md-2 mt-1 ms-auto">
+           
+            
+            
+        </div>
+        <div class="col-md-2 mt-1 ms-auto">
+            <a href="{% url 'User:home'%}" class="btn " style="background-color: beige;">    <span class="me-2">
+                <i class="bi bi-box-arrow-right"></i>
+            </span>Back</a>
+        </div>
+
+    </div>
+    
+</div>
+<hr class="text-warning">
+<div class="row mt-3 mb-4">
+    <div class="col-3"></div>
+    <div class="col-4">
+    <Center>
+        <p class="card-header fw-bold">MESSAGES</p>
+    </Center></div>
+    <div class="col-4"></div>
+
+</div>
+
+<div class="row mb-2 mt-3">
+
+    <div class="mb-2">
+     
+        {% for message in conversation.messages.all %}
+        <div class="row mb-1 mt-1">
+            <div class="col-4">
+                
+            </div>
+            <div class="col-4"><p class="card-text"><strong>{{ message.created_at }}</strong></p></div>
+            <div class="col-4"></div>
+        </div>
+                <div class=" {% if message.created_by == request.user %} bg-pass{% else %} bg-light {% endif %}">
+                    <p class=" px-5 py-2  {% if message.created_by == request.user %} text-success {% else %} text-muted {% endif %}">
+                        <strong>{% if message.created_by == request.user %}You
+                             {% else %} {{ message.created_by }} {% endif %}</strong></p>
+                    <p class=" px-5 py-2 ">{{ message.content }}</p>
+                </div>
+            
+        {% endfor %}
+            
+                
+    </div>
+
+    <div>
+
+        <form method="POST" action=".">
+            {% csrf_token %}
+
+            {{ form.as_p }}
+
+            <button class="btn btn-success mt-5 mb-2 m-auto">Send</button>
+        </form>
+
+    </div>
+    
+</div>
+
+{% endblock %}

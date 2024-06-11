@@ -20,57 +20,33 @@ from django.utils import timezone
 
 
 
-@login_required
-
 
 # Create your views here.
-
-
-class Conversation_Inbox_View(View):
-    pass
-
-class DonationView(View):
-    template_name = 'website/account_donation.html'
-
-    def get(self, request):
-        return render(request, self.template_name)
-
-class EventsView(View):
-    template_name = 'website/donor_events.html'
-
-    def get(self,request):
-        donor_id = request.user.pk 
-        joined_events = Event.objects.filter(members__in=[donor_id])
-
-        context={
-            'Events':joined_events
-        }
-        return render(request, self.template_name, context)
-
-class InboxView(View):
-
-    template_name = 'website/inbox.html'
+class NewConversationView(View):
     Status = 'regular'
-    
+    template_name = 'website/newConversation.html'
 
     def get(self, request):
         user_pk = request.user.pk
-        user_conversations = Conversation.objects.filter(members__in=[user_pk])
-        # if user_conversations:
+        conversation = Conversation.objects.filter(members__in=[request.user.id])
+    
+        if conversation:
 
-        #    return redirect('Website:details', pk=user_pk)
-
+            return redirect('Website:messages', c_id=conversation.first().id)
+        
 
         form = ConversationMessageForm()
 
         context={
             'form':form,
-            'user_conversations':user_conversations
+            
         }
 
         return render(request, self.template_name, context)
 
+
     def post(self, request):
+        
 
         form = ConversationMessageForm(request.POST)
         # take admin as an initial member of conversation
@@ -95,6 +71,80 @@ class InboxView(View):
         }
 
         return render(request, self.template_name, context)
+
+
+@login_required
+
+def messages_view(request, c_id):
+    # take conversation/user_id
+    u_id = request.user.id
+    conversation = Conversation.objects.filter(members__in=[u_id]).get(pk=c_id)
+
+    if request.method == 'POST':
+        form = ConversationMessageForm(request.POST)
+        if form.is_valid():
+            conversation_message=form.save(commit=False)
+            conversation_message.created_by = request.user
+            conversation_message.conversation = conversation
+            conversation_message.save()
+            
+            conversation.save()
+            messages.success(request, 'your message has been sent successfuly..')
+            
+            return redirect('Website:messages', c_id=c_id)
+            
+            
+    form = ConversationMessageForm()
+
+    context={
+        'form':form,
+        'conversation':conversation
+    }
+
+    return render(request, 'website/messages.html', context)
+
+
+
+
+class Conversation_Inbox_View(View):
+    pass
+
+class DonationView(View):
+    template_name = 'website/account_donation.html'
+
+    def get(self, request):
+        return render(request, self.template_name)
+
+class EventsView(View):
+    template_name = 'website/donor_events.html'
+
+    def get(self,request):
+        donor_id = request.user.pk 
+        joined_events = Event.objects.filter(members__in=[donor_id])
+
+        context={
+            'Events':joined_events
+        }
+        return render(request, self.template_name, context)
+
+class InboxView(View):
+    template_name = 'website/inbox.html'
+    
+
+    def get(self, request):
+        user_pk = request.user.pk
+        user_conversations = Conversation.objects.filter(members__in=[user_pk])
+
+        form = ConversationMessageForm()
+
+        context={
+            'form':form,
+            'user_conversations':user_conversations
+        }
+
+        return render(request, self.template_name, context)
+
+    
 
 
 def User_profile_page(request):

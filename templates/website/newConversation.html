@@ -1,0 +1,31 @@
+{% extends 'website/user_profile.html' %}
+
+{% block title %}Details{% endblock %}
+
+{%block btn%}{% endblock %}
+{% block opt%}{% endblock %}
+{% block desc%}Inbox{% endblock %}
+
+{% block header %}NEW CONVERSATION{% endblock %}
+
+
+{% block content %}
+
+
+
+<div class="container bg-light mt-3 mb-3 py-3 px-20">
+    
+        <form action="." method="post">
+            {% csrf_token %}
+
+            <div class="mb-2">
+                <label for="" class="mb-2">Message to : <span><p class="text-muted">Admin</p></span>  </label><br>
+                {{ form.content }}
+            </div>
+
+            <button class="btn btn-success mt-5 mb-2 m-auto">Send</button>
+        </form>
+
+</div>
+
+{% endblock %}

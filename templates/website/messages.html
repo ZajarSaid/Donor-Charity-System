@@ -1,0 +1,56 @@
+{% extends 'website/user_profile.html' %}
+
+{% block title %}Details{% endblock %}
+
+{%block btn%}{% endblock %}
+{% block desc%}Inbox{% endblock %}
+
+{% block header %}Messages{% endblock %}
+{% block opt %}{% endblock %}
+
+
+{% block content %}
+
+
+<div class="mb-2">
+    
+    {% for message in conversation.messages.all %}
+    <div class="row mb-1 mt-1">
+        <div class="col-4">
+            
+        </div>
+        <div class="col-4"><p class="card-text"><strong>{{ message.created_at }}</strong></p></div>
+        <div class="col-4"></div>
+    </div>
+            <div class=" px-1 py-1 {% if message.created_by == request.user %} bg-pass{% else %} bg-light {% endif %}">
+                <p class=" px-5   {% if message.created_by == request.user %} text-success {% else %} text-muted {% endif %}">
+                    <strong>
+                    {% if message.created_by == request.user %} You 
+                     {% else %}
+                     {{ message.created_by}} {% endif %} 
+                    </strong></p>
+                <p class=" px-5 py-2 ">{{ message.content }}</p>
+            </div>
+        
+    {% endfor %}
+        
+          
+
+
+<div class="row mb-2 mt-2">
+    
+    <div class="col-12">
+        <div class="card mb-2 mt-2 py-2 px-1">
+            <form action="" method="post">
+                {% csrf_token %}
+                {{form.as_p}}
+
+                <input type="submit" value="Send">
+            </form>
+        </div>
+    </div>
+    
+</div>
+
+
+{% endblock %}
