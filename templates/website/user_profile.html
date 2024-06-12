@@ -54,19 +54,24 @@
         <div class="col-3">{% include 'partials/user_sidebar.html '%}</div>
         <div class="col-8">
             
-            <div class="container-fluid mt-3 ">
+        <div class="row mb-1">
+            <div class="col-xl-4 col-md-3 bg-light">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb py-1">
+                        <li class="breadcrumb-item active text-decoration-none pt-1"><a href="" class="text-decoration-none pt-2">Dashboard</a></li>
+                        <li class="breadcrumb-item list-unstyled pt-1"><a href="" class="text-decoration-none">{%block desc%}User Account{%endblock desc%}</a></li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+            
+            <div class="container-fluid mt-2">
+                
                 <div class="row ">
-
-                    <div class="col-md-3 bg-light">
-                        <nav aria-label="breadcrumb">
-                            <ol class="breadcrumb py-1">
-                                <li class="breadcrumb-item active text-decoration-none pt-1"><a href="" class="text-decoration-none pt-2">Dashboard</a></li>
-                                <li class="breadcrumb-item list-unstyled pt-1"><a href="" class="text-decoration-none">{%block desc%}User Account{%endblock desc%}</a></li>
-                            </ol>
-                        </nav>
-                    </div>
-                    <div class="col-2"></div>
-                    <div class="col-3 mt-1 ms-auto">
+                    <div class="col-3"></div>
+                   
+                                        
+                    <div class="col-3 mt-1">
                         {%block opt%}
                         <a href="{% url 'Website:new-conversation'%}" class="btn " style="background-color: rgb(154, 188, 199);">
                             <span class="me-2">
@@ -74,7 +79,8 @@
                         </span>Contact Admin</a>
                         {% endblock %}
                     </div>
-                    <div class="col-md-2 mt-1 ms-auto">
+
+                    <div class="col-md-2 mt-1">
                         {%block btn%}
                         <a href="{% url 'Website:inbox'%}" class="btn " style="background-color: aquamarine;">
                             <span class="me-2">
@@ -83,9 +89,17 @@
                         {% endblock %}
 
                     </div>
+                    <div class="col-2 mt-1">
+                        {%block index%}
+                        <a href="{% url 'Website:index'%}" class="btn " style="background-color: rgb(172, 175, 175);">
+                            <span class="">
+                            <i class="bi bi-home text-dark"></i>
+                        </span>Home</a>
+                        {% endblock %}
+                    </div>
                    
-                    <div class="col-md-2 mt-1 ms-auto">
-                        <a href="{% url 'Website:logout'%}" class="btn " style="background-color: beige;">    <span class="me-2">
+                    <div class="col-md-2 mt-1">
+                        <a href="{% url 'Website:logout'%}" class="btn " style="background-color: beige;">    <span class="me-1">
                             <i class="bi bi-box-arrow-right"></i>
                         </span>Logout</a>
                     </div>
@@ -111,48 +125,67 @@
             <!-- User information -->
 
             <div class="row mt-2 mb-3">
-        
-                <div class="row my-3 mx-3 px-4 bg-light">
+                <form action="{% url 'Website:user-page' %}" method="POST" class="row" style="width: 100%;" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                <div class="row my-3 mx-3 px-4 py-2 bg-light">
 
                     <div class="col-md-3">
                         <div class="card shadow">
+                            
                             <div class="card-header">
-
-                                <h4 class="card-title text-center">Profile</h4>
+                              <div class="text-center">Profile Image</div>
+                               
                             </div>
-                            <center>
-                            <div class="col-md-xl-2 py-2 px-2">
-                                <img id="" class="rounded-pill mb-2" src="{% static 'profiles/avatar.svg' %}" alt="" height="100%" width="100%" />
+                           
+                            <div class=" py-2 px-2 text-center">
+                                
+                                {% if user.image %}
+                                            <img id="profile-image" class="rounded-pill mb-2" src="{{ user.image.url }}" alt="Profile Image" height="100%" width="100%" />
+                                        {% else %}
+                                            <img id="profile-image" class="rounded-pill mb-2" src="" alt="Default Profile Image" height="100%" width="100%" />
+                                 {% endif %}
+                                
                             </div>
-                            </center>
+                           
                         </div>
                     </div>
 
-                    <div class="col-9">
+                    <div class="col-9 px-2">
                         
-                        <div class="container=fluid">
+                    
                             <div class="card">
                                 <div class="card-header">
 
-                                    <h4 class="card-title text-center">Account Details</h4>
+                                    <div class="text-center">Account Details</div>
                                 </div>
-                                <div class="card bg-light px-1 py-2">
-                                    <form action="" method="get">
-                                        <div class="row mb-1 ">
-                                            <div class="col-6">{{form.username}}</div>
-                                            <div class="col-6">{{form.email}}</div>
+                                <div class=" px-3 py-2">
+
+                                 
+                                        <div class="row mb-2 ">
+                                            <div class="col-6"><label for="">Username:</label>{{form.username}}</div>
+                                            <div class="col-6"><label for="">First Name:</label>{{form.first_name}}</div>
                                         </div>
-                                        <div class="row mb-1 ">
-                                            <div class="col-6">{{form.status}}</div>
-                                            <div class="col-6">{{form.phone}}</div>
+                                        <div class="row mb-2 ">
+                                            <div class="col-6"><label for="">Last Name:</label>{{form.last_name}}</div>
+                                            <div class="col-6"><label for="" class="mb-1">Status:</label><br>
+                                            <span class="mt-2">{{request.user.status}}</span></div>
                                         </div>
-                                    </form>
+                                   
+                                        <div class="row mb-2 ">
+                                            <div class="col-6"><label for="">Email:</label>{{form.email}}</div>
+                                            <div class="col-6"><label for="">Phone:</label>{{form.phone}}</div>
+                                        </div>
                                 </div>
                             </div>
                             
-                        </div>
+                       
+                        <div class="mt-2 mb-2"><input type="submit" value="Update"></div>
                         
                     </div>
+                    
+                    
+                   </form>
                         
                 </div>
             

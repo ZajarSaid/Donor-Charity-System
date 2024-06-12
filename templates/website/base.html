@@ -59,7 +59,7 @@
         <h1>Donor and people inneed</h1>
         <p>join our community</p>
         {% if user.is_authenticated %}
-        <a href=""><button class="rounded-pill success text-warning px-2 py-1">Donate Now</button></a>
+        <a href="{% url 'Website:payment' %}"><button class="rounded-pill success text-warning px-2 py-1">Donate Now</button></a>
         {% else %}
    
 

@@ -22,6 +22,12 @@ from django.utils import timezone
 
 
 # Create your views here.
+
+def payments(request):
+    
+    return render(request, 'website/payment.html')
+
+
 class NewConversationView(View):
     Status = 'regular'
     template_name = 'website/newConversation.html'
@@ -31,22 +37,16 @@ class NewConversationView(View):
         conversation = Conversation.objects.filter(members__in=[request.user.id])
     
         if conversation:
-
             return redirect('Website:messages', c_id=conversation.first().id)
         
-
         form = ConversationMessageForm()
-
         context={
-            'form':form,
-            
+            'form':form,  
         }
 
         return render(request, self.template_name, context)
 
-
     def post(self, request):
-        
 
         form = ConversationMessageForm(request.POST)
         # take admin as an initial member of conversation
@@ -145,18 +145,30 @@ class InboxView(View):
         return render(request, self.template_name, context)
 
     
-
-
 def User_profile_page(request):
     user_pk = request.user.pk
-        
+   
     userInfo = get_object_or_404(CustomUser, pk=user_pk)
+    
+
+    if userInfo.status == 'regular':
+        return redirect('User:home')
+
+    
+    if request.method == 'POST':
+        form = UserForm(request.POST, request.FILES, instance=userInfo)
+        if form.is_valid():
+            form.save()
+            message.success(request, 'You information has been updated successfuly..')
+            return redirect('Website:user-page')
     form = UserForm(instance=userInfo)
+    user = userInfo
     context = {
-        'form':form
+        'form':form,
+        'user':userInfo
     }
-
-
+    
+    
     return render(request, 'Website/user_profile.html', context)
 
 def leave_event(request, event_pk, username):
@@ -170,7 +182,6 @@ def leave_event(request, event_pk, username):
 
         return HttpResponseRedirect(reverse('Website:events') + '?left')
 
-    
     return render(request, 'website/events.html')
 
 
@@ -265,6 +276,7 @@ class RegistrationView(View):
         firstname = request.POST['firstname']
         lastname = request.POST['lastname']
         email = request.POST['email']
+        image = request.FILES.get('image')
         phone = request.POST['phone']
         password = request.POST['password']
 
@@ -282,7 +294,9 @@ class RegistrationView(View):
                  username=username,
                  first_name=firstname,
                  last_name=lastname,
-                 email=email, phone=phone
+                 email=email,
+                 phone=phone,
+                 image=image
                  )
                 user.set_password(password)
                 user.save()

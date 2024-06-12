@@ -455,6 +455,6 @@ def add_event(request):
 
 def user_logout(request):
     logout(request)
-    messages.error(request, 'you have been logged out successfuly')
+    
     return HttpResponseRedirect(reverse('Website:index'))
 

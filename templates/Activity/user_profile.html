@@ -6,37 +6,9 @@
 
 {% block content%}
 
+{% include 'partials/messages.html' %}
+
       <center>  <h1>User Profile<span></span></h1> </center>
-            
-<!-- <div class="card card-border bg-light  me-2" id="back">
-    <div class="card-header"><strong></strong><br></div>
-<div class="card-body bg-light shadow">
-    <div>
-       
-             <form action="" method="POST" enctype="multipart/form-data" ><br><br>
-            {% csrf_token %}
-            
-            {{ form.as_p }}
-        
-                <button type="submit" class="btn btn-secondary">Update</button>
-        </form> -->
-
-
-<!-- 
-    </div>
-
-</div>
-
-<div class="row mt-3 mb-2">
-
-
-
-    
-</div>
-</div> -->
-
-
-
 
 
 <div class="container-fluid px-4. mt-4.">
@@ -47,22 +19,29 @@
         <a href="{% url 'Activity:all-users' %}" class="d-none d-sm-inline-block btn btn-sm btn-outline-primary shadow pe-4">
             <i class="fas fa-arrow-left fa-sm text-white-50. px-1"></i> Back</a>
     </div>
-    <form action="{% url 'User:user-profile' user.username %}" class="row">
+    <form action="{% url 'User:user-profile' user.username %}" method="post" class="row">
+        {% csrf_token %}
         <div class="col-xl-4">
             <!-- Profile picture card-->
             <div class="card mb-4 mb-xl-0">
 
                 <div class="card-header">Profile Picture</div>
                 <div class="card-body text-center">
+                {% if form.image %}
+                
+                {% else %}
                 <!-- Profile picture image -->
                 <img id="previewImage" class="img-account-profile. rounded-circle mb-2" src="{% static 'profiles/avatar.svg' %}" alt="" height="200px" width="200px" />
+                {% endif %}	
                 <!-- Profile picture help block -->
                 <div class="small font-italic text-muted mb-4">JPG or PNG no larger than 5 MB</div>
-                <!-- Profile picture upload form -->
-                <!-- <form id="teacherProfilePicture"> -->
-                <input class="form-control" type="file" id="profilePicture" name="profilePicture" accept="image/*"  style="display:none"  onchange="previewProfilePicture(event)"/>
-                <!-- Profile picture upload button -->										
-                <label class="btn btn-primary btn-sm mb-0" type="button" for="profilePicture" class="m-0"><i class="fas fa-upload fa-sm text-white-50 pe-2"></i> Change Image</label>
+                
+                
+                <input class="form-control" type="file" name="profilePicture" accept="image/*"  style="" />
+                <!-- Profile picture upload button -->									
+                
+                <label class="btn btn-primary btn-sm mb-0" type="button" for="profilePicture" class="m-0">
+                    <i class="fas fa-upload fa-sm text-white-50 pe-2"></i> Change Image</label>
                 
                 <!-- </form> -->
                 </div>
@@ -122,43 +101,6 @@
         </div>
     </form>
 
-    {% if request.user.username != form.username %}
-
-    <form id="changePassword" class="row">
-        <div class="offset-xl-4 col-xl-8">
-            <!-- Account details card-->
-            <div class="card mb-4">
-                <div class="card-header">Change Password</div>
-                <div class="card-body">
-                    <!-- Form Row-->
-                    <div class="row gx-3 mb-4">
-                        <!-- Form Group (Change Password)-->
-                        <div class="col-md-4">
-                            <label class="small mb-1" for="currentPassword">Current Password</label>
-                            <input class="form-control" id="currentPassword" name="currentPassword" type="password" placeholder="" value="" required />
-                        </div>
-                        <div class="col-md-4">
-                            <label class="small mb-1" for="newPassword">New Password</label>
-                            <input class="form-control" id="newPassword" name="newPassword" type="password" placeholder="" value="" required />
-                        </div>
-                        <div class="col-md-4">
-                            <label class="small mb-1" for="confirmPassword">Confirm Password</label>
-                            <input class="form-control" id="confirmPassword" name="confirmPassword" type="password" placeholder="" value="" required />
-                        </div>
-                    </div>										
-                    <!-- Submit button-->
-                    <button class="btn btn-primary btn-sm" type="submit"><i class="fas fa-upload fa-sm text-white-50 pe-2"></i> Change Password</button>
-                </div>
-            </div>
-        </div>
-    </form>
-
-    {% else %}
-
-    
-
-    {% endif %}
-  
    
 </div>
 

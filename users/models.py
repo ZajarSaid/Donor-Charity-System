@@ -9,7 +9,7 @@ EX_FILE_VALIDATOR = FeV(['csv'])
 EX_IMAGE_VALIDATOR = FeV(['jpg','jpeg', 'png'])
 
 class CustomUserManager(BaseUserManager):
-    def create_user(self, username,first_name, last_name, phone, email, image=None, password=None):
+    def create_user(self, username,first_name, last_name, phone, email, image, password=None):
         # Your custom user creation logic
         if not email:
             raise ValueError("users must have an email")

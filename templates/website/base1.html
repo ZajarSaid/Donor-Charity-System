@@ -35,6 +35,7 @@
 <div id="myCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
   <nav>
     {% if user.is_authenticated %}
+    <a href="{% url 'Website:payment' %}" class="bg-warning text-dark">Donate Now</a>
       <a href="{% url 'Website:index' %}">Home</a>
       <a href="{% url 'Website:logout' %}">Logout</a>
       
@@ -68,7 +69,13 @@
                 </h5>
                 <h1>Donor and people inneed</h1>
                 <p>join our community</p>
-                  <a href="#" class="btn btn-lg btn-secondary bg-success">SignUp today </a>
+               
+            </div>
+
+            <div class="row">
+              <div class="col-4"></div>
+              <div class="col-4"></div>
+              <div class="col-4"></div>
             </div>
 
          </div>
@@ -84,7 +91,7 @@
                     we aim to make a meaningful impact on people's lives. Through these acts of kindness and support,
                    we strive to create ripple effects of compassion and contribute to a more compassionate world for all.
                 </h5>
-                  <a href="#" class="btn btn-lg btn-secondary">SignUp yesterday </a>
+               
               </div>
 
         </div>
@@ -101,7 +108,7 @@
                     we can create a world where everyone has access to the support they require, regardless of their circumstances,
                      and build a brighter future for generations to come."
                 </h5>
-                  <a href="#" class="btn btn-lg btn-secondary">SignUp LEO </a>
+               
               </div>
 
           </div>
@@ -120,7 +127,11 @@
                 </h5>
                 <h1>Donor and people inneed</h1>
                 <p>join our community</p>
-                  <a href="#" class="btn btn-lg btn-secondary bg-success">SignUp today </a>
+                {% if user.is_authenticated %}
+                <a href="{% url 'Website:payment' %}" class="btn btn-lg btn-secondary">Donate Now </a>
+                {% else %}
+                  <a href="{% url 'Website:register' %}" class="btn btn-lg btn-secondary">SignUp yesterday </a>
+                {% endif %}
             </div>
 
          </div>

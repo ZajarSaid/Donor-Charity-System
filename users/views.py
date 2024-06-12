@@ -56,30 +56,30 @@ def Add_charity(request):
 def Profile(request, username):
     user = CustomUser.objects.get(username=username)
     if request.method == 'POST':
-        form = UserForm(request.POST or None,instance = user)
+        form = UserForm(request.POST or None, request.FILES, instance = user)
         if form.is_valid():
             form.save()
             messages.success(request, 'your profile has been updated successfulyy')
-            return redirect('users')
+            return redirect('Activity:all-users')
     title = 'Profile'
-    form = UserForm(request.POST or None,instance = user)
+    form = UserForm(instance=user)
     return render(request, 'Activity/user_profile.html', {'form':form, 'title':title})
 
 
-def index(request):
-    submitted = False
-    if request.method == 'POST':
-        form = CharityForm(request.POST or None)
-        if form.is_valid():
-            user=form.save(commit=False)
-            user.created_by = request.user
-            user.save()
-            return HttpResponseRedirect('index?submitted')
-    if submitted in request.GET:
-        submitted = True
-        messages.success(request, 'your form has been created successfully')
-    form = CharityForm
-    return render(request, 'tests/register_charity.html', {'form':form})
+# def index(request):
+#     submitted = False
+#     if request.method == 'POST':
+#         form = CharityForm(request.POST or None)
+#         if form.is_valid():
+#             user=form.save(commit=False)
+#             user.created_by = request.user
+#             user.save()
+#             return HttpResponseRedirect('index?submitted')
+#     if submitted in request.GET:
+#         submitted = True
+#         messages.success(request, 'your form has been created successfully')
+#     form = CharityForm
+#     return render(request, 'tests/register_charity.html', {'form':form})
 
 
 

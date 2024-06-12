@@ -25,5 +25,6 @@ urlpatterns = [
     path('DonorContribution/', views.DonationView.as_view(), name='donor-contribution'),
     path('Messages/<int:c_id>/', views.messages_view, name='messages'),
     path('NewConversation/', views.NewConversationView.as_view(), name='new-conversation'),
+     path('Payment/', views.payments, name='payment'),
    
 ]
