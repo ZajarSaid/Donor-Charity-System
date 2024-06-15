@@ -1,0 +1,112 @@
+<div id="myCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
+  <nav>
+    {% if user.is_authenticated %}
+    <a href="{% url 'Website:payment' %}" class="bg-warning text-dark">Donate Now</a>
+      <a href="{% url 'Website:index' %}">Home</a>
+      
+      
+
+      {% else %}
+      <a href="{% url 'Website:login' %}">Login</a>
+      <a href="{% url 'Website:register' %}">Register</a>
+
+      {% endif %}
+  </nav>
+
+  <ol class="carousel-indicators ">
+    <li data-bs-target="#myCarousel" data-bs-slide-to="0" class="list-unstyled active"></li>
+    <li data-bs-target="#myCarousel" data-bs-slide-to="1" class="list-unstyled "></li>
+    <li data-bs-target="#myCarousel" data-bs-slide-to="2" class="list-unstyled "></li>
+    <li data-bs-target="#myCarousel" data-bs-slide-to="3" class="list-unstyled "></li>
+  </ol>
+
+    <div class="carousel-inner">
+        <div class="carousel-item active" data-bs-interval="4000">
+            <div class="overlay-image" id="Image1">
+
+            </div>
+
+            <div class="container">
+                <h1>hellow</h1>
+                <h5>Our nonprofit organization is committed to supporting people who are suffering difficulties as well as communities.
+                  We help people overcome obstacles and create better futures by offering necessities like food, shelter,
+                   healthcare, and educational chances. The altruism of contributors and volunteers.
+                  
+                </h5>
+                <h1>Donor and people inneed</h1>
+                <p>join our community</p>
+               
+            </div>
+
+            <div class="row">
+              <div class="col-4"></div>
+              <div class="col-4"></div>
+              <div class="col-4"></div>
+            </div>
+
+         </div>
+        <div class="carousel-item " data-bs-interval="3000">
+              <div class="overlay-image" id="Image2">
+
+              </div>
+              
+              <div class="container">
+                
+                <h5>We believe that every act of generosity, no matter how small, has the potential to create positive change.
+                   By supporting families in crisis, offering mentorship to at-risk youth, and aiding communities in rebuilding after disasters,
+                    we aim to make a meaningful impact on people's lives. Through these acts of kindness and support,
+                   we strive to create ripple effects of compassion and contribute to a more compassionate world for all.
+                </h5>
+               
+              </div>
+
+        </div>
+        <div class="carousel-item" data-bs-interval="4000">
+              <div class="overlay-image" id="Image3">
+
+              </div>
+              
+              <div class="container">
+                <h1>hellow</h1>
+                <h5 class="text-warning">Join us in our mission to build a more equitable tomorrow for everyone. Your contribution,
+                   whether through donations, volunteering, or spreading awareness,
+                    plays a crucial role in creating opportunities and resources for those in need. Together, 
+                    we can create a world where everyone has access to the support they require, regardless of their circumstances,
+                     and build a brighter future for generations to come."
+                </h5>
+               
+              </div>
+
+          </div>
+
+          <div class="carousel-item" data-bs-interval="4000">
+            <div class="overlay-image" id="Image4">
+
+            </div>
+
+            <div class="container">
+                <h1>hellow</h1>
+                <h5 class="text-primary">Our nonprofit organization is committed to supporting people who are suffering difficulties as well as communities.
+                  We help people overcome obstacles and create better futures by offering necessities like food, shelter,
+                   healthcare, and educational chances. The altruism of contributors and volunteers.
+                  
+                </h5>
+                <h1 class="text-muted">Donor and people inneed</h1>
+                <p class="text-primary">join our community</p>
+               
+            </div>
+
+         </div>
+
+    </div>
+
+    <a href="#myCarousel" class="carousel-control-prev" role="button" data-bs-slide-to="prev">
+      <span class="sr-only"></span>
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    </a>
+    <a href="#myCarousel" class="carousel-control-next" role="button" data-bs-slide-to="next">
+      <span class="sr-only"></span>
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    </a>
+
+</div>

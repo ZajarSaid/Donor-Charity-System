@@ -86,11 +86,11 @@ def charity_age_trends(request):
     df = pd.DataFrame(data)
     
     # Create a bar graph using Plotly
-    fig = px.histogram(df, x='Age', nbins=10, title='Trends of Charities by Age')
+    fig = px.histogram(df, x='Age', nbins=10, title='Trends of People In Need by Age')
     # fig.update_traces(marker_color='blue')  # Update the color of the bars to green
     fig.update_layout(
         xaxis_title='Age',
-        yaxis_title='Number of Charities',
+        yaxis_title='Number of People',
         bargap=0.2,
         title={'x': 0.5}  # Center the title
     )
@@ -124,7 +124,7 @@ def generate_pdf_report(request):
     elements.append(ministry_title)
     elements.append(Spacer(1, 12))  # Add a space after the ministry title
 
-    charity_title = Paragraph("THE LIST OF CHARITY", styles['Title'])
+    charity_title = Paragraph("THE LIST OF PEOPLE IN NEED", styles['Title'])
     elements.append(charity_title)
     elements.append(Spacer(1, 12))  # Add a space after the charity title
 

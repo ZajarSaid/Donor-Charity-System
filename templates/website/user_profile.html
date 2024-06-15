@@ -111,7 +111,7 @@
             <div class="row my-1 mx-1  my-2 ms-3  py-1">
                 <div class="col-4"></div>
                 <div class="col-6">
-                    <h4 class="card-text mb-2 mt-2 fw-bold text-muted">{% block header %}Donor Personal Account{% endblock %}</h4>
+                    <h4 class="card-text mt-2 fw-bold text-muted">{% block header %}Donor Personal Account{% endblock %}</h4>
                 </div>
                 <div class="col-2"></div>
             </div>
@@ -138,20 +138,21 @@
                                
                             </div>
                            
-                            <div class=" py-2 px-2 text-center">
+                            <div class=" py-2 px-2 text-center mt-2">
                                 
                                 {% if user.image %}
                                             <img id="profile-image" class="rounded-pill mb-2" src="{{ user.image.url }}" alt="Profile Image" height="100%" width="100%" />
                                         {% else %}
-                                            <img id="profile-image" class="rounded-pill mb-2" src="" alt="Default Profile Image" height="100%" width="100%" />
+                                            <img id="profile-image" class="rounded-pill mb-2" src="{% static 'profiles/avatar.svg' %}" alt="Default Profile Image" height="100%" width="100%" />
                                  {% endif %}
                                 
                             </div>
+                            <div class="px-1 "><label for="" class="btn text-primary mb-1">Change Image:</label>{{form.image}}</div>
                            
                         </div>
                     </div>
 
-                    <div class="col-9 px-2">
+                    <div class="col-md-9 mt-2 px-2">
                         
                     
                             <div class="card">

@@ -1,6 +1,6 @@
 {% extends 'tests/base1.html'%}
 
-{% block title%} {{title}} {% endblock%}
+{% block title%} All Staff {% endblock%}
 
 
 {% block content%}
@@ -14,7 +14,14 @@
     </div>
     <div class="col-2">
         {% if user.status == 'regular' %}
-        <a href="{% url 'User:home' %}" class="btn btn-primary rounded-pill">< Back</a>
+        <div class="d-sm-flex align-items-center justify-content-between mb-2">
+            <h1 class="h3 mb-0 text-gray-800"></h1>
+            <a href="{% url 'User:home' %}" class="d-none d-sm-inline-block btn btn-sm btn-outline-success shadow pe-4">
+                <i class="fas fa-arrow-left fa-sm text-white-50. px-1">
+
+                </i> Back</a>
+        </div>
+       
         {% else %}
         <a href="{% url 'Activity:add-user' %}" class="btn btn-primary rounded-pill">+ Add User</a>
         {% endif %}
@@ -73,10 +80,7 @@
 
         </div>
         
-
     </div>
-
-    
 </div>
 
 

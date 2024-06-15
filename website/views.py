@@ -64,6 +64,12 @@ class NewConversationView(View):
             conversation_message.created_by = request.user
             conversation_message.save()
             messages.success(request, 'Your Message has been sent successfuly')
+
+            
+            # for message in Conversation.messages.all():
+            #     if message.created_by == request.user.id:
+            #         m_id = message.pk
+            # m_id = message.pk
             return redirect('Website:inbox')
 
         context={
@@ -89,7 +95,7 @@ def messages_view(request, c_id):
             conversation_message.save()
             
             conversation.save()
-            messages.success(request, 'your message has been sent successfuly..')
+            # messages.success(request, 'your message has been sent successfuly..')
             
             return redirect('Website:messages', c_id=c_id)
             
@@ -146,28 +152,39 @@ class InboxView(View):
 
     
 def User_profile_page(request):
+
     user_pk = request.user.pk
-   
     userInfo = get_object_or_404(CustomUser, pk=user_pk)
-    
 
     if userInfo.status == 'regular':
         return redirect('User:home')
 
-    
     if request.method == 'POST':
         form = UserForm(request.POST, request.FILES, instance=userInfo)
-        if form.is_valid():
-            form.save()
-            message.success(request, 'You information has been updated successfuly..')
-            return redirect('Website:user-page')
+        first_name = request.POST['first_name']
+        last_name = request.POST['last_name']
+        email = request.POST['email']
+        username = request.POST['username']
+        image = request.FILES.get('image')
+        phone = request.POST['phone']
+    
+        c_user = CustomUser.objects.get(id=user_pk)
+        c_user.username = username
+        c_user.last_name = last_name
+        c_user.first_name = first_name
+        c_user.email = email
+        c_user.image = image
+        c_user.phone = phone
+        c_user.save()
+        messages.success(request, 'Your information has been updated successfuly..')
+        return redirect('Website:user-page')
+
     form = UserForm(instance=userInfo)
     user = userInfo
     context = {
         'form':form,
         'user':userInfo
     }
-    
     
     return render(request, 'Website/user_profile.html', context)
 
@@ -351,11 +368,13 @@ def user_login(request):
             messages.success(request, 'you have been logged in successfuly..')
             return redirect('User:home')
         
-            
-            print(password)
+        messages.error(request, 'there is an erro loggin in.')
+        return redirect('Website:login')
+
+       
                 
     form = LoginForm()
-    return render(request, 'website/weblogin.html', {'form':form})
+    return render(request, 'website/Login.html', {'form':form})
 
 def user_logout(request):
     if request.user is not None:

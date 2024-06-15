@@ -4,7 +4,7 @@
     <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Index | {% block title %}{% endblock %}</title>
+    <title>Dashboard | {% block title %}{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
     <link rel="stylesheet" href="{% static 'css/datatables.min.css' %}" />
     <link rel="stylesheet" href="{% static 'fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css" />
@@ -43,7 +43,7 @@
                 <li>
                     {% if user.is_authenticated %}
                     <div>
-                        <p class=" card-text text-light mt-2">{{user.username}}</p>
+                        <p class=" card-text text-light mt-2">{{request.user.email}}</p>
                         
                     </div>
                     {% endif %}

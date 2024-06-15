@@ -1,14 +1,14 @@
 {% extends 'tests/base1.html'%}
 {% load static %}
 
-{% block title%} {{title}} {% endblock%}
+{% block title%} Charity-Trends {{title}} {% endblock%}
 
 
 {% block content%}
 
     <div class="row">
         
-        <h1 class="text-success"><i class="bi bi-bar-chart"></i> Charity Age Trends</h1>
+        <h1 class="text-success"><i class="bi bi-bar-chart"></i> People In Need Age Trends</h1>
         <div>{{ graph|safe }}</div>
 
     </div>

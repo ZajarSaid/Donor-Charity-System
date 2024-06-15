@@ -33,6 +33,11 @@
       background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background for contrast */
       border-radius: 5px;
     }
+    .message{
+      position:absolute;
+      top: 50;
+      left: 50;
+    }
     </style>
   </head>
   <body>
@@ -43,6 +48,8 @@
           <a href="{% url 'Website:register' %}">Register</a>
           <a href="{% url 'Website:index' %}">Go to Website</a>
         </nav>
+
+       
 
 <div class="row mt-4 my-4">
 
@@ -57,6 +64,8 @@
                 <form action="" method="POST" autocomplete="off"><br><br>
                   {% csrf_token %}
                   
+                    
+                 
                       <div class="mb-3 m-1 px-3">
                         <label for="">Email:</label>
                       <input type="email" class="form-control mt-2 px-3" id="emailField" placeholder="Enter email" name="username">

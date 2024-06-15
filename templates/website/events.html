@@ -1,4 +1,4 @@
-{% extends 'website/base.html' %}
+{% extends 'website/base1.html' %}
 
 {% block title %}Events{% endblock %}
 
@@ -43,7 +43,8 @@
             <p class="card-text mb-1"><strong>Manager:</strong><br> {{event.manager}}</p>
             <div class="row">
               <div class="col-4"> <p class="card-text mb-1"><strong>Date:</strong><br>{{event.event_date}}</p> </div>
-              <div class="col-6"> {% if request.user in event.members.all %}
+              <div class="col-6">
+               {% if request.user in event.members.all %}
             
                 <a href="{% url 'Website:leave-event' event.id request.user.username %}" class="btn btn-pass bg-dark py-2 text-light rounded-pill">Leave Event</a>
             {% else %}
@@ -57,46 +58,7 @@
 
 
       </div>
-            <!-- <center> <div class="card-header"><strong>{{event.name}}</strong><br></div></center> -->
-          
-        <!-- <div class="col-4 bg-light shadow px-3 py-2">
-          <div class="bg-light">
-            <p class="card-text mb-2"><strong>Venue:</strong><br>{{event.venue}}</p>
-          </div>
-          <div class="bg-light">
-            <p class="card-text mb-2 "><strong>Description:</strong><br> {{event.description}}</p>
-          </div>
-          <div class="bg-light">
-            <p class="card-text mb-2"><strong>Manager:</strong><br> {{event.manager}}</p>
-          </div>
-
-          <div class="bg-light">
-            <p class="card-text mb-2"><strong>Date:</strong><br>{{event.event_date}}</p> 
-          </div>
-        
             
-            <div class="row mb-3 mt-3">
-                <strong>Members:</strong>
-              {% if request.user in event.members.all %}
-                  {% for member in event.members.all %}
-                      {% if member != request.user %}
-                      <ul>
-                        <li class="list-unstyled ms-1">{{member.username}}</li>
-                      </ul>
-                          <p class="card-text mb-2"></p>
-                        {% else %}
-
-                        {% endif %}
-
-                    {% endfor %}
-                <a href="{% url 'Website:leave-event' event.id request.user.username %}" class="btn btn-pass bg-dark text-light rounded-pill">Leave Event</a>
-            {% else %}
-                <a href="{% url 'Website:join-event' event.id request.user.username %}" class="btn btn-success rounded-pill">Join Event</a>
-              {% endif %}
-          
-            </div>
-
-        </div> -->
     </div>
 
 {% endfor %}

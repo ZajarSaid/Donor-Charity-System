@@ -1,17 +1,152 @@
-{% extends 'website/base.html' %}
+{% extends 'website/base1.html' %}
+{% load static %}
 
 {% block title %}About Us{% endblock %}
 
 
 
 {% block content %}
-<div class="row">
-    <div class="col-6 bg-danger">
-        <p class="text-light">
-            About US Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-             Eaque itaque cum cumque dicta aut quas consequuntur, fugiat eum voluptatibus dolore exercitationem
-             odit possimus natus facere quam, recusandae minima excepturi dolores?
-        </p>
+<!-- Main Content -->
+<div class=" my-3">
+    <!-- Mission Section -->
+    <div class="row mb-5">
+      <div class="col text-center">
+        <h1 class="text-warning">About Us</h1>
+        <p class="lead text-success">Learn more about our mission, values, and the impact we create.</p>
+      </div>
     </div>
-</div>
+  
+    <!-- Mission and Values -->
+    <div class="row mb-4 px-3">
+      <div class="col-md-6">
+        <h2>Our Mission</h2>
+        <p>Our mission is to connect donors with people in need to create a better world. We aim to provide essential resources, support, and opportunities to those who need them most.</p>
+      </div>
+      <div class="col-md-6">
+        <h2>Our Values</h2>
+        <ul>
+          <li>Compassion: We believe in the power of kindness and empathy.</li>
+          <li>Transparency: We maintain honesty and openness in all our operations.</li>
+          <li>Collaboration: We work together with communities and partners to achieve our goals.</li>
+          <li>Impact: We strive to create meaningful and lasting change.</li>
+        </ul>
+      </div>
+    </div>
+  
+    <!-- History Section -->
+    <div class="row mb-4">
+      <div class="col text-center">
+        <h2 class="text-success">Our History</h2>
+        <p>Since our founding, we have been committed to making a difference. Here is a brief overview of our journey.</p>
+      </div>
+    </div>
+    <div class="row px-3">
+      <div class="col-md-4">
+        <div class="card mb-4 shadow">
+          <div class="card-body">
+            <h5 class="card-title">2020</h5>
+            <p class="card-text">Our organization was founded with the goal of connecting donors with those in need.</p>
+          </div>
+        </div>
+      </div>
+      <!-- Repeat similar blocks for more milestones -->
+      <div class="col-md-4">
+        <div class="card mb-4 shadow">
+            <div class="card-body">
+                <h5 class="card-title">2022</h5>
+                <p class="card-text">Expanded our operations internationally, partnering with organizations in five new countries to reach more people in need.</p>
+              </div>
+        </div>
+      </div>
+      <!-- Repeat similar blocks for more milestones -->
+      <div class="col-md-4">
+        <div class="card mb-4 shadow">
+            <div class="card-body">
+                <h5 class="card-title">2023</h5>
+                <p class="card-text">Launched our first major fundraising campaign, raising over $500,000 to support local communities affected by the pandemic.</p>
+              </div>
+        </div>
+      </div>
+      <!-- Repeat similar blocks for more milestones -->
+    </div>
+  
+    <!-- Team Section -->
+    <div class="row mb-5">
+      <div class="col text-center">
+        <h2 class="text-primary">Meet Our Team</h2>
+        <p>Our dedicated team works tirelessly to achieve our mission.</p>
+      </div>
+    </div>
+    <div class="row px-4">
+      <div class="col-md-3">
+        <div class="card mb-4">
+          <img src="{% static 'Photos/picha1.jpeg' %}" class="card-img-top" alt="Team Member 1">
+          <div class="card-body">
+            <h5 class="card-title">Felix Kapunda</h5>
+            <p class="card-text">CEO & Founder</p>
+          </div>
+        </div>
+      </div>
+      <!-- Repeat similar blocks for more team members -->
+
+      <div class="col-md-3">
+        <div class="card mb-4">
+          <img src="{% static 'Photos/picha1.jpeg' %}" class="card-img-top" alt="Team Member 1">
+          <div class="card-body">
+            <h5 class="card-title">Joseph Paul</h5>
+            <p class="card-text">EX-CEO & Founder</p>
+          </div>
+        </div>
+      </div>
+      <!-- Repeat similar blocks for more team members -->
+
+      <div class="col-md-3">
+        <div class="card mb-4">
+          <img src="{% static 'Photos/picha3.jpeg' %}" class="card-img-top" alt="Team Member 1">
+          <div class="card-body">
+            <h5 class="card-title">Fredrick Kitale</h5>
+            <p class="card-text">MINISTER & Charity</p>
+          </div>
+        </div>
+      </div>
+      <!-- Repeat similar blocks for more team members -->
+
+      <div class="col-md-3">
+        <div class="card mb-4">
+          <img src="{% static 'Photos/picha3.jpeg' %}" class="card-img-top" alt="Team Member 1">
+          <div class="card-body">
+            <h5 class="card-title">Emans Simumba</h5>
+            <p class="card-text">PRESIDENT & People In Need</p>
+          </div>
+        </div>
+      </div>
+      <!-- Repeat similar blocks for more team members -->
+
+    </div>
+  
+    <!-- Get Involved Section -->
+    <div class="row mb-5">
+      <div class="col text-center">
+        <h2>Get Involved</h2>
+        <p>Join us in making a difference. Here's how you can help.</p>
+      </div>
+    </div>
+    <div class="row px-3">
+      <div class="col-md-4 text-center">
+        <i class="bi bi-people-fill display-4 mb-3"></i>
+        <h5>Volunteer</h5>
+        <p>Become a part of our volunteer community and help those in need.</p>
+      </div>
+      <div class="col-md-4 text-center">
+        <i class="bi bi-credit-card-fill display-4 mb-3"></i>
+        <h5>Donate</h5>
+        <p>Your donations can make a significant impact on someone's life.</p>
+      </div>
+      <div class="col-md-4 text-center">
+        <i class="bi bi-megaphone-fill display-4 mb-3"></i>
+        <h5>Spread the Word</h5>
+        <p>Help us raise awareness by sharing our mission with others.</p>
+      </div>
+    </div>
+  </div>
 {% endblock %}

@@ -1,0 +1,121 @@
+<!-- Main Content -->
+ {% load static %}
+
+
+
+
+  <div class=" my-5">
+    <!-- Introduction/Overview Section -->
+    <div class="row mb-5">
+      <div class="col text-center">
+        <h2>Welcome to Our Charity Platform</h2>
+        <p class="lead">Connecting donors with people in need to create a better world.</p>
+      </div>
+    </div>
+
+    <!-- Featured Causes/Projects Section -->
+    <div class="row mb-5">
+      <div class="col text-center">
+        <h2>Featured Causes</h2>
+      </div>
+    </div>
+    <div class="row">
+      <!-- Cause Item -->
+      <div class="col-md-4">
+        <div class="card mb-4">
+          <img src="{% static '/Photos/need6.jpeg' %}" class="card-img-top" alt="Cause 1">
+          <div class="card-body">
+            <h5 class="card-title">Cause Title 1</h5>
+            <p class="card-text">Short description of the cause and why it's important.</p>
+            <a href="#" class="btn btn-primary">Donate Now</a>
+          </div>
+        </div>
+      </div>
+      <!-- Repeat similar blocks for more causes -->
+      <div class="col-md-4">
+        <div class="card mb-4">
+          <img src="{% static '/Photos/need6.jpeg' %}" class="card-img-top" alt="Cause 1">
+          <div class="card-body">
+            <h5 class="card-title">Cause Title 1</h5>
+            <p class="card-text">Short description of the cause and why it's important.</p>
+            <a href="#" class="btn btn-primary">Donate Now</a>
+          </div>
+        </div>
+      </div>
+      <!-- Repeat similar blocks for more causes -->
+      <div class="col-md-4">
+        <div class="card mb-4">
+          <img src="{% static '/Photos/need6.jpeg' %}" class="card-img-top" alt="Cause 1">
+          <div class="card-body">
+            <h5 class="card-title">Cause Title 1</h5>
+            <p class="card-text">Short description of the cause and why it's important.</p>
+            <a href="#" class="btn btn-primary">Donate Now</a>
+          </div>
+        </div>
+      </div>
+      <!-- Repeat similar blocks for more causes -->
+    </div>
+
+    <!-- How It Works Section -->
+    <div class="row mb-5">
+      <div class="col text-center">
+        <h2>How It Works</h2>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4 text-center">
+        <i class="bi bi-person-fill display-4 mb-3"></i>
+        <h5>Step 1</h5>
+        <p>Sign up and create an account.</p>
+      </div>
+      <div class="col-md-4 text-center">
+        <i class="bi bi-heart-fill display-4 mb-3"></i>
+        <h5>Step 2</h5>
+        <p>Choose a cause to support.</p>
+      </div>
+      <div class="col-md-4 text-center">
+        <i class="bi bi-credit-card-fill display-4 mb-3"></i>
+        <h5>Step 3</h5>
+        <p>Make a donation securely.</p>
+      </div>
+    </div>
+
+    <!-- Testimonials/Success Stories Section -->
+    <!-- <div class="row mb-5">
+      <div class="col text-center">
+        <h2>Success Stories</h2>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="card mb-4">
+          <div class="card-body">
+            <h5 class="card-title">Success Story 1</h5>
+            <p class="card-text">Description of how donations made a difference.</p>
+          </div>
+        </div>
+      </div> -->
+      <!-- Repeat similar blocks for more success stories -->
+
+      <div class="row mt-3 mb-4">
+        <div class="col-1"></div>
+        <div class="col-10 px-2">
+            <div class="alert alert-warning shadow">
+              <center><p class="text-muted text-uppercase mt-2">Your small contribution today is the success of their future </p></center>
+              
+            </div>
+        </div>
+        <div class="col-1"></div>
+      </div>
+
+    </div>
+
+    <!-- Call to Action Section -->
+    <div class="row mb-5">
+      <div class="col text-center">
+        <h2>Join Our Community</h2>
+        <p class="lead">Your small contribution today can be the light of their future.</p>
+        <a href="{% url 'Website:register' %}" class="btn btn-lg btn-success">Register Now</a>
+      </div>
+    </div>
+  </div>

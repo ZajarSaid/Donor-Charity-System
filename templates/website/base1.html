@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Corousel-Slider</title>
+  <title>People inneed | {% block title %}Home{% endblock %}</title>
     
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -32,122 +32,7 @@
 </style>
 <body>
 
-<div id="myCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
-  <nav>
-    {% if user.is_authenticated %}
-    <a href="{% url 'Website:payment' %}" class="bg-warning text-dark">Donate Now</a>
-      <a href="{% url 'Website:index' %}">Home</a>
-      <a href="{% url 'Website:logout' %}">Logout</a>
-      
-
-      {% else %}
-      <a href="{% url 'Website:login' %}">Login</a>
-      <a href="{% url 'Website:register' %}">Register</a>
-
-      {% endif %}
-  </nav>
-
-  <ol class="carousel-indicators ">
-    <li data-bs-target="#myCarousel" data-bs-slide-to="0" class="list-unstyled active"></li>
-    <li data-bs-target="#myCarousel" data-bs-slide-to="1" class="list-unstyled "></li>
-    <li data-bs-target="#myCarousel" data-bs-slide-to="2" class="list-unstyled "></li>
-    <li data-bs-target="#myCarousel" data-bs-slide-to="3" class="list-unstyled "></li>
-  </ol>
-
-    <div class="carousel-inner">
-        <div class="carousel-item active" data-bs-interval="4000">
-            <div class="overlay-image" id="Image1">
-
-            </div>
-
-            <div class="container">
-                <h1>hellow</h1>
-                <h5>Our nonprofit organization is committed to supporting people who are suffering difficulties as well as communities.
-                  We help people overcome obstacles and create better futures by offering necessities like food, shelter,
-                   healthcare, and educational chances. The altruism of contributors and volunteers.
-                  
-                </h5>
-                <h1>Donor and people inneed</h1>
-                <p>join our community</p>
-               
-            </div>
-
-            <div class="row">
-              <div class="col-4"></div>
-              <div class="col-4"></div>
-              <div class="col-4"></div>
-            </div>
-
-         </div>
-        <div class="carousel-item " data-bs-interval="3000">
-              <div class="overlay-image" id="Image2">
-
-              </div>
-              
-              <div class="container">
-                
-                <h5>We believe that every act of generosity, no matter how small, has the potential to create positive change.
-                   By supporting families in crisis, offering mentorship to at-risk youth, and aiding communities in rebuilding after disasters,
-                    we aim to make a meaningful impact on people's lives. Through these acts of kindness and support,
-                   we strive to create ripple effects of compassion and contribute to a more compassionate world for all.
-                </h5>
-               
-              </div>
-
-        </div>
-        <div class="carousel-item" data-bs-interval="4000">
-              <div class="overlay-image" id="Image3">
-
-              </div>
-              
-              <div class="container">
-                <h1>hellow</h1>
-                <h5>Join us in our mission to build a more equitable tomorrow for everyone. Your contribution,
-                   whether through donations, volunteering, or spreading awareness,
-                    plays a crucial role in creating opportunities and resources for those in need. Together, 
-                    we can create a world where everyone has access to the support they require, regardless of their circumstances,
-                     and build a brighter future for generations to come."
-                </h5>
-               
-              </div>
-
-          </div>
-
-          <div class="carousel-item" data-bs-interval="4000">
-            <div class="overlay-image" id="Image4">
-
-            </div>
-
-            <div class="container">
-                <h1>hellow</h1>
-                <h5>Our nonprofit organization is committed to supporting people who are suffering difficulties as well as communities.
-                  We help people overcome obstacles and create better futures by offering necessities like food, shelter,
-                   healthcare, and educational chances. The altruism of contributors and volunteers.
-                  
-                </h5>
-                <h1>Donor and people inneed</h1>
-                <p>join our community</p>
-                {% if user.is_authenticated %}
-                <a href="{% url 'Website:payment' %}" class="btn btn-lg btn-secondary">Donate Now </a>
-                {% else %}
-                  <a href="{% url 'Website:register' %}" class="btn btn-lg btn-secondary">SignUp yesterday </a>
-                {% endif %}
-            </div>
-
-         </div>
-
-    </div>
-
-    <a href="#myCarousel" class="carousel-control-prev" role="button" data-bs-slide-to="prev">
-      <span class="sr-only"></span>
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    </a>
-    <a href="#myCarousel" class="carousel-control-next" role="button" data-bs-slide-to="next">
-      <span class="sr-only"></span>
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    </a>
-
-</div>
+{% include 'partials/carousel.html' %}
 
 <nav class="navbar navbar-expand-lg navbar-dark  topnav mb-2">
     
@@ -164,12 +49,13 @@
         <li class="nav-item">
           <a class="nav-link" href="{% url 'Website:post' %}">Posts</a>
         </li>
+
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'Website:user-page'  %}">Profile</a>
+          <a class="nav-link active" aria-current="page" href="{% url 'Website:about' %}">About Us</a>
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" href="">Inbox</a>
+          <a class="nav-link" href="{% url 'Website:user-page'  %}">Profile</a>
         </li>
 
         {% else %}
@@ -182,65 +68,18 @@
   </div>
 
 </nav>
-
-<div class="container-fluid">
-
-    <div class="row mt-3 mb-4">
-        <div class="col-1"></div>
-        <div class="col-10 px-2">
-            <div class="alert alert-warning shadow">
-              <center><p class="text-muted text-uppercase mt-2">Your small contribution today is the light of their future </p></center>
-              
-            </div>
-        </div>
-        <div class="col-1"></div>
-    </div>
-
-    <div class="row mt-2 mb-3">
-        <div class="col-1"></div>
-        
-        <div class="col-4 ">
-            <img src="{% static 'Photos/children.png' %}" alt="" style="width: 100%; height: 100%;">
-        </div>
-        <div class="col-1 me-2"></div>
-        <div class="col-4 " >
-            <img src="{% static 'Photos/donated2.png' %}" alt="" style="width: 100%;height: 100%;">
-        </div>
-        <div class="col-1"></div>
-    </div>
-
-    <div class="row mt-4 mb-2">
-      <div class="col-3"></div>
-      <div class="col-5 mb-3 mt-3"><center><button class="btn btn-success shadow text-pass rounded-pill">Register Now</button></center></div>
-      <div class="col-4 mb-2"></div>
-      
-    </div>
-
-    <div class="row mt-2 mb-5 bg-warning mx-3 rounded-pill" style="height: 60px;">
-      <div class="text-pass px-2 py-3">
-          <p class="text-white ms-4">Learn how our Charity Sponsorship provides Education to the People inneed.....</p>
-      </div>
-
-    </div>
-
+<div class="px-4">
+  {% include 'partials/messages.html' %}
 </div>
 
-<!-- footer -->
+{% block content %}
 
-<footer>
-  <div class="row mb-1 bg-dark  px-3">
-     <div class="col-6">
-        <div class="px-2 py-2">
-          <h3 class="text-warning">
-            <span>About Us</span>
-          </h3>
-          <p class="text-white">Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto quas cum ipsum animi obcaecati,
-             eligendi, aliquid voluptas, qui aperiam fugit magnam officia? Modi quis vitae est blanditiis officia pariatur delectus.</p>
-        </div>
-     </div>
-     <div class="col-6"></div>
-  </div>
-</footer>
+{% include 'partials/main.html' %}
+
+{% endblock %}
+
+<!-- footer -->
+{% include 'partials/footer1.html' %}
 <!-- footer -->
 
 
@@ -253,6 +92,7 @@
 <script src="{% static 'js/jquery-3.7.1.min.js' %}"></script>
 <script src="{% static 'js/datatables.min.js' %}"></script>
 <script src="{% static 'js/script.js' %}"></script>
+<script src="{% static 'js/comment.js' %}"></script>
   
  
 </body>

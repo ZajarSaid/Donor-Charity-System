@@ -54,16 +54,38 @@ def Add_charity(request):
 
 
 def Profile(request, username):
-    user = CustomUser.objects.get(username=username)
-    if request.method == 'POST':
-        form = UserForm(request.POST or None, request.FILES, instance = user)
-        if form.is_valid():
-            form.save()
-            messages.success(request, 'your profile has been updated successfulyy')
-            return redirect('Activity:all-users')
+    c_user = CustomUser.objects.get(username=username)
+    form = UserForm(instance=c_user)
+
     title = 'Profile'
-    form = UserForm(instance=user)
-    return render(request, 'Activity/user_profile.html', {'form':form, 'title':title})
+    if request.method == 'POST':
+        
+        form = UserForm(request.POST, request.FILES, instance=c_user)
+        first_name = request.POST['first_name']
+        last_name = request.POST['last_name']
+        email = request.POST['email']
+        username = request.POST['username']
+        image = request.FILES.get('image')
+        phone = request.POST['phone']
+        
+        c_user.username = username
+        c_user.last_name = last_name
+        c_user.first_name = first_name
+        c_user.email = email
+        c_user.image = image
+        c_user.phone = phone
+        c_user.save()
+        messages.success(request, 'Your information has been updated successfuly..')
+    
+        return redirect('User:user-profile',username=username)
+
+    context = {
+        'title':title,
+        'user':c_user,
+        'form':form
+    }
+    
+    return render(request, 'Activity/user_profile.html', context)
 
 
 # def index(request):

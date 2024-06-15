@@ -6,20 +6,20 @@
 
 {% block content%}
 
-{% include 'partials/messages.html' %}
+
 
       <center>  <h1>User Profile<span></span></h1> </center>
 
 
-<div class="container-fluid px-4. mt-4.">
+<div class="container-fluid px-4">
 						
     <!-- Page Heading -->
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <div class="d-sm-flex align-items-center justify-content-between mb-2">
         <h1 class="h3 mb-0 text-gray-800"></h1>
         <a href="{% url 'Activity:all-users' %}" class="d-none d-sm-inline-block btn btn-sm btn-outline-primary shadow pe-4">
             <i class="fas fa-arrow-left fa-sm text-white-50. px-1"></i> Back</a>
     </div>
-    <form action="{% url 'User:user-profile' user.username %}" method="post" class="row">
+    <form action="{% url 'User:user-profile' user.username %}" method="post" class="row" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="col-xl-4">
             <!-- Profile picture card-->
@@ -27,21 +27,24 @@
 
                 <div class="card-header">Profile Picture</div>
                 <div class="card-body text-center">
-                {% if form.image %}
+                    {% if user.image %}
+                        <img id="profile-image" class="rounded-pill mb-2" src="{{ user.image.url }}" alt="Profile Image" height="100%" width="100%" />
+                    {% else %}
+                        <img id="profile-image" class="rounded-pill mb-2" src="{% static 'profiles/avatar.svg' %}" alt="Default Profile Image" height="100%" width="100%" />
+                    {% endif %}
+                    <!-- Profile picture help block -->
+                    {% if user.pk != request.user.id %}
+                    {% else %}
+                        <div class="small font-italic text-muted mb-4">JPG or PNG no larger than 5 MB</div>
+                    
+                    
+                        <input class="form-control" type="file" name="image" accept="image/*"   />
+                        <!-- Profile picture upload button -->									
+                        
+                        <label class="btn btn-primary btn-sm mb-0" type="button" for="profilePicture" class="m-0">
+                            <i class="fas fa-upload fa-sm text-white-50 pe-2"></i> Change Image</label>
+                    {% endif %}
                 
-                {% else %}
-                <!-- Profile picture image -->
-                <img id="previewImage" class="img-account-profile. rounded-circle mb-2" src="{% static 'profiles/avatar.svg' %}" alt="" height="200px" width="200px" />
-                {% endif %}	
-                <!-- Profile picture help block -->
-                <div class="small font-italic text-muted mb-4">JPG or PNG no larger than 5 MB</div>
-                
-                
-                <input class="form-control" type="file" name="profilePicture" accept="image/*"  style="" />
-                <!-- Profile picture upload button -->									
-                
-                <label class="btn btn-primary btn-sm mb-0" type="button" for="profilePicture" class="m-0">
-                    <i class="fas fa-upload fa-sm text-white-50 pe-2"></i> Change Image</label>
                 
                 <!-- </form> -->
                 </div>
@@ -57,12 +60,12 @@
                     <div class="row gx-3 mb-3">
                         <!-- Form Group (first name)-->
                         <div class="col-md-6">
-                            <label class="small mb-1" for="inputUserName">Username</label>
+                            <label class="small mb-1" for="inputUserName">Username:</label>
                             {{form.username}}
                         </div>
                         <!-- Form Group (last name)-->
                         <div class="col-md-6">
-                            <label class="small mb-1" for="inputFirstName">First name</label>
+                            <label class="small mb-1" for="inputFirstName">First name:</label>
                          {{form.first_name}}
                         </div>
                     </div>
@@ -70,12 +73,12 @@
                     <div class="row gx-3 mb-3">
                         <!-- Form Group (first name)-->
                         <div class="col-md-6">
-                            <label class="small mb-1" for="inputLasttName" >Last name</label>
+                            <label class="small mb-1" for="inputLasttName" >Last name:</label>
                            {{form.last_name}}
                         </div>
                         <!-- Form Group (last name)-->
                         <div class="col-md-6">
-                            <label class="small mb-1" for="inputEmail">Email</label>
+                            <label class="small mb-1" for="inputEmail">Email:</label>
                            {{form.email}}
                         </div>
                     </div>
@@ -83,17 +86,20 @@
             
                     <!-- Form Group (Positions)-->
                     <div class="mb-4">
-                        <label class="small mb-1">Status</label>
-                               {{form.status}}
+                        <label class="small mb-1">Status:</label><br>
+                               <p class="text-primary fw-bold">{{user.status}}</p>
                             
                     </div>
                     <div class="mb-4">
-                        <label class="small mb-1">Phone</label>
+                        <label class="small mb-1">Phone:</label>
                         {{form.phone}}
                             
                     </div>
                     <!-- Form Group (Subjects)-->
-                 <input type="submit" value="Submit">
+                     {% if user.pk != request.user.id %}
+                     {% else %}
+                        <input type="submit" value="Submit">
+                     {% endif %}
                     <!-- Submit button-->
                   
                 </div>
