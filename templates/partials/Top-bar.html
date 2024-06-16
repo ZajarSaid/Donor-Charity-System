@@ -1,0 +1,52 @@
+  <nav class="navbar navbar-expand-lg navbar-dark shadow fixed-top" style="background-color: rgb(110, 120, 114);" id="nnav">
+        <div class="container-fluid">
+            
+            <!--offcanvas-trigger-->
+            <button class="navbar-toggler me-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#demo">
+                <span class="navbar-toggler-icon" data-bs-target="#demo"></span>
+                </button>
+            <!--offcanvas-trigger-->
+        <a class="navbar-brand fw-bold me-auto text-uppercase " href="#"><span class="me-2">
+            <i class="bi bi-heart"></i>
+        </span>Donor And People In Need MS</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    
+            <div class="d-flex ms-auto">
+    
+            </div>
+            <div class="d-flex">
+    
+            </div>
+            
+            
+            <ul class="navbar-nav  mb-2 mb-lg-0">
+                <li>
+                    {% if user.is_authenticated %}
+                    <div>
+                        <p class=" card-text text-light mt-2">{{request.user.email}}</p>
+                        
+                    </div>
+                    {% endif %}
+                </li>
+            
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-person-fill"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        {% if user %}
+                        <li><a class="dropdown-item" href="{% url 'User:user-profile' user.username %}">Profile</a></li>
+                        <li><a class="dropdown-item" href="#">Settings</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="{% url 'Activity:logout' %}">Logout</a></li>
+                        {% endif %}
+                    </ul>
+                </li>
+                
+            </ul>
+        </div>
+        </div>
+    </nav>

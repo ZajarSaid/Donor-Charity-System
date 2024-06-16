@@ -15,183 +15,21 @@
     <body>
      <!-- navs --> 
 
-     <nav class="navbar navbar-expand-lg navbar-dark shadow fixed-top" style="background-color: rgb(110, 120, 114);" id="nnav">
-        <div class="container-fluid">
-            
-            <!--offcanvas-trigger-->
-            <button class="navbar-toggler me-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#demo">
-                <span class="navbar-toggler-icon" data-bs-target="#demo"></span>
-                </button>
-            <!--offcanvas-trigger-->
-        <a class="navbar-brand fw-bold me-auto text-uppercase " href="#"><span class="me-2">
-            <i class="bi bi-heart"></i>
-        </span>CHARITY MS</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    
-            <div class="d-flex ms-auto">
-    
-            </div>
-            <div class="d-flex">
-    
-            </div>
-            
-            
-            <ul class="navbar-nav  mb-2 mb-lg-0">
-                <li>
-                    {% if user.is_authenticated %}
-                    <div>
-                        <p class=" card-text text-light mt-2">{{request.user.email}}</p>
-                        
-                    </div>
-                    {% endif %}
-                </li>
-            
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="bi bi-person-fill"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-end">
-                        {% if user %}
-                        <li><a class="dropdown-item" href="{% url 'User:user-profile' user.username %}">Profile</a></li>
-                        <li><a class="dropdown-item" href="#">Settings</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="{% url 'Activity:logout' %}">Logout</a></li>
-                        {% endif %}
-                    </ul>
-                </li>
-                
-            </ul>
-        </div>
-        </div>
-    </nav>
+   {% include 'partials/Top-bar.html' %}
     
     <!-- navs -->     
 
 <!-- offcanvas --> 
-            
-
-<div class="offcanvas offcanvas-start text-white shadow" style="width: 270px; background-color: rgb(154, 176, 168);" id="demo">
-    <div class="offcanvas-header">
-        <button class="btn-close text-reset ms-auto" data-bs-dismiss="offcanvas" type="button" aria-label="Close" id="close"></button>
-    </div>
-    <div class="offcanvas-body p-0">
-        <nav class="navbar-dark">
-            <ul class="navbar-nav">
-                <li>
-                    <div class="text-light fw-bold text-uppercase px-3 small">core</div>
-                </li>
-                <li>
-                    <a href="{% url 'User:home' %}" class="nav-link px-3 active">
-                        <span class="me-2">
-                            <i class="bi bi-speedometer2"></i>
-                        </span>
-                        <span class="small">Dashboard</span>
-                    </a>
-                </li>
-                <li>
-                    <hr class="nav-divider text-white">
-                </li>
-                <li>
-                    <div class=" text-white fw-bold text-uppercase px-3 small">Interface</div>
-                </li>
-                <li>
-                    <a href="#dem" class="nav-link px-3 sidebar-link" data-bs-toggle="collapse" aria-expanded="false" aria-controls="dem">
-                        <span class="me-2">
-                            <i class="bi bi-people"></i>
-                        </span>
-                        <span class="small">Users</span>
-                        <span class="ms-auto right-icon">
-                            <i class="bi bi-chevron-down"></i>
-                        </span>
-                    </a>
-
-                        <div id="dem" class="collapse">
-                            <div>
-                                <ul class="navbar-nav ps-3">
-                                    <a href="{% url 'Activity:all-charity' %}" class="nav-link px-3 active">
-                                        <span class="me-2">
-                                            <i class="bi bi-people"></i>
-                                        </span>
-                                        <span class="small">Charity</span>
-                                    </a>
-                                    <a href="{% url 'Activity:all-users' %}" class="nav-link px-3 active">
-                                        <span class="me-2">
-                                            <i class="bi bi-people"></i>
-                                        </span>
-                                        <span class="small">Staffs</span>
-                                    </a>
-                                  
-                                </ul>
-                            </div>
-                        </div>
-                </li>
-                {% if user.status == 'government' %}
-                {% else %}
-                <li>
-                    <a href="{% url 'Activity:events' %}" class="nav-link px-3 active">
-                        <span class="me-2">
-                            <i class="bi bi-calendar-event"></i>
-                        </span>
-                        <span class="small">Events</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{% url 'Activity:posts' %}" class="nav-link px-3 active">
-                        <span class="me-2">
-                            <i class="bi bi-journal-text"></i>
-                        </span>
-                        <span class="small">Posts</span>
-                    </a>
-                </li>
-                {% endif %}
-                <li>
-                    <a href="{% url 'Activity:donations' %}" class="nav-link px-3 active">
-                        <span class="me-2">
-                            <i class="bi bi-cash"></i>
-                        </span>
-                        <span class="small">Donations</span>
-                    </a>
-                </li>
-
-                <li>
-                    <hr class="nav-divider text-white">
-                </li>
-                <li>
-                    <div class=" text-white fw-bold text-uppercase px-3 small">Analysis</div>
-                </li>
-
-                <li>
-                    <a href="{% url 'Activity:Charity-Trends' %}" class="nav-link px-3 active">
-                        <span class="me-2">
-                            <i class="bi bi-bar-chart"></i>
-                        </span>
-                        <span class="small">Charity-Age-Trends</span>
-                    </a>
-                </li>
-          
-                <li>
-                    <a href="{% url 'Activity:inbox' %}" class="nav-link px-3 active">
-                        <span class="me-2">
-                            <i class="bi bi-inbox "></i>
-                        </span>
-                        <span class="small ">Inbox</span>
-                    </a>
-                     
-                 </li>
-
-            </ul>
-        </nav>
-    
-    </div>
-</div>
+{% include 'partials/OffCanvasSidebar.html' %}
 
 <!-- Offcanvas Sidebar -->
     <!--main-section-->
     <main class="mt-5 pt-3 ">
-        
+        <div class="container" style="display: '{% if messages %} none {% else %} block {% endif %};'">
+            {% include 'partials/messages.html' %}
+        </div>
+       
+
         <div class="row mb-1 ms-2 mt-3">
             <div class="col-xl-4 col-md-3 bg-light">
                 <nav aria-label="breadcrumb">
@@ -206,7 +44,7 @@
             <div class="row mt-3">
                 <div class="container-fluid px-lg-5">
 
-                   {% include 'partials/messages.html' %}
+                  
                   
                     
                 {% block content %}

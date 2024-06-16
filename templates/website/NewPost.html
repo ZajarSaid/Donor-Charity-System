@@ -5,7 +5,11 @@
 {% block title %}Posts{% endblock %}
 
 {% block content %}
-
+<div class="row mb-2 mt-2">
+  <div class="col-md-6">
+    Current Posts
+  </div>
+</div>
 
 <div class="container-fluid mt-3">
   {% for post in Posts %}
@@ -15,7 +19,7 @@
             <!-- Posts section -->
                 <!-- Post cards -->
           <div class="">
-             <div class="card ">
+             <div class="card px-2 py-2">
                  <div class=" ">
                       <!-- row for top event description -->
         
@@ -37,7 +41,7 @@
                             
                            </div>
                         
-                           <h5>A SAFE HOME FOR THE POOR</h5>
+                           <h5>{{post.title}}</h5>
                         </div>
                     
                     </div>

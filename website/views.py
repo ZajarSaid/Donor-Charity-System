@@ -150,7 +150,53 @@ class InboxView(View):
 
         return render(request, self.template_name, context)
 
+
+class DonorrProfileView(View):
+
+    template_name = 'Website/user_profile.html'
+
+    def get(self, request):
+        user_pk = request.user.pk
+        userInfo = get_object_or_404(CustomUser, pk=user_pk)
+
+        if userInfo.status == 'regular':
+            return redirect('User:home')
+
+        form = UserForm(instance=userInfo)
+        user = userInfo
+        context = {
+            'form':form,
+            'user':user
+            }    
+
+        return render(request,self.template_name , context)
+
+    def post(self, request):
+        user_pk = request.user.pk
+        userInfo = get_object_or_404(CustomUser, pk=user_pk)
+        form = UserForm(request.POST, request.FILES, instance=userInfo)
+
+        first_name = request.POST['first_name']
+        last_name = request.POST['last_name']
+        email = request.POST['email']
+        username = request.POST['username']
+        image = request.FILES.get('image')
+        phone = request.POST['phone']
     
+        c_user = CustomUser.objects.get(id=user_pk)
+        c_user.username = username
+        c_user.last_name = last_name
+        c_user.first_name = first_name
+        c_user.email = email
+        c_user.image = image
+        c_user.phone = phone
+        c_user.save()
+        messages.success(request, 'Your information has been updated successfuly..')
+
+        return redirect('Website:user-page')
+
+
+
 def User_profile_page(request):
 
     user_pk = request.user.pk
@@ -158,6 +204,8 @@ def User_profile_page(request):
 
     if userInfo.status == 'regular':
         return redirect('User:home')
+
+    
 
     if request.method == 'POST':
         form = UserForm(request.POST, request.FILES, instance=userInfo)
