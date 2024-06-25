@@ -1,0 +1,31 @@
+:root{
+    --custom-bg:#134277;
+    --custom2-bg:#FCF8E3;
+}
+
+nav{
+    background-color: var(--custom-bg);
+}
+
+
+.bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+}
+
+@media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+    font-size: 3.5rem;
+    }
+}
+
+/* body {
+    background-color: rgb(1, 25, 32);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    padding: 50px;
+  }
+   */
+

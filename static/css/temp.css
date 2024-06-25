@@ -1,0 +1,61 @@
+:root{
+    --offcanvas-width:270px;
+    --topnavbarHeight:56px;
+}
+#demo{
+    width: var(--offcanvas-width);
+}
+
+#back{
+    background-image: url('static/Photos/vlriuos.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    margin-left: 20px;
+}
+
+#bs{
+    background-color: rgb(154, 176, 168);
+}
+
+@media(min-width:992px){
+    body{
+        overflow: auto !important;
+        
+        
+    }
+    #close{
+        display: none;
+    }
+    #demo{
+        transform: none;
+        visibility: visible;
+        top: var(--topnavbarHeight);
+        
+    }
+    main{
+        margin-left: var(--offcanvas-width);
+    }
+}
+
+.sidebar-link{
+    display: flex;
+    align-items: center;
+}
+.sidebar-link .right-icon{
+    display: inline-flex;
+    transition: all ease 0.25s;
+}
+
+
+.sidebar-link[aria-expanded="true"] .right-icon{
+    transform: rotate(180deg);
+}
+
+.icon{
+    width: 24px;
+    height: 24px;
+}
+.showPasswordToogle{
+    cursor: pointer;
+}

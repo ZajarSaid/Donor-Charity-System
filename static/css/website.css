@@ -1,0 +1,51 @@
+
+body, html {
+    margin: 0;
+    padding: 0;
+  }
+
+  #comment-icon {
+    color: red; /* Change the color to red */
+}
+  
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: -10px;
+    /* background-color: rgba(0, 0, 0, 0.5);  Adjust opacity as needed  */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+ 
+  .content {
+    color: white;
+    text-align: center;
+    padding: 20px;
+  }
+  nav {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    gap: 10px;
+    z-index: 1000;
+  }
+  nav a {
+    color: white;
+    text-decoration: none;
+    padding: 5px 10px;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background for contrast */
+    border-radius: 5px;
+  }
+
+  .topnav{
+    background-color: rgba(0, 0, 0, 0.5); 
+    width: 100%;
+    position: sticky;
+    top: 0;
+   
+  }

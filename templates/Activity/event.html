@@ -25,7 +25,34 @@
 <div class="col-8">
     <a href="{% url 'Activity:events' %}" class="btn btn-pass rounded-pill">Back</a>
 <a href="{% url 'Activity:update-event' c_event.id %}" class="btn btn-success rounded-pill">Update</a>
-<a href="{% url 'Activity:delete-event' c_event.id %}" class="btn btn-danger rounded-pill">Delete</a>
+
+<button type="button" class="btn btn-danger rounded-pill" data-bs-toggle="modal" data-bs-target="#Mymodal">Delete</button>
+<!-- modal -->
+
+<div class="modal fade" id="Mymodal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalLabel">Heading</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p class="card-text">Are sure you want to delete an event?</p>
+            </div>
+            <div class="modal-footer">
+                <div class="row">
+                    <div class="col-4 me-2"><a href="{% url 'Activity:delete-event' c_event.id %}" class="btn btn-danger">Delete</a></div>
+               
+                    <div class="col-4 ms-2"><button type="button" class="btn btn-dark" data-bs-dismiss="modal">No</button></div>
+                </div>
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+<!-- modal -->
+
 {% if c_event.approved == True %}
 <a href="{% url 'Activity:event-denial' c_event.id %}" class="btn btn-warning rounded-pill">Deny</a>
 
