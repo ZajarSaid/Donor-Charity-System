@@ -14,8 +14,26 @@
     <h1 class="text-muted card-text text-center">{{title}}</h1>
     <form action="" method="POST" enctype="multipart/form-data" ><br><br>
         {% csrf_token %}
-        
-        {{ form.as_p }}
+        <div class="row mb-1">
+            <div class="col-6"><label for="name">Name:</label> {{ form.name }}</div>
+            <div class="col-6"><label for="name">Date:</label> {{ form.event_date }}</div>
+        </div>
+        <div class="row mb-1">
+            <div class="col-6"><label for="name">Venue:</label> {{ form.venue }}</div>
+            <div class="col-6"><label for="name">Manager:</label> {{ form.manager }}</div>
+        </div>
+        <div class="row mb-1">
+            <div class=""><label for="name">Image:</label> {{ form.photo }}</div>
+           
+        </div>
+        <div class="row mb-1">
+         
+            
+                <div class=""><label for="name">Image:</label>
+              
+           {{ form.description }}</div>
+        </div>
+       
     
             <button type="submit" class="btn btn-secondary">Submit</button>
     </form>

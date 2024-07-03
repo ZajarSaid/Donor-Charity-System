@@ -45,8 +45,46 @@
               <div class="col-4"> <p class="card-text mb-1"><strong>Date:</strong><br>{{event.event_date}}</p> </div>
               <div class="col-6">
                {% if request.user in event.members.all %}
-            
-                <a href="{% url 'Website:leave-event' event.id request.user.username %}" class="btn btn-pass bg-dark py-2 text-light rounded-pill">Leave Event</a>
+              
+                <a href="" class="btn btn-pass bg-dark py-2 text-light rounded-pill" data-bs-toggle="modal" data-bs-target="#Mymodal">Leave Event</a>
+
+                <!-- modal -->
+
+<div class="modal fade" id="Mymodal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header bg-warning">
+              <h5 class="modal-title " id="modalLabel">Leaving</h5>
+          </div>
+          <div class="modal-body">
+              <p class="card-text fw-bold">Are sure you want to leave an event?</p>
+            <p class="card-title">You will be no longer a member of that event once left here</p>
+          </div>
+    
+          <div class="modal-footer">
+         
+                
+                <div class="row">
+                  <div class="col-4">
+                     <a href="{% url 'Website:leave-event' event.id request.user.username %}" class="btn btn-warning ms-2">Leave</a>
+                  </div>
+                  <div class="col-2"></div>
+                  <div class="col-4">
+                     <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Stay</button>
+                  </div>
+                
+             
+          
+                </div>
+              
+
+          </div>
+        
+      </div>
+  </div>
+</div>
+<!-- modal -->
+
             {% else %}
                 <a href="{% url 'Website:join-event' event.id request.user.username %}" class="btn btn-success py-2 rounded-pill">Join Event</a>
               {% endif %}</div>
@@ -64,5 +102,7 @@
 {% endfor %}
 </div>
 {% endif %}
+
+
 
 {% endblock %}

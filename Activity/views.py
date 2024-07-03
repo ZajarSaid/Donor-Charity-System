@@ -112,6 +112,14 @@ def generate_pdf_report(request):
                             topMargin=inch, bottomMargin=inch)
     elements = []
 
+     # Add the logo
+    logo_path = os.path.join(settings.STATICFILES_DIRS[0], 'Photos/tz_gov_logo.png')  # Use Django static helper
+    logo = Image(logo_path)
+    logo.drawHeight = 1.5 * inch  # Resize the logo
+    logo.drawWidth = 1.5 * inch
+    elements.append(logo)
+    elements.append(Spacer(1, 12))  # Add space after the logo
+
     # Add titles
     styles = getSampleStyleSheet()
     custom_title_style = ParagraphStyle(
