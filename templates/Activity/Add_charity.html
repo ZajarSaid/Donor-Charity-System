@@ -2,9 +2,34 @@
 
 {% block title%}{{title}}{% endblock%}
 
-
+{%block desc%}{{title}}{%endblock desc%}
 {% block content%}
 
+<div class="row mb-3">
+    <div class="col-3">
+        <h3></h3>
+    </div>
+    <div class="col-3">
+  
+    </div>
+    
+    <div class="col-2">
+        
+    </div>
+    <div class="col-2">
+        
+    </div>
+    
+    <div class="col-2">
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800"></h1>
+            <a href="{% url 'Activity:all-charity' %}" class="d-none d-sm-inline-block btn btn-sm btn-outline-secondary shadow pe-4">
+                <i class="fas fa-arrow-left fa-sm text-white-50. px-1"></i> Back</a>
+        </div>
+    </div>
+    
+   
+</div>
 
             
 <div class="card p-3 me-3" id="back">

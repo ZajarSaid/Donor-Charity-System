@@ -7,7 +7,7 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 
-from Activity.models import Event, Post, Comment
+from Activity.models import Event, Post, Comment, Donation
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import View
@@ -20,8 +20,31 @@ from django.utils import timezone
 
 
 
+class PaymentView(LoginRequiredMixin, View):
+    template_name = 'website/payment.html'
 
-# Create your views here.
+    def get(self, request):
+
+        return render(request, self.template_name)
+
+    def post(self, request):
+
+        user_pk = request.user.id
+        amount = request.POST['amount']
+
+        donor = CustomUser.objects.filter(pk=user_pk)
+        if donor:
+            Donation.objects.create(amount=amount, donor=donor)
+            messages.success(request, 'You have been successfuly donated to our organization..')
+            return redirect('Website:payment')
+        else:
+            messages.error(request, 'there are an error fetching your ur credentials..')
+            return redirect('Website:payment')
+
+        
+
+
+
 
 def payments(request):
     

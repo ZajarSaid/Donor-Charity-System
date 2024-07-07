@@ -42,25 +42,26 @@
                             {% csrf_token %}
                             <div class="mb-3">
                                 <label for="donationAmount" class="form-label">Donation Amount</label>
-                                <input type="number" class="form-control" id="donationAmount" name="donation_amount" placeholder="Enter amount" required>
+                                <input type="number" class="form-control"  name="amount" placeholder="Enter amount" required>
                             </div>
                             <div class="mb-3">
                                 <label for="cardNumber" class="form-label">Card Number</label>
-                                <input type="text" class="form-control" id="cardNumber" name="card_number" placeholder="1234 5678 9012 3456" required>
+                                <input type="text" class="form-control" id="cardNumber" name="card_number" placeholder="1234 5678 9012 3456" >
+                                <input type="hidden" id="cardNumber" name="user_id" value="{{ request.user.id }}">
                             </div>
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label for="expiryDate" class="form-label">Expiry Date</label>
-                                    <input type="text" class="form-control" id="expiryDate" name="expiry_date" placeholder="MM/YY" required>
+                                    <input type="text" class="form-control" id="expiryDate" name="expiry_date" placeholder="MM/YY" >
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label for="cvv" class="form-label">CVV</label>
-                                    <input type="text" class="form-control" id="cvv" name="cvv" placeholder="123" required>
+                                    <input type="text" class="form-control" id="cvv" name="cvv" placeholder="123" >
                                 </div>
                             </div>
                             <div class="mb-3">
                                 <label for="cardName" class="form-label">Name on Card</label>
-                                <input type="text" class="form-control" id="cardName" name="card_name" placeholder="Full name" required>
+                                <input type="text" class="form-control" id="cardName" name="card_name" placeholder="Full name" >
                             </div>
                             <button type="submit" class="btn btn-primary w-100">Donate Now</button>
                         </form>

@@ -1,31 +1,26 @@
 {% extends 'tests/base1.html'%}
 
-
+{% block title%}{{title}}{% endblock %}
+{% block desc%}{{title}}{% endblock %}
 
 
 {% block content%}
 
-
-            
-<div class="card p-3 me-3" id="back">
-
-    
-    
-    <form action="" method="POST" enctype="multipart/form-data"><br><br>
-        {% csrf_token %}
-        <h1 class="text-muted card-text text-center">{{title}}</h1>
-        {{ form.as_p }}
-    
-            <button type="submit" class="btn btn-secondary">Submit</button>
-    </form>
-
-
-
-
-
+<div class="row mb-2 mt-2">
+    <div class="container">
+        <div class="card me-3 shadow" id="back">
+            <div class="card-body">
+                <form action="" method="POST" enctype="multipart/form-data"><br><br>
+                    {% csrf_token %}
+                    <h1 class="text-muted card-text text-center">{{title}}</h1>
+                       {{ form.as_p }}
+                    <button type="submit" class="btn btn-secondary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
-
-
+            
 
 
 {% endblock%}

@@ -11,15 +11,26 @@
     <div class="col-3">
   
     </div>
+    
     <div class="col-2">
-        <a href="{% url 'Activity:pdf' %}" class="btn btn-secondary rounded-pill"> Export PDF2</a>
+        
     </div>
     <div class="col-2">
-        <a href="{% url 'Activity:export-pdf' %}" class="btn btn-secondary rounded-pill"> Export PDF</a>
+        
+            <h1 class="h3 mb-0 text-gray-800"></h1>
+            <a href="{% url 'Activity:pdf' %}" class="d-none d-sm-inline-block btn btn-sm btn-outline-secondary shadow pe-4">
+                <i class="fas fa-upload fa-sm text-white-50. px-1"></i> Export PDF</a>
+       
     </div>
     <div class="col-2">
-        <a href="{% url 'User:add-charity' %}" class="btn btn-primary rounded-pill">+ Add Charity</a>
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800"></h1>
+            <a href="{% url 'User:add-charity' %}" class="d-none d-sm-inline-block btn btn-sm btn-outline-primary shadow pe-4">
+                <i class="fas fa-plus fa-sm text-white-50. px-1"></i> Add member</a>
+        </div>
     </div>
+    
+   
 </div>
     <div class="row bg-light mt-4">
 
