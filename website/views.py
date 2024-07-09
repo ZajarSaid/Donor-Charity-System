@@ -44,8 +44,6 @@ class PaymentView(LoginRequiredMixin, View):
         
 
 
-
-
 def payments(request):
     
     return render(request, 'website/payment.html')
