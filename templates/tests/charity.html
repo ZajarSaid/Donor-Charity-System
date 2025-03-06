@@ -1,18 +1,19 @@
-{% extends 'tests/base1.html'%}
 
+{% extends 'tests/base1.html'%}
+{% load static %}
 {% block title%} {{title}} {% endblock%}
 {% block desc %}People In Need{% endblock %}
 
 {% block content%}
 <div class="row mb-3">
-    <div class="col-3">
-        <h3>List of Charities</h3>
+    <div class="col-4">
+        <h3>List of People In Need</h3>
     </div>
-    <div class="col-3">
+    <div class="col-1">
   
     </div>
     
-    <div class="col-2">
+    <div class="col-1">
         
     </div>
     <div class="col-2">
@@ -22,7 +23,7 @@
                 <i class="fas fa-upload fa-sm text-white-50. px-1"></i> Export PDF</a>
        
     </div>
-    <div class="col-2">
+    <div class="col-3">
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800"></h1>
             <a href="{% url 'User:add-charity' %}" class="d-none d-sm-inline-block btn btn-sm btn-outline-primary shadow pe-4">
@@ -59,7 +60,11 @@
                                    
                                     {% for child in charity%}
                                     <tr>
-                                        <td><img src="{{ child.image.url }}" alt="" style="width:60px"></td>
+                                        {% if child.image %}
+                                            <td><img src="{{ child.image.url }}" alt="" style="width:60px"></td>
+                                        {% else %}
+                                              <td><img src="{% static 'profiles/avatar.svg' %}" alt="" style="width:80px"></td>
+                                        {% endif %}
                                         <td>{{ child.first_name }}</td>
                                         <td>{{ child.last_name }}</td>
                                         <td>{{ child.sex }}</td>
@@ -80,8 +85,7 @@
                                   
                             </tbody>
                                 
-                
-                        {% endif %}
+                {% endif %}
             
                         <tfoot>
                             <tr>

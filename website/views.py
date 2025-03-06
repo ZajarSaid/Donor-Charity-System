@@ -335,7 +335,7 @@ def post(request):
 
 
 def _events(request):
-    all_events = Event.objects.all()
+    all_events = Event.objects.filter(approved=True)
 
     title = 'All events'
 

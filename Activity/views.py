@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.contrib import messages
 from Activity.models import Event
 from users.models import Charithy, CustomUser
+from django.contrib.auth.decorators import login_required
 import os
 from django.conf import settings
 from users.forms import AddVenueForm, AddEventForm, AddPostForm, CommentForm, UserForm
@@ -325,12 +326,7 @@ def deny_event(request, event_pk):
 
 
 #list of events to the page wih minimal implementatkon
-def _events(request):
-    all_events = Event.objects.all()
 
-    title = 'All events'
-
-    return render(request, 'Activity/_events.html', {'title':title, 'Events':all_events})
 
 
 def update_event(request, pk):
@@ -371,7 +367,7 @@ def list_events(request):
 
     return render(request, 'Activity/events.html', {'title':title, 'Events':all_events})
 
-
+@login_required
 def index(request):
 
     return render(request, 'website/dashboard.html')

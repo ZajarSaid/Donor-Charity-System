@@ -7,18 +7,29 @@
 {% block content%}
 
 <div class="row mb-2 mt-2">
-    <div class="container">
-        <div class="card me-3 shadow" id="back">
-            <div class="card-body">
-                <form action="" method="POST" enctype="multipart/form-data"><br><br>
-                    {% csrf_token %}
-                    <h1 class="text-muted card-text text-center">{{title}}</h1>
-                       {{ form.as_p }}
-                    <button type="submit" class="btn btn-secondary">Submit</button>
-                </form>
+    
+   
+        <div class="container">
+            <div class="row">
+                <div class="col-2"></div>
+                <div class="col-8">
+                        <div class="card me-3 shadow" id="back">
+                            <div class="card-body">
+                                <form action="" method="POST" enctype="multipart/form-data"><br><br>
+                                    {% csrf_token %}
+                                    <h1 class="text-muted card-text text-center">{{title}}</h1>
+                                    {{ form.as_p }}
+                                    <button type="submit" class="btn btn-secondary">Submit</button>
+                                </form>
+                            </div>
+                        </div>
+                </div>
+                <div class="col-2"></div>
             </div>
+           
         </div>
-    </div>
+
+  
 </div>
             
 

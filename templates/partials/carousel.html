@@ -1,7 +1,12 @@
 <div id="myCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
   <nav>
     {% if user.is_authenticated %}
+
+    {% if user.status == 'regular' %}
+    {% else %}
     <a href="{% url 'Website:payment' %}" class="bg-warning text-dark">Donate Now</a>
+
+    {% endif %}
       <a href="{% url 'Website:index' %}">Home</a>
       
       
