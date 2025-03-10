@@ -2,6 +2,7 @@ import os
 
 from pathlib import Path
 from django.contrib import messages
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -71,14 +72,15 @@ WSGI_APPLICATION = 'charity_donor.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'Charitydb',
-        'USER': 'root',
-        'PASSWORD': 'zajar@gmail9977',
-        'HOST': 'localhost',
-        'PORT': '3306',
+        'NAME': config('DB_NAME'),
+        'USER': config('DB_USER'),
+        'PASSWORD': config('DB_USER_PASSWORD'),
+        'HOST': config('DB_HOST', default='localhost'),
+        'PORT': config('DB_PORT', default='3306'),
     }
 }
 
